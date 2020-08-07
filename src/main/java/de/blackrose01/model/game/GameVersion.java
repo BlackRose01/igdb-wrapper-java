@@ -1,4 +1,4 @@
-package de.blackrose01.model;
+package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class GameVideo implements Serializable {
+public class GameVersion implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
@@ -15,16 +15,19 @@ public class GameVideo implements Serializable {
     @JsonProperty(value = "game")
     private long game;
     @JsonIgnore
-    @JsonProperty(value = "name")
-    private String name;
+    @JsonProperty(value = "url")
+    private String url;
     @JsonIgnore
-    @JsonProperty(value = "video_is")
-    private String idVideo;
+    @JsonProperty(value = "created_at")
+    private long createdAt;
+    @JsonIgnore
+    @JsonProperty(value = "updated_at")
+    private long updatedAt;
     @JsonIgnore
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameVideo() {}
+    public GameVersion() {}
 
     public long getId() {
         return id;
@@ -42,20 +45,28 @@ public class GameVideo implements Serializable {
         this.game = game;
     }
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getIdVideo() {
-        return idVideo;
+    public long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setIdVideo(String idVideo) {
-        this.idVideo = idVideo;
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getChecksum() {
@@ -75,16 +86,17 @@ public class GameVideo implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GameVideo gameVideo = (GameVideo) o;
-        return id == gameVideo.id &&
-                game == gameVideo.game &&
-                Objects.equals(name, gameVideo.name) &&
-                Objects.equals(idVideo, gameVideo.idVideo) &&
-                Objects.equals(checksum, gameVideo.checksum);
+        GameVersion that = (GameVersion) o;
+        return id == that.id &&
+                game == that.game &&
+                createdAt == that.createdAt &&
+                updatedAt == that.updatedAt &&
+                Objects.equals(url, that.url) &&
+                Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, name, idVideo, checksum);
+        return Objects.hash(id, game, url, createdAt, updatedAt, checksum);
     }
 }
