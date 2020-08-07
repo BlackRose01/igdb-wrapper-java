@@ -46,6 +46,7 @@ public enum EndpointPublic implements Endpoint {
     Product_Family("product_families"),
     Pulse("pulses"),
     Pulse_Group("pulse_groups"),
+    Pulse_Image("pulse_images"),
     Pulse_Source("pulse_sources"),
     Pulse_Url("pulse_urls"),
     Release_Date("release_dates"),
