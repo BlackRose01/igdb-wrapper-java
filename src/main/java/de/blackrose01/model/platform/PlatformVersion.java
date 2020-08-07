@@ -1,4 +1,4 @@
-package de.blackrose01.model;
+package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

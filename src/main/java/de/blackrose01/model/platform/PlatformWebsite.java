@@ -1,4 +1,4 @@
-package de.blackrose01.model;
+package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,24 +7,24 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PlatformVersionCompany implements Serializable {
+public class PlatformWebsite implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
-    @JsonProperty(value = "company")
-    private long company;
+    @JsonProperty(value = "category")
+    private int category;
     @JsonIgnore
-    @JsonProperty(value = "developer")
-    private boolean isDeveloper;
+    @JsonProperty(value = "trusted")
+    private boolean isTrusted;
     @JsonIgnore
-    @JsonProperty(value = "manufacturer")
-    private boolean isManufacturer;
+    @JsonProperty(value = "url")
+    private String url;
     @JsonIgnore
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformVersionCompany() {}
+    public PlatformWebsite() {}
 
     public long getId() {
         return id;
@@ -34,28 +34,28 @@ public class PlatformVersionCompany implements Serializable {
         this.id = id;
     }
 
-    public long getCompany() {
-        return company;
+    public int getCategory() {
+        return category;
     }
 
-    public void setCompany(long company) {
-        this.company = company;
+    public void setCategory(int category) {
+        this.category = category;
     }
 
-    public boolean isDeveloper() {
-        return isDeveloper;
+    public boolean isTrusted() {
+        return isTrusted;
     }
 
-    public void setDeveloper(boolean developer) {
-        isDeveloper = developer;
+    public void setTrusted(boolean trusted) {
+        isTrusted = trusted;
     }
 
-    public boolean isManufacturer() {
-        return isManufacturer;
+    public String getUrl() {
+        return url;
     }
 
-    public void setManufacturer(boolean manufacturer) {
-        isManufacturer = manufacturer;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getChecksum() {
@@ -75,16 +75,16 @@ public class PlatformVersionCompany implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PlatformVersionCompany that = (PlatformVersionCompany) o;
+        PlatformWebsite that = (PlatformWebsite) o;
         return id == that.id &&
-                company == that.company &&
-                isDeveloper == that.isDeveloper &&
-                isManufacturer == that.isManufacturer &&
+                category == that.category &&
+                isTrusted == that.isTrusted &&
+                Objects.equals(url, that.url) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, company, isDeveloper, isManufacturer, checksum);
+        return Objects.hash(id, category, isTrusted, url, checksum);
     }
 }
