@@ -8,6 +8,7 @@ public enum EndpointPrivate implements Endpoint {
     Follow("follows"),
     List("lists"),
     List_Entry("list_entries"),
+    People("people"),
     Rate("rates"),
     Review("reviews"),
     Review_Video("review_videos");
