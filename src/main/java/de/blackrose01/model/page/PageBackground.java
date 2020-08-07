@@ -1,4 +1,4 @@
-package de.blackrose01.model;
+package de.blackrose01.model.page;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PageLogo implements Serializable {
+public class PageBackground implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
@@ -33,7 +33,7 @@ public class PageLogo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PageLogo() {}
+    public PageBackground() {}
 
     public long getId() {
         return id;
@@ -108,7 +108,7 @@ public class PageLogo implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PageLogo pageLogo = (PageLogo) o;
+        PageBackground pageLogo = (PageBackground) o;
         return id == pageLogo.id &&
                 isAlphaChannel == pageLogo.isAlphaChannel &&
                 isAnimated == pageLogo.isAnimated &&
