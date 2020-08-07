@@ -2,7 +2,11 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,6 +22,9 @@ public class ReleaseDate implements Serializable {
     @JsonProperty(value = "platform")
     private long platform;
     @JsonIgnore
+    @JsonProperty(value = "platform")
+    private Platform platformObject;
+    @JsonIgnore
     @JsonProperty(value = "m")
     private int m;
     @JsonIgnore
@@ -32,6 +39,9 @@ public class ReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "game")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "date")
     private long date;
@@ -69,6 +79,14 @@ public class ReleaseDate implements Serializable {
 
     public void setPlatform(long platform) {
         this.platform = platform;
+    }
+
+    public Platform getPlatformObject() {
+        return platformObject;
+    }
+
+    public void setPlatformObject(Platform platformObject) {
+        this.platformObject = platformObject;
     }
 
     public int getM() {
@@ -111,6 +129,14 @@ public class ReleaseDate implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public long getDate() {
         return date;
     }
@@ -143,6 +169,22 @@ public class ReleaseDate implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
+    @JsonSetter("platform")
+    public void setPlatformJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.platform = jsonNode.asLong();
+        else
+            this.platformObject = new Gson().fromJson(jsonNode.toString(), Platform.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -163,12 +205,14 @@ public class ReleaseDate implements Serializable {
                 date == that.date &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
+                Objects.equals(platformObject, that.platformObject) &&
                 Objects.equals(human, that.human) &&
+                Objects.equals(gameObject, that.gameObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, platform, m, y, region, human, game, date, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, platform, platformObject, m, y, region, human, game, gameObject, date, createdAt, updatedAt, checksum);
     }
 }

@@ -2,7 +2,10 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +17,9 @@ public class AlternativeName implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "id")
+    private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "id")
     private String name;
@@ -42,6 +48,14 @@ public class AlternativeName implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public String getName() {
         return name;
     }
@@ -66,6 +80,14 @@ public class AlternativeName implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -78,6 +100,7 @@ public class AlternativeName implements Serializable {
         AlternativeName that = (AlternativeName) o;
         return id == that.id &&
                 game == that.game &&
+                Objects.equals(gameObject, that.gameObject) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(comment, that.comment) &&
                 Objects.equals(checksum, that.checksum);
@@ -85,6 +108,6 @@ public class AlternativeName implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, name, comment, checksum);
+        return Objects.hash(id, game, gameObject, name, comment, checksum);
     }
 }

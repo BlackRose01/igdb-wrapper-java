@@ -2,9 +2,16 @@ package de.blackrose01.model.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.ExternalGame;
+import de.blackrose01.model.game.Game;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,14 +41,26 @@ public class Company implements Serializable {
     @JsonProperty(value = "developed")
     private List<Long> developed;
     @JsonIgnore
+    @JsonProperty(value = "developed")
+    private List<Game> developedObject;
+    @JsonIgnore
     @JsonProperty(value = "published")
     private List<Long> published;
+    @JsonIgnore
+    @JsonProperty(value = "published")
+    private List<Game> publishedObject;
     @JsonIgnore
     @JsonProperty(value = "parent")
     private long parent;
     @JsonIgnore
+    @JsonProperty(value = "parent")
+    private Company parentObject;
+    @JsonIgnore
     @JsonProperty(value = "logo")
     private long logo;
+    @JsonIgnore
+    @JsonProperty(value = "logo")
+    private CompanyLogo logoObject;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -49,11 +68,17 @@ public class Company implements Serializable {
     @JsonProperty(value = "websites")
     private List<Long> websites;
     @JsonIgnore
+    @JsonProperty(value = "websites")
+    private List<CompanyWebsite> websitesObject;
+    @JsonIgnore
     @JsonProperty(value = "start_date")
     private long dateStart;
     @JsonIgnore
     @JsonProperty(value = "changed_company_id")
     private long changedCompanyId;
+    @JsonIgnore
+    @JsonProperty(value = "changed_company_id")
+    private Company changedCompanyIdObject;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -130,12 +155,28 @@ public class Company implements Serializable {
         this.developed = developed;
     }
 
+    public List<Game> getDevelopedObject() {
+        return developedObject;
+    }
+
+    public void setDevelopedObject(List<Game> developedObject) {
+        this.developedObject = developedObject;
+    }
+
     public List<Long> getPublished() {
         return published;
     }
 
     public void setPublished(List<Long> published) {
         this.published = published;
+    }
+
+    public List<Game> getPublishedObject() {
+        return publishedObject;
+    }
+
+    public void setPublishedObject(List<Game> publishedObject) {
+        this.publishedObject = publishedObject;
     }
 
     public long getParent() {
@@ -146,12 +187,28 @@ public class Company implements Serializable {
         this.parent = parent;
     }
 
+    public Company getParentObject() {
+        return parentObject;
+    }
+
+    public void setParentObject(Company parentObject) {
+        this.parentObject = parentObject;
+    }
+
     public long getLogo() {
         return logo;
     }
 
     public void setLogo(long logo) {
         this.logo = logo;
+    }
+
+    public CompanyLogo getLogoObject() {
+        return logoObject;
+    }
+
+    public void setLogoObject(CompanyLogo logoObject) {
+        this.logoObject = logoObject;
     }
 
     public String getUrl() {
@@ -170,6 +227,14 @@ public class Company implements Serializable {
         this.websites = websites;
     }
 
+    public List<CompanyWebsite> getWebsitesObject() {
+        return websitesObject;
+    }
+
+    public void setWebsitesObject(List<CompanyWebsite> websitesObject) {
+        this.websitesObject = websitesObject;
+    }
+
     public long getDateStart() {
         return dateStart;
     }
@@ -184,6 +249,14 @@ public class Company implements Serializable {
 
     public void setChangedCompanyId(long changedCompanyId) {
         this.changedCompanyId = changedCompanyId;
+    }
+
+    public Company getChangedCompanyIdObject() {
+        return changedCompanyIdObject;
+    }
+
+    public void setChangedCompanyIdObject(Company changedCompanyIdObject) {
+        this.changedCompanyIdObject = changedCompanyIdObject;
     }
 
     public long getCreatedAt() {
@@ -210,6 +283,66 @@ public class Company implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("developed")
+    public void setDevelopedJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<ExternalGame>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.developed = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.developedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("published")
+    public void setPublishedJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.published = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.publishedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("parent")
+    public void setParentJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.parent = jsonNode.asLong();
+        else
+            this.parentObject = new Gson().fromJson(jsonNode.toString(), Company.class);
+    }
+
+    @JsonSetter("logo")
+    public void setLogoJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.logo = jsonNode.asLong();
+        else
+            this.logoObject = new Gson().fromJson(jsonNode.toString(), CompanyLogo.class);
+    }
+
+    @JsonSetter("websites")
+    public void setWebsitesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<CompanyWebsite>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("changed_company_id")
+    public void setChangedCompanyIdJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<Company>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.changedCompanyId = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.changedCompanyIdObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -234,14 +367,20 @@ public class Company implements Serializable {
                 Objects.equals(slug, company.slug) &&
                 Objects.equals(description, company.description) &&
                 Objects.equals(developed, company.developed) &&
+                Objects.equals(developedObject, company.developedObject) &&
                 Objects.equals(published, company.published) &&
+                Objects.equals(publishedObject, company.publishedObject) &&
+                Objects.equals(parentObject, company.parentObject) &&
+                Objects.equals(logoObject, company.logoObject) &&
                 Objects.equals(url, company.url) &&
                 Objects.equals(websites, company.websites) &&
+                Objects.equals(websitesObject, company.websitesObject) &&
+                Objects.equals(changedCompanyIdObject, company.changedCompanyIdObject) &&
                 Objects.equals(checksum, company.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categoryChangeDate, categoryStartDate, country, name, slug, description, developed, published, parent, logo, url, websites, dateStart, changedCompanyId, createdAt, updatedAt, checksum);
+        return Objects.hash(id, categoryChangeDate, categoryStartDate, country, name, slug, description, developed, developedObject, published, publishedObject, parent, parentObject, logo, logoObject, url, websites, websitesObject, dateStart, changedCompanyId, changedCompanyIdObject, createdAt, updatedAt, checksum);
     }
 }

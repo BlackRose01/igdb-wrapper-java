@@ -2,7 +2,11 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.company.Company;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,8 +19,14 @@ public class InvolvedCompany implements Serializable {
     @JsonProperty(value = "company")
     private long company;
     @JsonIgnore
+    @JsonProperty(value = "company")
+    private Company companyObject;
+    @JsonIgnore
     @JsonProperty(value = "game")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "developer")
     private boolean isDeveloper;
@@ -57,12 +67,28 @@ public class InvolvedCompany implements Serializable {
         this.company = company;
     }
 
+    public Company getCompanyObject() {
+        return companyObject;
+    }
+
+    public void setCompanyObject(Company companyObject) {
+        this.companyObject = companyObject;
+    }
+
     public long getGame() {
         return game;
     }
 
     public void setGame(long game) {
         this.game = game;
+    }
+
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
     }
 
     public boolean isDeveloper() {
@@ -121,6 +147,22 @@ public class InvolvedCompany implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("company")
+    public void setCompanyJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.company = jsonNode.asLong();
+        else
+            this.companyObject = new Gson().fromJson(jsonNode.toString(), Company.class);
+    }
+
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -140,11 +182,13 @@ public class InvolvedCompany implements Serializable {
                 isSupporting == that.isSupporting &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
+                Objects.equals(companyObject, that.companyObject) &&
+                Objects.equals(gameObject, that.gameObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, company, game, isDeveloper, isPorting, isPublisher, isSupporting, createdAt, updatedAt, checksum);
+        return Objects.hash(id, company, companyObject, game, gameObject, isDeveloper, isPorting, isPublisher, isSupporting, createdAt, updatedAt, checksum);
     }
 }

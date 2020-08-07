@@ -2,9 +2,15 @@ package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.ExternalGame;
+import de.blackrose01.model.company.Company;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +21,9 @@ public class PlatformVersion implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "companies")
     private List<Long> companies;
+    @JsonIgnore
+    @JsonProperty(value = "companies")
+    private List<Company> companiesObject;
     @JsonIgnore
     @JsonProperty(value = "cpu")
     private String cpu;
@@ -49,11 +58,20 @@ public class PlatformVersion implements Serializable {
     @JsonProperty(value = "platform_logo")
     private long platformLogo;
     @JsonIgnore
+    @JsonProperty(value = "platform_logo")
+    private PlatformLogo platformLogoObject;
+    @JsonIgnore
     @JsonProperty(value = "platform_version_release_dates")
     private List<Long> platformVersionReleaseDates;
     @JsonIgnore
+    @JsonProperty(value = "platform_version_release_dates")
+    private List<PlatformVersionReleaseDate> platformVersionReleaseDatesObject;
+    @JsonIgnore
     @JsonProperty(value = "main_manufacturer")
     private long manufacturerMain;
+    @JsonIgnore
+    @JsonProperty(value = "main_manufacturer")
+    private PlatformVersionCompany manufacturerMainObject;
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
@@ -89,6 +107,14 @@ public class PlatformVersion implements Serializable {
 
     public void setCompanies(List<Long> companies) {
         this.companies = companies;
+    }
+
+    public List<Company> getCompaniesObject() {
+        return companiesObject;
+    }
+
+    public void setCompaniesObject(List<Company> companiesObject) {
+        this.companiesObject = companiesObject;
     }
 
     public String getCpu() {
@@ -179,6 +205,14 @@ public class PlatformVersion implements Serializable {
         this.platformLogo = platformLogo;
     }
 
+    public PlatformLogo getPlatformLogoObject() {
+        return platformLogoObject;
+    }
+
+    public void setPlatformLogoObject(PlatformLogo platformLogoObject) {
+        this.platformLogoObject = platformLogoObject;
+    }
+
     public List<Long> getPlatformVersionReleaseDates() {
         return platformVersionReleaseDates;
     }
@@ -187,12 +221,28 @@ public class PlatformVersion implements Serializable {
         this.platformVersionReleaseDates = platformVersionReleaseDates;
     }
 
+    public List<PlatformVersionReleaseDate> getPlatformVersionReleaseDatesObject() {
+        return platformVersionReleaseDatesObject;
+    }
+
+    public void setPlatformVersionReleaseDatesObject(List<PlatformVersionReleaseDate> platformVersionReleaseDatesObject) {
+        this.platformVersionReleaseDatesObject = platformVersionReleaseDatesObject;
+    }
+
     public long getManufacturerMain() {
         return manufacturerMain;
     }
 
     public void setManufacturerMain(long manufacturerMain) {
         this.manufacturerMain = manufacturerMain;
+    }
+
+    public PlatformVersionCompany getManufacturerMainObject() {
+        return manufacturerMainObject;
+    }
+
+    public void setManufacturerMainObject(PlatformVersionCompany manufacturerMainObject) {
+        this.manufacturerMainObject = manufacturerMainObject;
     }
 
     public String getSlug() {
@@ -243,6 +293,44 @@ public class PlatformVersion implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("companies")
+    public void setCompaniesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<Company>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.companies = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.companiesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("platform_logo")
+    public void setPlatformLogoJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.platformLogo = jsonNode.asLong();
+        else
+            this.platformLogoObject = new Gson().fromJson(jsonNode.toString(), PlatformLogo.class);
+    }
+
+    @JsonSetter("platform_version_release_dates")
+    public void setPlatformVersionReleaseDatesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<PlatformVersionReleaseDate>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.platformVersionReleaseDates = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.platformVersionReleaseDatesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("main_manufacturer")
+    public void setManufacturerMainJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.manufacturerMain = jsonNode.asLong();
+        else
+            this.manufacturerMainObject = new Gson().fromJson(jsonNode.toString(), PlatformVersionCompany.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -257,6 +345,7 @@ public class PlatformVersion implements Serializable {
                 platformLogo == that.platformLogo &&
                 manufacturerMain == that.manufacturerMain &&
                 Objects.equals(companies, that.companies) &&
+                Objects.equals(companiesObject, that.companiesObject) &&
                 Objects.equals(cpu, that.cpu) &&
                 Objects.equals(graphics, that.graphics) &&
                 Objects.equals(resolution, that.resolution) &&
@@ -267,7 +356,10 @@ public class PlatformVersion implements Serializable {
                 Objects.equals(online, that.online) &&
                 Objects.equals(connectivity, that.connectivity) &&
                 Objects.equals(output, that.output) &&
+                Objects.equals(platformLogoObject, that.platformLogoObject) &&
                 Objects.equals(platformVersionReleaseDates, that.platformVersionReleaseDates) &&
+                Objects.equals(platformVersionReleaseDatesObject, that.platformVersionReleaseDatesObject) &&
+                Objects.equals(manufacturerMainObject, that.manufacturerMainObject) &&
                 Objects.equals(slug, that.slug) &&
                 Objects.equals(sound, that.sound) &&
                 Objects.equals(storage, that.storage) &&
@@ -278,6 +370,6 @@ public class PlatformVersion implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, companies, cpu, graphics, resolution, memory, media, name, os, online, connectivity, output, platformLogo, platformVersionReleaseDates, manufacturerMain, slug, sound, storage, summary, url, checksum);
+        return Objects.hash(id, companies, companiesObject, cpu, graphics, resolution, memory, media, name, os, online, connectivity, output, platformLogo, platformLogoObject, platformVersionReleaseDates, platformVersionReleaseDatesObject, manufacturerMain, manufacturerMainObject, slug, sound, storage, summary, url, checksum);
     }
 }

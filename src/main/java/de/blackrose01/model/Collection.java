@@ -2,9 +2,14 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,6 +20,9 @@ public class Collection implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "games")
     private List<Long> games;
+    @JsonIgnore
+    @JsonProperty(value = "games")
+    private List<Game> gamesObject;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -50,6 +58,14 @@ public class Collection implements Serializable {
 
     public void setGames(List<Long> games) {
         this.games = games;
+    }
+
+    public List<Game> getGamesObject() {
+        return gamesObject;
+    }
+
+    public void setGamesObject(List<Game> gamesObject) {
+        this.gamesObject = gamesObject;
     }
 
     public String getName() {
@@ -100,6 +116,17 @@ public class Collection implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("games")
+    public void setExternalGamesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.games = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.gamesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -114,6 +141,7 @@ public class Collection implements Serializable {
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
                 Objects.equals(games, that.games) &&
+                Objects.equals(gamesObject, that.gamesObject) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(slug, that.slug) &&
                 Objects.equals(url, that.url) &&
@@ -122,6 +150,6 @@ public class Collection implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, games, name, slug, url, createdAt, updatedAt, checksum);
+        return Objects.hash(id, games, gamesObject, name, slug, url, createdAt, updatedAt, checksum);
     }
 }

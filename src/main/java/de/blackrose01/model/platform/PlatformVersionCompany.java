@@ -2,7 +2,10 @@ package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.company.Company;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +17,9 @@ public class PlatformVersionCompany implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "company")
     private long company;
+    @JsonIgnore
+    @JsonProperty(value = "company")
+    private Company companyObject;
     @JsonIgnore
     @JsonProperty(value = "developer")
     private boolean isDeveloper;
@@ -42,6 +48,14 @@ public class PlatformVersionCompany implements Serializable {
         this.company = company;
     }
 
+    public Company getCompanyObject() {
+        return companyObject;
+    }
+
+    public void setCompanyObject(Company companyObject) {
+        this.companyObject = companyObject;
+    }
+
     public boolean isDeveloper() {
         return isDeveloper;
     }
@@ -66,6 +80,14 @@ public class PlatformVersionCompany implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("company")
+    public void setCompanyJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.company = jsonNode.asLong();
+        else
+            this.companyObject = new Gson().fromJson(jsonNode.toString(), Company.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -80,11 +102,12 @@ public class PlatformVersionCompany implements Serializable {
                 company == that.company &&
                 isDeveloper == that.isDeveloper &&
                 isManufacturer == that.isManufacturer &&
+                Objects.equals(companyObject, that.companyObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, company, isDeveloper, isManufacturer, checksum);
+        return Objects.hash(id, company, companyObject, isDeveloper, isManufacturer, checksum);
     }
 }

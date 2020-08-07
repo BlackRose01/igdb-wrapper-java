@@ -2,9 +2,15 @@ package de.blackrose01.model.pulse;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.ExternalGame;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,11 +22,17 @@ public class PulseGroup implements Serializable {
     @JsonProperty(value = "game")
     private long game;
     @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
+    @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
     @JsonIgnore
     @JsonProperty(value = "pulses")
     private List<Long> pulses;
+    @JsonIgnore
+    @JsonProperty(value = "pulses")
+    private List<Pulse> pulsesObject;
     @JsonIgnore
     @JsonProperty(value = "tags")
     private List<Long> tags;
@@ -52,6 +64,14 @@ public class PulseGroup implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public String getName() {
         return name;
     }
@@ -66,6 +86,14 @@ public class PulseGroup implements Serializable {
 
     public void setPulses(List<Long> pulses) {
         this.pulses = pulses;
+    }
+
+    public List<Pulse> getPulsesObject() {
+        return pulsesObject;
+    }
+
+    public void setPulsesObject(List<Pulse> pulsesObject) {
+        this.pulsesObject = pulsesObject;
     }
 
     public List<Long> getTags() {
@@ -98,6 +126,25 @@ public class PulseGroup implements Serializable {
 
     public void setChecksum(String checksum) {
         this.checksum = checksum;
+    }
+
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
+    @JsonSetter("pulses")
+    public void setExternalGamesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<Pulse>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.pulses = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.pulsesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
     }
 
     @Override

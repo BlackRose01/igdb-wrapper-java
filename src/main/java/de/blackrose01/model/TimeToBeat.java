@@ -2,7 +2,10 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,6 +17,9 @@ public class TimeToBeat implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "game")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "normally")
     private long normally;
@@ -42,6 +48,14 @@ public class TimeToBeat implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public long getNormally() {
         return normally;
     }
@@ -66,6 +80,14 @@ public class TimeToBeat implements Serializable {
         this.hastly = hastly;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -80,11 +102,12 @@ public class TimeToBeat implements Serializable {
                 game == that.game &&
                 normally == that.normally &&
                 completely == that.completely &&
-                hastly == that.hastly;
+                hastly == that.hastly &&
+                Objects.equals(gameObject, that.gameObject);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, normally, completely, hastly);
+        return Objects.hash(id, game, gameObject, normally, completely, hastly);
     }
 }

@@ -2,9 +2,15 @@ package de.blackrose01.model.achievement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.ExternalGame;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,6 +37,9 @@ public class Achievement implements Serializable {
     @JsonProperty(value = "game")
     private long game;
     @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
+    @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
     @JsonIgnore
@@ -40,8 +49,14 @@ public class Achievement implements Serializable {
     @JsonProperty(value = "achievement_icon")
     private long iconAchievement;
     @JsonIgnore
+    @JsonProperty(value = "achievement_icon")
+    private AchievementIcon iconAchievementObject;
+    @JsonIgnore
     @JsonProperty(value = "locked_achievement_icon")
     private long iconAchievementLocked;
+    @JsonIgnore
+    @JsonProperty(value = "locked_achievement_icon")
+    private AchievementIcon iconAchievementLockedObject;
     @JsonIgnore
     @JsonProperty(value = "owners_percentage")
     private double percentageOwners;
@@ -116,6 +131,14 @@ public class Achievement implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public String getName() {
         return name;
     }
@@ -140,12 +163,28 @@ public class Achievement implements Serializable {
         this.iconAchievement = iconAchievement;
     }
 
+    public AchievementIcon getIconAchievementObject() {
+        return iconAchievementObject;
+    }
+
+    public void setIconAchievementObject(AchievementIcon iconAchievementObject) {
+        this.iconAchievementObject = iconAchievementObject;
+    }
+
     public long getIconAchievementLocked() {
         return iconAchievementLocked;
     }
 
     public void setIconAchievementLocked(long iconAchievementLocked) {
         this.iconAchievementLocked = iconAchievementLocked;
+    }
+
+    public AchievementIcon getIconAchievementLockedObject() {
+        return iconAchievementLockedObject;
+    }
+
+    public void setIconAchievementLockedObject(AchievementIcon iconAchievementLockedObject) {
+        this.iconAchievementLockedObject = iconAchievementLockedObject;
     }
 
     public double getPercentageOwners() {
@@ -188,6 +227,36 @@ public class Achievement implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
+    @JsonSetter("achievement_icon")
+    public void setIconAchievementJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.iconAchievement = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.iconAchievementObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("locked_achievement_icon")
+    public void setIconAchievementLockedJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.iconAchievementLocked = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.iconAchievementLockedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -210,14 +279,17 @@ public class Achievement implements Serializable {
                 updatedAt == that.updatedAt &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(idExternal, that.idExternal) &&
+                Objects.equals(gameObject, that.gameObject) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(slug, that.slug) &&
+                Objects.equals(iconAchievementObject, that.iconAchievementObject) &&
+                Objects.equals(iconAchievementLockedObject, that.iconAchievementLockedObject) &&
                 Objects.equals(tags, that.tags) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, language, rank, description, idExternal, game, name, slug, iconAchievement, iconAchievementLocked, percentageOwners, tags, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, language, rank, description, idExternal, game, gameObject, name, slug, iconAchievement, iconAchievementObject, iconAchievementLocked, iconAchievementLockedObject, percentageOwners, tags, createdAt, updatedAt, checksum);
     }
 }

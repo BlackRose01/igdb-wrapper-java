@@ -2,7 +2,10 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,6 +20,12 @@ public class Website implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "game")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
+    @JsonIgnore
+    @JsonProperty(value = "trusted")
+    private boolean trusted;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -50,6 +59,22 @@ public class Website implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
+    public boolean isTrusted() {
+        return trusted;
+    }
+
+    public void setTrusted(boolean trusted) {
+        trusted = trusted;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -66,6 +91,14 @@ public class Website implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -79,12 +112,14 @@ public class Website implements Serializable {
         return id == website.id &&
                 category == website.category &&
                 game == website.game &&
+                trusted == website.trusted &&
+                Objects.equals(gameObject, website.gameObject) &&
                 Objects.equals(url, website.url) &&
                 Objects.equals(checksum, website.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, game, url, checksum);
+        return Objects.hash(id, category, game, gameObject, trusted, url, checksum);
     }
 }

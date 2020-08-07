@@ -2,9 +2,15 @@ package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import de.blackrose01.model.ExternalGame;
+import de.blackrose01.model.ProductFamily;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,14 +34,26 @@ public class Platform implements Serializable {
     @JsonProperty(value = "platform_logo")
     private long platformLogo;
     @JsonIgnore
+    @JsonProperty(value = "platform_logo")
+    private PlatformLogo platformLogoObject;
+    @JsonIgnore
     @JsonProperty(value = "versions")
     private List<Long> versions;
+    @JsonIgnore
+    @JsonProperty(value = "versions")
+    private List<PlatformVersion> versionsObject;
     @JsonIgnore
     @JsonProperty(value = "websites")
     private List<Long> websites;
     @JsonIgnore
+    @JsonProperty(value = "websites")
+    private List<PlatformWebsite> websitesObject;
+    @JsonIgnore
     @JsonProperty(value = "product_family")
     private long productFamily;
+    @JsonIgnore
+    @JsonProperty(value = "product_family")
+    private ProductFamily productFamilyObject;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -96,12 +114,28 @@ public class Platform implements Serializable {
         this.platformLogo = platformLogo;
     }
 
+    public PlatformLogo getPlatformLogoObject() {
+        return platformLogoObject;
+    }
+
+    public void setPlatformLogoObject(PlatformLogo platformLogoObject) {
+        this.platformLogoObject = platformLogoObject;
+    }
+
     public List<Long> getVersions() {
         return versions;
     }
 
     public void setVersions(List<Long> versions) {
         this.versions = versions;
+    }
+
+    public List<PlatformVersion> getVersionsObject() {
+        return versionsObject;
+    }
+
+    public void setVersionsObject(List<PlatformVersion> versionsObject) {
+        this.versionsObject = versionsObject;
     }
 
     public List<Long> getWebsites() {
@@ -112,12 +146,28 @@ public class Platform implements Serializable {
         this.websites = websites;
     }
 
+    public List<PlatformWebsite> getWebsitesObject() {
+        return websitesObject;
+    }
+
+    public void setWebsitesObject(List<PlatformWebsite> websitesObject) {
+        this.websitesObject = websitesObject;
+    }
+
     public long getProductFamily() {
         return productFamily;
     }
 
     public void setProductFamily(long productFamily) {
         this.productFamily = productFamily;
+    }
+
+    public ProductFamily getProductFamilyObject() {
+        return productFamilyObject;
+    }
+
+    public void setProductFamilyObject(ProductFamily productFamilyObject) {
+        this.productFamilyObject = productFamilyObject;
     }
 
     public long getCreatedAt() {
@@ -144,6 +194,44 @@ public class Platform implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("platform_logo")
+    public void setPlatformLogoJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.platformLogo = jsonNode.asLong();
+        else
+            this.platformLogoObject = new Gson().fromJson(jsonNode.toString(), PlatformLogo.class);
+    }
+
+    @JsonSetter("versions")
+    public void setVersionsJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<PlatformVersion>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.versions = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.versionsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("websites")
+    public void setWebsitesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<PlatformWebsite>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.isArray())
+            this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
+    }
+
+    @JsonSetter("product_family")
+    public void setProductFamilyJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.productFamily = jsonNode.asLong();
+        else
+            this.productFamilyObject = new Gson().fromJson(jsonNode.toString(), ProductFamily.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -163,13 +251,17 @@ public class Platform implements Serializable {
                 Objects.equals(name, platform.name) &&
                 Objects.equals(nameAlternative, platform.nameAlternative) &&
                 Objects.equals(slug, platform.slug) &&
+                Objects.equals(platformLogoObject, platform.platformLogoObject) &&
                 Objects.equals(versions, platform.versions) &&
+                Objects.equals(versionsObject, platform.versionsObject) &&
                 Objects.equals(websites, platform.websites) &&
+                Objects.equals(websitesObject, platform.websitesObject) &&
+                Objects.equals(productFamilyObject, platform.productFamilyObject) &&
                 Objects.equals(checksum, platform.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, name, nameAlternative, slug, platformLogo, versions, websites, productFamily, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, name, nameAlternative, slug, platformLogo, platformLogoObject, versions, versionsObject, websites, websitesObject, productFamily, productFamilyObject, createdAt, updatedAt, checksum);
     }
 }

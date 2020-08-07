@@ -2,7 +2,11 @@ package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -15,8 +19,14 @@ public class MultiplayerMode implements Serializable {
     @JsonProperty(value = "game")
     private long game;
     @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
+    @JsonIgnore
     @JsonProperty(value = "platform")
     private long platform;
+    @JsonIgnore
+    @JsonProperty(value = "platform")
+    private Platform platformObject;
     @JsonIgnore
     @JsonProperty(value = "dropin")
     private boolean isDropin;
@@ -69,12 +79,28 @@ public class MultiplayerMode implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public long getPlatform() {
         return platform;
     }
 
     public void setPlatform(long platform) {
         this.platform = platform;
+    }
+
+    public Platform getPlatformObject() {
+        return platformObject;
+    }
+
+    public void setPlatformObject(Platform platformObject) {
+        this.platformObject = platformObject;
     }
 
     public boolean isDropin() {
@@ -165,6 +191,22 @@ public class MultiplayerMode implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
+    @JsonSetter("platform")
+    public void setPlatformJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.platform = jsonNode.asLong();
+        else
+            this.platformObject = new Gson().fromJson(jsonNode.toString(), Platform.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -188,11 +230,13 @@ public class MultiplayerMode implements Serializable {
                 onlineMax == that.onlineMax &&
                 isSplitscreen == that.isSplitscreen &&
                 isSplitscreenOnline == that.isSplitscreenOnline &&
+                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(platformObject, that.platformObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, platform, isDropin, isLanCoop, isOfflineCoop, offlineCoopMax, offlineMax, isOnlineCoop, onlineCoopMax, onlineMax, isSplitscreen, isSplitscreenOnline, checksum);
+        return Objects.hash(id, game, gameObject, platform, platformObject, isDropin, isLanCoop, isOfflineCoop, offlineCoopMax, offlineMax, isOnlineCoop, onlineCoopMax, onlineMax, isSplitscreen, isSplitscreenOnline, checksum);
     }
 }
