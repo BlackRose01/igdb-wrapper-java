@@ -13,7 +13,7 @@ public class PulseUrl implements Serializable {
     private long id;
     @JsonIgnore
     @JsonProperty(value = "trusted")
-    private boolean isTrusted;
+    private boolean trusted;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -32,11 +32,11 @@ public class PulseUrl implements Serializable {
     }
 
     public boolean isTrusted() {
-        return isTrusted;
+        return trusted;
     }
 
     public void setTrusted(boolean trusted) {
-        isTrusted = trusted;
+        trusted = trusted;
     }
 
     public String getUrl() {
@@ -66,13 +66,13 @@ public class PulseUrl implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         PulseUrl pulseUrl = (PulseUrl) o;
         return id == pulseUrl.id &&
-                isTrusted == pulseUrl.isTrusted &&
+                trusted == pulseUrl.trusted &&
                 Objects.equals(url, pulseUrl.url) &&
                 Objects.equals(checksum, pulseUrl.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isTrusted, url, checksum);
+        return Objects.hash(id, trusted, url, checksum);
     }
 }
