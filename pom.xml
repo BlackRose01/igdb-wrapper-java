@@ -12,7 +12,7 @@
 
   <groupId>com.github.blackrose01</groupId>
   <artifactId>igdb-wrapper-java</artifactId>
-  <version>v0.11-alpha</version>
+  <version>v0.12-alpha</version>
 
   <name>igdb-wrapper-java</name>
   <description>Wrapper for IGDB REST-API</description>
