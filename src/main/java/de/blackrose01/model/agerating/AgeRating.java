@@ -3,16 +3,11 @@ package de.blackrose01.model.agerating;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import de.blackrose01.model.ExternalGame;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,7 +19,6 @@ public class AgeRating implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
-    @JsonIgnore
     @JsonProperty(value = "content_descriptions")
     private List<Object> descriptionsContent;
     @JsonIgnore

@@ -32,16 +32,12 @@ public class Platform implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
-    @JsonIgnore
     @JsonProperty(value = "platform_logo")
     private Object platformLogo;
-    @JsonIgnore
     @JsonProperty(value = "versions")
     private List<Object> versions;
-    @JsonIgnore
     @JsonProperty(value = "websites")
     private List<Object> websites;
-    @JsonIgnore
     @JsonProperty(value = "product_family")
     private Object productFamily;
     @JsonIgnore

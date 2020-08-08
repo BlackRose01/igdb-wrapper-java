@@ -16,13 +16,11 @@ public class FeedFollow implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "feed")
     private Object feed;
     @JsonIgnore
     @JsonProperty(value = "user")
     private long user;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore

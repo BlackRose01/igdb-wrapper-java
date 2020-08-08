@@ -18,7 +18,6 @@ public class GameEngine implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "companies")
     private List<Object> companies;
     @JsonIgnore
@@ -27,7 +26,6 @@ public class GameEngine implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
-    @JsonIgnore
     @JsonProperty(value = "platforms")
     private List<Object> platforms;
     @JsonIgnore

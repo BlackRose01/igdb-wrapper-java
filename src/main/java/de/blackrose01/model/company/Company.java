@@ -3,18 +3,12 @@ package de.blackrose01.model.company;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import de.blackrose01.model.ExternalGame;
 import de.blackrose01.model.game.Game;
-import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,28 +35,22 @@ public class Company implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "description")
     private String description;
-    @JsonIgnore
     @JsonProperty(value = "developed")
     private List<Object> developed;
-    @JsonIgnore
     @JsonProperty(value = "published")
     private List<Object> published;
-    @JsonIgnore
     @JsonProperty(value = "parent")
     private Object parent;
-    @JsonIgnore
     @JsonProperty(value = "logo")
     private Object logo;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
-    @JsonIgnore
     @JsonProperty(value = "websites")
     private List<Object> websites;
     @JsonIgnore
     @JsonProperty(value = "start_date")
     private long dateStart;
-    @JsonIgnore
     @JsonProperty(value = "changed_company_id")
     private Object changedCompanyId;
     @JsonIgnore

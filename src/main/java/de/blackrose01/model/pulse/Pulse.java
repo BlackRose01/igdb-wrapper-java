@@ -3,11 +3,8 @@ package de.blackrose01.model.pulse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.List;
@@ -39,16 +36,13 @@ public class Pulse implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "image")
     private String image;
-    @JsonIgnore
     @JsonProperty(value = "pulse_image")
     private Object pulseImage;
-    @JsonIgnore
     @JsonProperty(value = "pulse_source")
     private Object pulseSource;
     @JsonIgnore
     @JsonProperty(value = "tags")
     private List<Long> tags;
-    @JsonIgnore
     @JsonProperty(value = "website")
     private Object website;
     @JsonIgnore

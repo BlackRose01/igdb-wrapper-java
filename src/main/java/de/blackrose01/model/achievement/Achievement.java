@@ -3,16 +3,11 @@ package de.blackrose01.model.achievement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import de.blackrose01.model.ExternalGame;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -36,7 +31,6 @@ public class Achievement implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "external_id")
     private String idExternal;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore
@@ -45,10 +39,8 @@ public class Achievement implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
-    @JsonIgnore
     @JsonProperty(value = "achievement_icon")
     private Object iconAchievement;
-    @JsonIgnore
     @JsonProperty(value = "locked_achievement_icon")
     private Object iconAchievementLocked;
     @JsonIgnore

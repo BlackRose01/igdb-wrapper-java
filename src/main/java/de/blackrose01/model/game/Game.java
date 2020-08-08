@@ -1,6 +1,8 @@
 package de.blackrose01.model.game;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -26,28 +28,21 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
-    @JsonIgnore
     @JsonProperty(value = "collection")
     private Object collection;
-    @JsonIgnore()
     @JsonProperty(value = "cover")
     private Object cover;
     @JsonIgnore
     @JsonProperty(value = "storyline")
     private String storyline;
-    @JsonIgnore
     @JsonProperty(value = "external_games")
     private List<Object> externalGames;
-    @JsonIgnore
     @JsonProperty(value = "first_release_date")
     private Object firstReleaseDate;
-    @JsonIgnore
     @JsonProperty(value = "game_modes")
     private List<Object> gameModes;
-    @JsonIgnore
     @JsonProperty(value = "keywords")
     private List<Object> keywords;
-    @JsonIgnore
     @JsonProperty(value = "platforms")
     private List<Object> platforms;
     @JsonIgnore
@@ -56,10 +51,8 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "pulse_count")
     private int pulseCount;
-    @JsonIgnore
     @JsonProperty(value = "release_dates")
     private List<Object> releaseDates;
-    @JsonIgnore
     @JsonProperty(value = "similar_games")
     private List<Object> gamesSimilar;
     @JsonIgnore
@@ -71,22 +64,18 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "tags")
     private List<Long> tags;
-    @JsonIgnore
     @JsonProperty(value = "themes")
     private List<Object> themes;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
-    @JsonIgnore
     @JsonProperty(value = "videos")
     private List<Object> videos;
-    @JsonIgnore
     @JsonProperty(value = "websites")
     private List<Object> websites;
     @JsonIgnore
     @JsonProperty(value = "parent_game")
     private long gameParent;
-    @JsonIgnore
     @JsonProperty(value = "age_ratings")
     private List<Object> ratingsAge;
     @JsonIgnore
@@ -95,31 +84,22 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "rating_count")
     private int ratingCount;
-    @JsonIgnore
     @JsonProperty(value = "screenshots")
     private List<Object> screenshots;
-    @JsonIgnore
     @JsonProperty(value = "multiplayer_modes")
     private List<Object> modesMultiplayer;
-    @JsonIgnore
     @JsonProperty(value = "involved_companies")
     private List<Object> companiesInvolved;
-    @JsonIgnore
     @JsonProperty(value = "genres")
     private List<Object> genres;
-    @JsonIgnore
     @JsonProperty(value = "game_engines")
     private List<Object> gameEngines;
-    @JsonIgnore
     @JsonProperty(value = "franchises")
     private List<Object> franchises;
-    @JsonIgnore
     @JsonProperty(value = "artworks")
     private List<Object> artworks;
-    @JsonIgnore
     @JsonProperty(value = "bundles")
     private List<Object> bundles;
-    @JsonIgnore
     @JsonProperty(value = "franchise")
     private Object franchise;
     @JsonIgnore
@@ -128,19 +108,14 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "follows")
     private int follows;
-    @JsonIgnore
     @JsonProperty(value = "time_to_beat")
     private Object timeToBeat;
-    @JsonIgnore
     @JsonProperty(value = "expansions")
     private List<Object> expansions;
-    @JsonIgnore
     @JsonProperty(value = "standalone_expansions")
     private List<Object> expansionsStandalone;
-    @JsonIgnore
     @JsonProperty(value = "dlcs")
     private List<Object> dlcs;
-    @JsonIgnore
     @JsonProperty(value = "player_perspectives")
     private List<Object> perspectivesPlayer;
     @JsonIgnore
@@ -149,7 +124,6 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "total_rating_count")
     private int ratingTotalCount;
-    @JsonIgnore
     @JsonProperty(value = "parent_game")
     private Object parentVersion;
     @JsonIgnore

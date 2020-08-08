@@ -24,7 +24,6 @@ public class Search implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "name_alternative")
     private String nameAlternative;
-    @JsonIgnore
     @JsonProperty(value = "person")
     private Object person;
     @JsonIgnore
@@ -33,22 +32,17 @@ public class Search implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "popularity")
     private double popularity;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
-    @JsonIgnore
     @JsonProperty(value = "theme")
     private Object theme;
     @JsonIgnore
     @JsonProperty(value = "test_dummy")
     private long testDummy;
-    @JsonIgnore
     @JsonProperty(value = "platform")
     private Object platform;
-    @JsonIgnore
     @JsonProperty(value = "company")
     private Object company;
-    @JsonIgnore
     @JsonProperty(value = "collection")
     private Object collection;
     @JsonIgnore

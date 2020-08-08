@@ -15,7 +15,6 @@ public class AlternativeName implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "id")
     private Object game;
     @JsonIgnore

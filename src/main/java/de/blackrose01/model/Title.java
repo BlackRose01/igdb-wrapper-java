@@ -17,7 +17,6 @@ public class Title implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "games")
     private List<Object> games;
     @JsonIgnore

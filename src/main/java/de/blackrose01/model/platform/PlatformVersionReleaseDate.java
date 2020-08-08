@@ -17,7 +17,6 @@ public class PlatformVersionReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
-    @JsonIgnore
     @JsonProperty(value = "platform_version")
     private Object platformVersion;
     @JsonIgnore

@@ -3,17 +3,12 @@ package de.blackrose01.model.pulse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import de.blackrose01.model.ExternalGame;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,13 +17,11 @@ public class PulseGroup implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
-    @JsonIgnore
     @JsonProperty(value = "pulses")
     private List<Object> pulses;
     @JsonIgnore

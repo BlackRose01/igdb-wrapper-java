@@ -3,9 +3,7 @@ package de.blackrose01.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
@@ -24,7 +22,6 @@ public class Feed implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
-    @JsonIgnore
     @JsonProperty(value = "pulse")
     private Object pulse;
     @JsonIgnore
@@ -39,10 +36,8 @@ public class Feed implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "feed_likes_count")
     private int feedLikesCount;
-    @JsonIgnore
     @JsonProperty(value = "feed_video")
     private Object feedVideo;
-    @JsonIgnore
     @JsonProperty(value = "games")
     private List<Object> games;
     @JsonIgnore

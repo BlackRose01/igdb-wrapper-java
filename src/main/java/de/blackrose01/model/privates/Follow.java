@@ -15,7 +15,6 @@ public class Follow implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore

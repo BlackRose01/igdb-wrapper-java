@@ -3,16 +3,12 @@ package de.blackrose01.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +17,6 @@ public class Franchise implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "games")
     private List<Object> games;
     @JsonIgnore
@@ -43,7 +38,8 @@ public class Franchise implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Franchise() {}
+    public Franchise() {
+    }
 
     public long getId() {
         return id;
@@ -54,11 +50,13 @@ public class Franchise implements Serializable {
     }
 
     public List<Long> getGames() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Game> getGamesObject() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
+        });
     }
 
     public void setGames(List<Object> games) {

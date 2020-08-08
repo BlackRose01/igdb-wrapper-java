@@ -28,7 +28,6 @@ public class GameVersionFeature implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "position")
     private int position;
-    @JsonIgnore
     @JsonProperty(value = "values")
     private List<Object> values;
     @JsonIgnore

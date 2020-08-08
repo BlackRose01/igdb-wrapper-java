@@ -19,7 +19,6 @@ public class ReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
-    @JsonIgnore
     @JsonProperty(value = "platform")
     private Object platform;
     @JsonIgnore
@@ -34,7 +33,6 @@ public class ReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "human")
     private String human;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore

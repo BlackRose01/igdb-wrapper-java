@@ -17,7 +17,6 @@ public class Collection implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "games")
     private List<Objects> games;
     @JsonIgnore

@@ -34,7 +34,6 @@ public class Review implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "negative_points")
     private String pointsNegative;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore
@@ -52,16 +51,13 @@ public class Review implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "user")
     private long user;
-    @JsonIgnore
     @JsonProperty(value = "user_rating")
     private Object userRating;
     @JsonIgnore
     @JsonProperty(value = "views")
     private long views;
-    @JsonIgnore
     @JsonProperty(value = "platform")
     private Object platform;
-    @JsonIgnore
     @JsonProperty(value = "video")
     private Object video;
     @JsonIgnore

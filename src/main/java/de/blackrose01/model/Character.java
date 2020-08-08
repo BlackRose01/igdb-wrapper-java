@@ -24,7 +24,6 @@ public class Character implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "species")
     private int species;
-    @JsonIgnore
     @JsonProperty(value = "games")
     private List<Object> games;
     @JsonIgnore
@@ -33,7 +32,6 @@ public class Character implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
-    @JsonIgnore
     @JsonProperty(value = "people")
     private List<Object> people;
     @JsonIgnore

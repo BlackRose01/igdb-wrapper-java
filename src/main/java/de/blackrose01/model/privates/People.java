@@ -23,7 +23,6 @@ public class People implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
-    @JsonIgnore
     @JsonProperty(value = "credited_games")
     private List<Object> gamesCredited;
     @JsonIgnore

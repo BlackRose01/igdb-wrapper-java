@@ -17,7 +17,6 @@ public class PlatformVersion implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "companies")
     private List<Object> companies;
     @JsonIgnore
@@ -50,13 +49,10 @@ public class PlatformVersion implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "output")
     private String output;
-    @JsonIgnore
     @JsonProperty(value = "platform_logo")
     private Object platformLogo;
-    @JsonIgnore
     @JsonProperty(value = "platform_version_release_dates")
     private List<Object> platformVersionReleaseDates;
-    @JsonIgnore
     @JsonProperty(value = "main_manufacturer")
     private Object manufacturerMain;
     @JsonIgnore

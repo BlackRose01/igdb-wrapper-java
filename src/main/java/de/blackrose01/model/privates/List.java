@@ -40,16 +40,13 @@ public class List implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
-    @JsonIgnore
     @JsonProperty(value = "list_entries")
     private java.util.List<Object> listEntries;
-    @JsonIgnore
     @JsonProperty(value = "listed_games")
     private java.util.List<Object> listGames;
     @JsonIgnore
     @JsonProperty(value = "list_tags")
     private java.util.List<Long> listTags;
-    @JsonIgnore
     @JsonProperty(value = "similar_lists")
     private java.util.List<Object> similarLists;
     @JsonIgnore

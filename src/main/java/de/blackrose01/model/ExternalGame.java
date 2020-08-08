@@ -18,7 +18,6 @@ public class ExternalGame implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore

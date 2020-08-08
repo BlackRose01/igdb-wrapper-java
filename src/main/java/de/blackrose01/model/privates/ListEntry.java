@@ -16,10 +16,8 @@ public class ListEntry implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
-    @JsonIgnore
     @JsonProperty(value = "list")
     private Object list;
     @JsonIgnore
@@ -31,7 +29,6 @@ public class ListEntry implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "user")
     private long user;
-    @JsonIgnore
     @JsonProperty(value = "platform")
     private Object platform;
     @JsonIgnore

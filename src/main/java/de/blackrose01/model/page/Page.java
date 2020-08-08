@@ -19,7 +19,6 @@ public class Page implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
-    @JsonIgnore
     @JsonProperty(value = "background")
     private Object background;
     @JsonIgnore
@@ -37,13 +36,10 @@ public class Page implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "battlenet")
     private String battlenet;
-    @JsonIgnore
     @JsonProperty(value = "company")
     private Object company;
-    @JsonIgnore
     @JsonProperty(value = "feed")
     private Object feed;
-    @JsonIgnore
     @JsonProperty(value = "game")
     private Object game;
     @JsonIgnore
@@ -64,7 +60,6 @@ public class Page implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "user")
     private long user;
-    @JsonIgnore
     @JsonProperty(value = "websites")
     private List<Object> websites;
     @JsonIgnore
