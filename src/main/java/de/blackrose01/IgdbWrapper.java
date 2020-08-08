@@ -29,7 +29,7 @@ public class IgdbWrapper {
             this.urlBase += "pro/";
     }
 
-    public <T> T sendRequest(Endpoint endpoint, Parameters parameters, Class<T> c) {
+    public <T> T sendRequest(Endpoint endpoint, Parameters parameters, HttpMethod httpMethod, Class<T> c) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> entity;
@@ -40,6 +40,18 @@ public class IgdbWrapper {
 
         entity = new HttpEntity(parameters.buildQuery(), headers);
 
-        return restTemplate.exchange(this.urlBase + endpoint.getUrl(), HttpMethod.POST, entity, c).getBody();
+        return restTemplate.exchange(this.urlBase + endpoint.getUrl(), httpMethod, entity, c).getBody();
+    }
+
+    public <T> T sendRequest(Endpoint endpoint, Parameters parameters, Class<T> c) {
+        return this.sendRequest(endpoint, parameters, HttpMethod.GET, c);
+    }
+
+    public <T> T sendRequest(Endpoint endpoint, HttpMethod httpMethod, Class<T> c) {
+        return this.sendRequest(endpoint, new Parameters(), httpMethod, c);
+    }
+
+    public <T> T sendRequest(Endpoint endpoint, Class<T> c) {
+        return this.sendRequest(endpoint, new Parameters(), HttpMethod.GET, c);
     }
 }
