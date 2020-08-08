@@ -1,7 +1,6 @@
 package de.blackrose01;
 
-import de.blackrose01.interfaces.Endpoint;
-import de.blackrose01.test.Version;
+import de.blackrose01.endpoint.Endpoint;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -52,7 +51,7 @@ public class IgdbWrapper {
 
         entity = new HttpEntity(parameters.buildQuery(), headers);
 
-        return restTemplate.exchange(this.urlBase + endpoint.getUri(), httpMethod, entity, c).getBody();
+        return c.cast(restTemplate.exchange(this.urlBase + endpoint.getUri(), httpMethod, entity, c).getBody());
     }
 
     /**
