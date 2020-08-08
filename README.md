@@ -41,5 +41,8 @@ String prettyJson = gson.toJson(json);
 System.out.println(prettyJson);
 ```
 
+## License
+The scripts and documentation in this project are released under the [MIT License](https://github.com/actions/create-release/blob/main/LICENSE)
+
 ## Sources
 * [IGDB API Documentation](https://api-docs.igdb.com/)
