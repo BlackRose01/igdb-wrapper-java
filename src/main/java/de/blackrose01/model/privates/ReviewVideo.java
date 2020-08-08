@@ -13,7 +13,7 @@ public class ReviewVideo implements Serializable {
     private long id;
     @JsonIgnore
     @JsonProperty(value = "trusted")
-    private boolean isTrusted;
+    private boolean trusted;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -32,11 +32,11 @@ public class ReviewVideo implements Serializable {
     }
 
     public boolean isTrusted() {
-        return isTrusted;
+        return trusted;
     }
 
     public void setTrusted(boolean trusted) {
-        isTrusted = trusted;
+        this.trusted = trusted;
     }
 
     public String getUrl() {
@@ -66,13 +66,13 @@ public class ReviewVideo implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         ReviewVideo that = (ReviewVideo) o;
         return id == that.id &&
-                isTrusted == that.isTrusted &&
+                trusted == that.trusted &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isTrusted, url, checksum);
+        return Objects.hash(id, trusted, url, checksum);
     }
 }
