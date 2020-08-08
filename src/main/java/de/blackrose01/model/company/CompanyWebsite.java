@@ -16,7 +16,7 @@ public class CompanyWebsite implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "trusted")
-    private boolean isTrusted;
+    private boolean trusted;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -43,11 +43,11 @@ public class CompanyWebsite implements Serializable {
     }
 
     public boolean isTrusted() {
-        return isTrusted;
+        return trusted;
     }
 
     public void setTrusted(boolean trusted) {
-        isTrusted = trusted;
+        this.trusted = trusted;
     }
 
     public String getUrl() {
@@ -78,13 +78,13 @@ public class CompanyWebsite implements Serializable {
         CompanyWebsite that = (CompanyWebsite) o;
         return id == that.id &&
                 category == that.category &&
-                isTrusted == that.isTrusted &&
+                trusted == that.trusted &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, isTrusted, url, checksum);
+        return Objects.hash(id, category, trusted, url, checksum);
     }
 }
