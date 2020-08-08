@@ -40,6 +40,6 @@ public class IgdbWrapper {
 
         entity = new HttpEntity(parameters.buildQuery(), headers);
 
-        return c.cast(restTemplate.exchange(this.urlBase + endpoint.getUrl(), HttpMethod.POST, entity, c).getBody());
+        return restTemplate.exchange(this.urlBase + endpoint.getUrl(), HttpMethod.POST, entity, c).getBody();
     }
 }
