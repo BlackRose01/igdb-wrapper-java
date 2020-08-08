@@ -18,10 +18,7 @@ public class GameVersionFeatureValue implements Serializable {
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "game_feature")
     private Object gameFeature;
@@ -46,19 +43,15 @@ public class GameVersionFeatureValue implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
+    }
+
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
     public void setGame(long game) {
         this.game = game;
-    }
-
-    public Game getGameObject() {
-        return gameObject;
-    }
-
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
     }
 
     public long getGameFeature() {
@@ -110,7 +103,6 @@ public class GameVersionFeatureValue implements Serializable {
         return id == that.id &&
                 game == that.game &&
                 featureInclude == that.featureInclude &&
-                Objects.equals(gameObject, that.gameObject) &&
                 Objects.equals(gameFeature, that.gameFeature) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(checksum, that.checksum);
@@ -118,6 +110,6 @@ public class GameVersionFeatureValue implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, gameObject, gameFeature, featureInclude, note, checksum);
+        return Objects.hash(id, game, gameFeature, featureInclude, note, checksum);
     }
 }
