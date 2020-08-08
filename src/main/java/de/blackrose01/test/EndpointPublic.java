@@ -6,6 +6,7 @@ import de.blackrose01.interfaces.Endpoint;
 public enum EndpointPublic implements Endpoint {
     Achievement("achievements"),
     Achievement_Icon("achievement_icons"),
+    Api_Status("api_status"),
     Age_Rating("age_ratings"),
     Age_Rating_Content_Description("age_rating_content_descriptions"),
     Alternative_Name("alternative_names"),
