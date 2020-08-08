@@ -1,9 +1,9 @@
 package de.blackrose01;
 
-import de.blackrose01.interfaces.Endpoint;
-import de.blackrose01.test.EndpointPrivate;
-import de.blackrose01.test.EndpointPublic;
-import de.blackrose01.test.Postfixes;
+import de.blackrose01.endpoint.Endpoint;
+import de.blackrose01.endpoint.EndpointPrivate;
+import de.blackrose01.endpoint.EndpointPublic;
+
 import java.util.ArrayList;
 import java.util.List;
 

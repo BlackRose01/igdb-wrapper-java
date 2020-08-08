@@ -1,4 +1,4 @@
-package de.blackrose01.test;
+package de.blackrose01;
 
 import com.google.gson.Gson;
 
