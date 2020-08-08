@@ -1,4 +1,4 @@
-package de.blackrose01.interfaces;
+package de.blackrose01.endpoint;
 
 /**
  * interface for endpoints

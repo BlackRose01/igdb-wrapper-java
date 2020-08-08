@@ -1,7 +1,6 @@
-package de.blackrose01.test;
+package de.blackrose01.endpoint;
 
 import com.google.gson.Gson;
-import de.blackrose01.interfaces.Endpoint;
 
 /**
  * private api endpoints
