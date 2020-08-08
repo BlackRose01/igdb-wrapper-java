@@ -2,9 +2,13 @@ package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +31,9 @@ public class GameVersionFeature implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "values")
     private List<Long> values;
+    @JsonIgnore
+    @JsonProperty(value = "values")
+    private List<GameVersionFeatureValue> valuesObject;
     @JsonIgnore
     @JsonProperty(value = "checksum")
     private String checksum;
@@ -81,12 +88,33 @@ public class GameVersionFeature implements Serializable {
         this.values = values;
     }
 
+    public List<GameVersionFeatureValue> getValuesObject() {
+        return valuesObject;
+    }
+
+    public void setValuesObject(List<GameVersionFeatureValue> valuesObject) {
+        this.valuesObject = valuesObject;
+    }
+
     public String getChecksum() {
         return checksum;
     }
 
     public void setChecksum(String checksum) {
         this.checksum = checksum;
+    }
+
+    @JsonSetter("values")
+    public void setValuesJson(JsonNode jsonNode) {
+        Type typeListObject = new TypeToken<List<GameVersionFeatureValue>>(){}.getType();
+        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
+
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
+            this.values = new Gson().fromJson(jsonNode.toString(), typeListLong);
+        else
+            this.valuesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
     }
 
     @Override
@@ -105,11 +133,12 @@ public class GameVersionFeature implements Serializable {
                 Objects.equals(title, that.title) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(values, that.values) &&
+                Objects.equals(valuesObject, that.valuesObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, title, description, position, values, checksum);
+        return Objects.hash(id, category, title, description, position, values, valuesObject, checksum);
     }
 }
