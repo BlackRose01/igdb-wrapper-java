@@ -10,6 +10,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
+/**
+ * Wrapper for IGDB API
+ */
 public class IgdbWrapper {
     private String apiKey;
     private String urlBase;
@@ -29,6 +32,15 @@ public class IgdbWrapper {
             this.urlBase += "pro/";
     }
 
+    /**
+     * general method to send requests
+     * @param endpoint
+     * @param parameters
+     * @param httpMethod
+     * @param c
+     * @param <T>
+     * @return
+     */
     public <T> T sendRequest(Endpoint endpoint, Parameters parameters, HttpMethod httpMethod, Class<T> c) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -40,17 +52,40 @@ public class IgdbWrapper {
 
         entity = new HttpEntity(parameters.buildQuery(), headers);
 
-        return restTemplate.exchange(this.urlBase + endpoint.getUrl(), httpMethod, entity, c).getBody();
+        return restTemplate.exchange(this.urlBase + endpoint.getUri(), httpMethod, entity, c).getBody();
     }
 
+    /**
+     * general method to send requests
+     * @param endpoint
+     * @param parameters
+     * @param c
+     * @param <T>
+     * @return
+     */
     public <T> T sendRequest(Endpoint endpoint, Parameters parameters, Class<T> c) {
         return this.sendRequest(endpoint, parameters, HttpMethod.GET, c);
     }
 
+    /**
+     * general method to send requests
+     * @param endpoint
+     * @param httpMethod
+     * @param c
+     * @param <T>
+     * @return
+     */
     public <T> T sendRequest(Endpoint endpoint, HttpMethod httpMethod, Class<T> c) {
         return this.sendRequest(endpoint, new Parameters(), httpMethod, c);
     }
 
+    /**
+     * general method to send requests
+     * @param endpoint
+     * @param c
+     * @param <T>
+     * @return
+     */
     public <T> T sendRequest(Endpoint endpoint, Class<T> c) {
         return this.sendRequest(endpoint, new Parameters(), HttpMethod.GET, c);
     }

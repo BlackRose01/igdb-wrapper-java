@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Player perspectives describe the view/perspective of the player in a video game.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlayerPerspective implements Serializable {
     @JsonIgnore

@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Achievement data for specific games for specific platforms (currently limited to acheivements from steam, playstation and Xbox)
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Achievement implements Serializable {
     @JsonIgnore

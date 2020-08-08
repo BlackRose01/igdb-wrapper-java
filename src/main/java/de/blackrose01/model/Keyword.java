@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Keywords are words or phrases that get tagged to a game such as “world war 2” or “steampunk”.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Keyword implements Serializable {
     @JsonIgnore

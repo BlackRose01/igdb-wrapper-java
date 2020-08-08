@@ -13,6 +13,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Video game characters
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Character implements Serializable {
     @JsonIgnore

@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A website url, usually associated with a game
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Website implements Serializable {
     @JsonIgnore

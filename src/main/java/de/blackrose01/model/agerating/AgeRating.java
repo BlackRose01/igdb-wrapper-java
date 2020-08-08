@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Age Rating according to various rating organisations
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AgeRating implements Serializable {
     @JsonIgnore

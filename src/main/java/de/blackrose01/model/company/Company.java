@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Video game companies. Both publishers & developers
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Company implements Serializable {
     @JsonIgnore

@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A list of video game franchises such as Star Wars.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Franchise implements Serializable {
     @JsonIgnore

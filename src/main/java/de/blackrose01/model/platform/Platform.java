@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The hardware used to run the game or game delivery network
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Platform implements Serializable {
     @JsonIgnore

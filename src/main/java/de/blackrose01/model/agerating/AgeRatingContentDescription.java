@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The organisation behind a specific rating
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AgeRatingContentDescription implements Serializable {
     @JsonIgnore

@@ -10,6 +10,9 @@ import de.blackrose01.model.company.Company;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A platform developer
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformVersionCompany implements Serializable {
     @JsonIgnore

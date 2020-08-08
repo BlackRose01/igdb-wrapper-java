@@ -9,6 +9,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A video associated with a game
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVideo implements Serializable {
     @JsonIgnore

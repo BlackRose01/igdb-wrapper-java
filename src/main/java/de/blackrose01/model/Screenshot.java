@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Screenshots of games
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Screenshot implements Serializable {
     @JsonIgnore

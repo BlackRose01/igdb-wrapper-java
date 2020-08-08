@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Job titles in the games industry
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Title implements Serializable {
     @JsonIgnore

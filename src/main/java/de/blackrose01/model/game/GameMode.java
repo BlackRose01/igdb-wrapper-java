@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Single player, Multiplayer etc
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameMode implements Serializable {
     @JsonIgnore

@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * official artworks (resolution and aspect ratio may vary)
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Artwork implements Serializable {
     @JsonIgnore

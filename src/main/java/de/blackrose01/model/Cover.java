@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The cover art of games
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cover implements Serializable {
     @JsonIgnore

@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The logos of game engines
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameEngineLogo implements Serializable {
     @JsonIgnore

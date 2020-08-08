@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Game IDs on other services
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExternalGame implements Serializable {
     @JsonIgnore

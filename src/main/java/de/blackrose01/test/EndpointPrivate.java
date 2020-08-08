@@ -3,6 +3,9 @@ package de.blackrose01.test;
 import com.google.gson.Gson;
 import de.blackrose01.interfaces.Endpoint;
 
+/**
+ * private api endpoints
+ */
 public enum EndpointPrivate implements Endpoint {
     Feed_Follow("feed_follows"),
     Follow("follows"),
@@ -13,15 +16,19 @@ public enum EndpointPrivate implements Endpoint {
     Review("reviews"),
     Review_Video("review_videos");
 
-    private String url;
+    private String uri;
     private final String preUrl = "private/";
 
     EndpointPrivate(String url) {
-        this.url = url;
+        this.uri = url;
     }
 
-    public String getUrl() {
-        return preUrl + url;
+    /**
+     * return URI of endpoint
+     * @return
+     */
+    public String getUri() {
+        return preUrl + uri;
     }
 
     @Override

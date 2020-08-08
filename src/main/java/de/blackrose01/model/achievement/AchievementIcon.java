@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * An icon for a specific achievement
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AchievementIcon implements Serializable {
     @JsonIgnore

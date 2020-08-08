@@ -11,6 +11,9 @@ import de.blackrose01.model.platform.Platform;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Data about the supported multiplayer types
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MultiplayerMode implements Serializable {
     @JsonIgnore

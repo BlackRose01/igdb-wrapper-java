@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Pulse groups are a combined array of news articles that are about a specific game and were published around the same time period.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PulseGroup implements Serializable {
     @JsonIgnore

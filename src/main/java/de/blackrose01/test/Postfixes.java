@@ -2,6 +2,9 @@ package de.blackrose01.test;
 
 import com.google.gson.Gson;
 
+/**
+ * available postfixes to filter
+ */
 public enum Postfixes {
     Equal_Case_Sensitive("=", true, false),
     Equal_Case_Insensitive("~", true, false),
@@ -29,14 +32,26 @@ public enum Postfixes {
     private boolean onlyNumeric;
     public static final String PLACEHOLDER = "&LIST&";
 
+    /**
+     * return postfix/relational operator
+     * @return
+     */
     public String getPostfix() {
         return postfix;
     }
 
+    /**
+     * return comparator is requires
+     * @return
+     */
     public boolean isRequireComparator() {
         return requireComparator;
     }
 
+    /**
+     * return only numeric values accepted
+     * @return
+     */
     public boolean isOnlyNumeric() {
         return onlyNumeric;
     }

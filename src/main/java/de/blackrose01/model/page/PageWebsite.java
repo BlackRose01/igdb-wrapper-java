@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Page Website
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageWebsite implements Serializable {
     @JsonIgnore

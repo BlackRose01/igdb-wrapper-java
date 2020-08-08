@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Feed items are a social feed of status updates, media and news articles.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Feed implements Serializable {
     @JsonIgnore

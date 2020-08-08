@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The main website for the platform
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformWebsite implements Serializable {
     @JsonIgnore

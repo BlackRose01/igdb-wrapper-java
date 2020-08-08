@@ -11,6 +11,9 @@ import de.blackrose01.model.platform.Platform;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A handy endpoint that extends game release dates. Used to dig deeper into release dates, platforms and versions.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ReleaseDate implements Serializable {
     @JsonIgnore

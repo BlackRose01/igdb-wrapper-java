@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A URL linking to the article
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PulseUrl implements Serializable {
     @JsonIgnore

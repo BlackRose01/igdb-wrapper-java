@@ -9,6 +9,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A handy endpoint that extends platform release dates. Used to dig deeper into release dates, platforms and versions.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformVersionReleaseDate implements Serializable {
     @JsonIgnore

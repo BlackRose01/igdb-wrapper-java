@@ -3,6 +3,9 @@ package de.blackrose01.test;
 import com.google.gson.Gson;
 import de.blackrose01.interfaces.Endpoint;
 
+/**
+ * public api endpoints
+ */
 public enum EndpointPublic implements Endpoint {
     Achievement("achievements"),
     Achievement_Icon("achievement_icons"),
@@ -58,14 +61,18 @@ public enum EndpointPublic implements Endpoint {
     Title("titles"),
     Website("websites");
 
-    private String url;
+    private String uri;
 
-    EndpointPublic(String url) {
-        this.url = url;
+    EndpointPublic(String uri) {
+        this.uri = uri;
     }
 
-    public String getUrl() {
-        return url;
+    /**
+     * returns URI of endpoint
+     * @return
+     */
+    public String getUri() {
+        return uri;
     }
 
     @Override

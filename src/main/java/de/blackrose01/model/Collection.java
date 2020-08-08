@@ -12,6 +12,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Collection, AKA Series
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Collection implements Serializable {
     @JsonIgnore

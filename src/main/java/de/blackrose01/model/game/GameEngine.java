@@ -13,6 +13,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Video game engines such as unreal engine.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameEngine implements Serializable {
     @JsonIgnore

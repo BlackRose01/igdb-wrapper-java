@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Average completion times for games
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeToBeat implements Serializable {
     @JsonIgnore

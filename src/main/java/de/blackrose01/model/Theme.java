@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Video game themes
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Theme implements Serializable {
     @JsonIgnore

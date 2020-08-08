@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Images depicting game characters
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CharacterMugShot implements Serializable {
     @JsonIgnore

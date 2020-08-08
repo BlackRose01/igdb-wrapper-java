@@ -9,6 +9,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Details about game editions and versions.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersion implements Serializable {
     @JsonIgnore

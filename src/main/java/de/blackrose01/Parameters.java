@@ -7,6 +7,9 @@ import de.blackrose01.test.Postfixes;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Manage Parameters for API requests
+ */
 public class Parameters {
     private List<String> filters = new ArrayList<String>();
     private String ids = "";
@@ -19,11 +22,21 @@ public class Parameters {
 
     public Parameters() {}
 
+    /**
+     * Add single ID as filter
+     * @param id
+     * @return
+     */
     public Parameters addId(long id) {
         this.ids = "id = (" + String.valueOf(id) + ")";
         return this;
     }
 
+    /**
+     * Add a bunch of IDs as filter
+     * @param id
+     * @return
+     */
     public Parameters addId(long[] id) {
         String[] ids = new String[id.length];
 
@@ -34,24 +47,49 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * Add a bunch of IDs as filter
+     * @param id
+     * @return
+     */
     public Parameters addId(List<Long> id) {
         return this.addId(long[].class.cast(id.toArray()));
     }
 
+    /**
+     * Select the field to show in object
+     * @param fields
+     * @return
+     */
     public Parameters addFields(String fields) {
         this.fields = "fields " + fields.replace(" ", ",").toLowerCase();
         return this;
     }
 
+    /**
+     * Select the fields to show in objects
+     * @param fields
+     * @return
+     */
     public Parameters addFields(String[] fields) {
         this.fields = "fields " + String.join(",", fields).toLowerCase();
         return this;
     }
 
+    /**
+     * Select the fields to show in objects
+     * @param fields
+     * @return
+     */
     public Parameters addFields(List<String> fields) {
         return addFields(fields.toArray(new String[fields.size()]));
     }
 
+    /**
+     *
+     * @param offset
+     * @return
+     */
     public Parameters addOffset(int offset) {
         if (offset < 1)
             this.offset = "";
@@ -63,6 +101,12 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * Maximal size of objects in response
+     * max value: 500, min value: 1
+     * @param limit
+     * @return
+     */
     public Parameters addLimit(int limit) {
         if (limit < 1)
             this.limit = "";
@@ -74,6 +118,12 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * sort response list by given field
+     * @param field
+     * @param descending
+     * @return
+     */
     public Parameters addOrder(String field, boolean descending) {
         if (descending)
             this.order = "sort " + field + " desc";
@@ -83,6 +133,13 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * search for given string in name field; sort by similarity
+     * only for endpoints Character, Collection, Game, Platform, People Theme
+     * @param endpoint
+     * @param search
+     * @return
+     */
     public Parameters addSearch(Endpoint endpoint, String search) {
         if (
                 endpoint == EndpointPublic.Character ||
@@ -97,11 +154,23 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * exclude a field in response objects
+     * @param field
+     * @return
+     */
     public Parameters addExclude(String field) {
         this.exclude = "exclude = " + field;
         return this;
     }
 
+    /**
+     * set comparising filters
+     * @param field
+     * @param comparator
+     * @param n
+     * @return
+     */
     public Parameters addFilter(String field, Postfixes comparator, Number n) {
         if (
                 (comparator.isRequireComparator() && comparator.isOnlyNumeric()) ||
@@ -112,6 +181,13 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * set comparising filters
+     * @param field
+     * @param comparator
+     * @param s
+     * @return
+     */
     public Parameters addFilter(String field, Postfixes comparator, String s) {
         if (
                 !comparator.isOnlyNumeric() &&
@@ -122,7 +198,13 @@ public class Parameters {
 
         return this;
     }
-    
+
+    /**
+     * set comparising filters (only null checks)
+     * @param field
+     * @param comparator
+     * @return
+     */
     public Parameters addFilterNull(String field, Postfixes comparator) {
         if (comparator == Postfixes.Is_Null || comparator == Postfixes.Not_Null)
             this.filters.add(field + comparator.getPostfix());
@@ -130,6 +212,12 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * set comparising filters
+     * @param values
+     * @param comparator
+     * @return
+     */
     public Parameters addFilter(String[] values, Postfixes comparator) {
         if (
                 !comparator.isRequireComparator() &&
@@ -140,11 +228,21 @@ public class Parameters {
 
         return this;
     }
-    
+
+    /**
+     * set comparising filters
+     * @param values
+     * @param comparator
+     * @return
+     */
     public Parameters addFilter(List<String> values, Postfixes comparator) {
         return this.addFilter(values.toArray(new String[values.size()]), comparator);
     }
-    
+
+    /**
+     * delete all parameters
+     * @return
+     */
     public Parameters resetFilterAll() {
         this.filters = new ArrayList<String>();
         this.ids = "";
@@ -158,46 +256,82 @@ public class Parameters {
         return this;
     }
 
+    /**
+     * delete parameters for ID
+     * @return
+     */
     public Parameters resetFilterIds() {
         this.ids = "";
         return this;
     }
 
+    /**
+     * delete filter parameters
+     * @return
+     */
     public Parameters resetFilterFilters() {
         this.filters = new ArrayList<>();
         return this;
     }
 
+    /**
+     * delete parameters for fields
+     * @return
+     */
     public Parameters resetFilterFields() {
         this.fields = "fields *";
         return this;
     }
 
+    /**
+     * delete parameters for ordering
+     * @return
+     */
     public Parameters resetFilterOrder() {
         this.order = "";
         return this;
     }
 
+    /**
+     * delete parameters for offset
+     * @return
+     */
     public Parameters resetFilterOffset() {
         this.offset = "";
         return this;
     }
 
+    /**
+     * delete parameters for limit
+     * @return
+     */
     public Parameters resetFilterLimit() {
         this.limit = "";
         return this;
     }
 
+    /**
+     * delete parameters for searching
+     * @return
+     */
     public Parameters resetFilterSearch() {
         this.search = "";
         return this;
     }
 
+    /**
+     * delete parameters for exluding fields
+     * @return
+     */
     public Parameters resetFilterExclude() {
         this.exclude = "";
         return this;
     }
-    
+
+    /**
+     * build query string for request
+     * @return
+     */
     public String buildQuery() {
         String query = fields + ";";
 
@@ -211,7 +345,7 @@ public class Parameters {
             query += order + ";";
         if (!limit.isEmpty())
             query += limit + ";";
-        if (!offset.isEmpty())
+        if (!offset.isEmpty() && !limit.isEmpty())
             query += offset + ";";
         if (!exclude.isEmpty())
             query += exclude + ";";

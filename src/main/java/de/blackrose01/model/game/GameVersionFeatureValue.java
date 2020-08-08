@@ -9,6 +9,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The bool/text value of the feature
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersionFeatureValue implements Serializable {
     @JsonIgnore

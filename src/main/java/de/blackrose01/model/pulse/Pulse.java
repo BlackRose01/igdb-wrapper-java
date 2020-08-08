@@ -10,6 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * A single news article.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pulse implements Serializable {
     @JsonIgnore

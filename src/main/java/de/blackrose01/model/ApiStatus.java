@@ -7,6 +7,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A usage report for the API key
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiStatus implements Serializable {
     @JsonProperty(value = "authorized")

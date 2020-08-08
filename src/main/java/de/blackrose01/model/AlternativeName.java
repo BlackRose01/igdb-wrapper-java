@@ -10,6 +10,9 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Alternative and international game titles
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AlternativeName implements Serializable {
     @JsonIgnore

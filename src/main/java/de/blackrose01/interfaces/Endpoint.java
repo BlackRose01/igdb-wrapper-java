@@ -1,6 +1,18 @@
 package de.blackrose01.interfaces;
 
+/**
+ * interface for endpoints
+ */
 public interface Endpoint {
-    String getUrl();
+    /**
+     * should return URI of endpoint
+     * @return
+     */
+    String getUri();
+
+    /**
+     * should return stringified object
+     * @return
+     */
     String toString();
 }

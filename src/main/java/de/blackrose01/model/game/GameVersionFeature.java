@@ -11,6 +11,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Features and descriptions of what makes each version/edition different from the main game
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersionFeature implements Serializable {
     @JsonIgnore

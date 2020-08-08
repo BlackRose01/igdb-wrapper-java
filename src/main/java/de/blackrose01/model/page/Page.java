@@ -14,6 +14,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Our multipurpose page system is currently used for youtubers and media organisations.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Page implements Serializable {
     @JsonIgnore

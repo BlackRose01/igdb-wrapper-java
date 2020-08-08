@@ -11,6 +11,9 @@ import de.blackrose01.model.page.Page;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A news article source such as IGN.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PulseSource implements Serializable {
     @JsonIgnore

@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * A collection of closely related platforms
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProductFamily implements Serializable {
     @JsonIgnore

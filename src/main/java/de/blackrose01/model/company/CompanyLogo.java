@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * The logos of developers and publishers
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CompanyLogo implements Serializable {
     @JsonIgnore

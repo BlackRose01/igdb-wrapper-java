@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Genres of video game
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Genre implements Serializable {
     @JsonIgnore
