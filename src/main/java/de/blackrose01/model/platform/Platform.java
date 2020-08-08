@@ -207,7 +207,9 @@ public class Platform implements Serializable {
         Type typeListObject = new TypeToken<List<PlatformVersion>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.versions = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.versionsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -218,7 +220,9 @@ public class Platform implements Serializable {
         Type typeListObject = new TypeToken<List<PlatformWebsite>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);

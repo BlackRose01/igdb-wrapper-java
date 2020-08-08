@@ -288,7 +288,9 @@ public class Company implements Serializable {
         Type typeListObject = new TypeToken<List<ExternalGame>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.developed = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.developedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -299,7 +301,9 @@ public class Company implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.published = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.publishedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -326,7 +330,9 @@ public class Company implements Serializable {
         Type typeListObject = new TypeToken<List<CompanyWebsite>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -337,7 +343,9 @@ public class Company implements Serializable {
         Type typeListObject = new TypeToken<List<Company>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.changedCompanyId = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.changedCompanyIdObject = new Gson().fromJson(jsonNode.toString(), typeListObject);

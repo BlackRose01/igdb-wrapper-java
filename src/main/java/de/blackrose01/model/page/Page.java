@@ -366,7 +366,9 @@ public class Page implements Serializable {
         Type typeListObject = new TypeToken<List<PageWebsite>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);

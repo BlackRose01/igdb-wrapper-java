@@ -199,7 +199,9 @@ public class Character implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.games = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.gamesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -210,7 +212,9 @@ public class Character implements Serializable {
         Type typeListObject = new TypeToken<List<People>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.people = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.peopleObject = new Gson().fromJson(jsonNode.toString(), typeListObject);

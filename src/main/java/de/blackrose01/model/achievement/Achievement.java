@@ -240,7 +240,9 @@ public class Achievement implements Serializable {
         Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.iconAchievement = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.iconAchievementObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -251,7 +253,9 @@ public class Achievement implements Serializable {
         Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.iconAchievementLocked = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.iconAchievementLockedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);

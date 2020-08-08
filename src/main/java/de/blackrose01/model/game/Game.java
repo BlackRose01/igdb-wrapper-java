@@ -852,7 +852,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<ExternalGame>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.externalGames = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.externalGamesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -863,7 +865,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<GameMode>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.gameModes = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.gameModesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -874,7 +878,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Keyword>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.keywords = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.keywordsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -885,7 +891,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Platform>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.platforms = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.platformsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -896,7 +904,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<ReleaseDate>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.releaseDates = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.releaseDatesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -907,7 +917,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.gamesSimilar = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.gamesSimilarObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -918,7 +930,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Theme>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.themes = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.themesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -929,7 +943,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<GameVideo>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.videos = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.videosObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -940,7 +956,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Website>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -951,7 +969,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<AgeRating>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.ratingsAge = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.ratingsAgeObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -962,7 +982,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Screenshot>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.screenshots = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.screenshotsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -973,7 +995,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<MultiplayerMode>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.modesMultiplayer = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.modesMultiplayerObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -984,7 +1008,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<InvolvedCompany>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.companiesInvolved = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.companiesInvolvedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -995,7 +1021,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Genre>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.genres = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.genresObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1006,7 +1034,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<GameEngine>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.gameEngines = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.gameEnginesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1017,7 +1047,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Franchise>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.franchises = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.franchisesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1028,7 +1060,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Artwork>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.artworks = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.artworksObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1039,7 +1073,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.bundles = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.bundlesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1050,7 +1086,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.expansions = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.expansionsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1061,7 +1099,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.expansionsStandalone = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.expansionsStandaloneObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1072,7 +1112,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<Game>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.dlcs = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.dlcsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
@@ -1083,7 +1125,9 @@ public class Game implements Serializable {
         Type typeListObject = new TypeToken<List<PlayerPerspective>>(){}.getType();
         Type typeListLong = new TypeToken<List<Long>>(){}.getType();
 
-        if (jsonNode.isArray())
+        if (jsonNode.size() == 0)
+            return;
+        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
             this.perspectivesPlayer = new Gson().fromJson(jsonNode.toString(), typeListLong);
         else
             this.perspectivesPlayerObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
