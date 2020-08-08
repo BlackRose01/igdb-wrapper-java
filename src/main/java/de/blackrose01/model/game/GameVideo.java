@@ -2,6 +2,8 @@ package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
@@ -14,6 +16,9 @@ public class GameVideo implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "game")
     private long game;
+    @JsonIgnore
+    @JsonProperty(value = "game")
+    private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -42,6 +47,14 @@ public class GameVideo implements Serializable {
         this.game = game;
     }
 
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
     public String getName() {
         return name;
     }
@@ -66,6 +79,14 @@ public class GameVideo implements Serializable {
         this.checksum = checksum;
     }
 
+    @JsonSetter("game")
+    public void setGameJson(JsonNode jsonNode) {
+        if (jsonNode.isInt() || jsonNode.isLong())
+            this.game = jsonNode.asLong();
+        else
+            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    }
+
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -78,6 +99,7 @@ public class GameVideo implements Serializable {
         GameVideo gameVideo = (GameVideo) o;
         return id == gameVideo.id &&
                 game == gameVideo.game &&
+                Objects.equals(gameObject, gameVideo.gameObject) &&
                 Objects.equals(name, gameVideo.name) &&
                 Objects.equals(idVideo, gameVideo.idVideo) &&
                 Objects.equals(checksum, gameVideo.checksum);
@@ -85,6 +107,6 @@ public class GameVideo implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, name, idVideo, checksum);
+        return Objects.hash(id, game, gameObject, name, idVideo, checksum);
     }
 }
