@@ -1,9 +1,9 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 import de.blackrose01.model.platform.Platform;
@@ -11,6 +11,7 @@ import de.blackrose01.model.platform.Platform;
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -20,10 +21,7 @@ public class ReleaseDate implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "platform")
-    private long platform;
-    @JsonIgnore
-    @JsonProperty(value = "platform")
-    private Platform platformObject;
+    private Object platform;
     @JsonIgnore
     @JsonProperty(value = "m")
     private int m;
@@ -38,10 +36,7 @@ public class ReleaseDate implements Serializable {
     private String human;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "date")
     private long date;
@@ -74,19 +69,15 @@ public class ReleaseDate implements Serializable {
     }
 
     public long getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(long platform) {
-        this.platform = platform;
+        return Long.parseLong(String.valueOf(platform));
     }
 
     public Platform getPlatformObject() {
-        return platformObject;
+        return new ObjectMapper().convertValue(platform, Platform.class);
     }
 
-    public void setPlatformObject(Platform platformObject) {
-        this.platformObject = platformObject;
+    public void setPlatform(Object platform) {
+        this.platform = platform;
     }
 
     public int getM() {
@@ -122,19 +113,15 @@ public class ReleaseDate implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(this.game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(this.game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public long getDate() {
@@ -169,22 +156,6 @@ public class ReleaseDate implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
-    @JsonSetter("platform")
-    public void setPlatformJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.platform = jsonNode.asLong();
-        else
-            this.platformObject = new Gson().fromJson(jsonNode.toString(), Platform.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -197,22 +168,20 @@ public class ReleaseDate implements Serializable {
         ReleaseDate that = (ReleaseDate) o;
         return id == that.id &&
                 category == that.category &&
-                platform == that.platform &&
                 m == that.m &&
                 y == that.y &&
                 region == that.region &&
-                game == that.game &&
                 date == that.date &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
-                Objects.equals(platformObject, that.platformObject) &&
+                Objects.equals(platform, that.platform) &&
                 Objects.equals(human, that.human) &&
-                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, platform, platformObject, m, y, region, human, game, gameObject, date, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, platform, m, y, region, human, game, date, createdAt, updatedAt, checksum);
     }
 }

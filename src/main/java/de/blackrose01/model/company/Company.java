@@ -1,9 +1,12 @@
 package de.blackrose01.model.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.ExternalGame;
@@ -15,6 +18,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Company implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -39,46 +43,28 @@ public class Company implements Serializable {
     private String description;
     @JsonIgnore
     @JsonProperty(value = "developed")
-    private List<Long> developed;
-    @JsonIgnore
-    @JsonProperty(value = "developed")
-    private List<Game> developedObject;
+    private List<Object> developed;
     @JsonIgnore
     @JsonProperty(value = "published")
-    private List<Long> published;
-    @JsonIgnore
-    @JsonProperty(value = "published")
-    private List<Game> publishedObject;
+    private List<Object> published;
     @JsonIgnore
     @JsonProperty(value = "parent")
-    private long parent;
-    @JsonIgnore
-    @JsonProperty(value = "parent")
-    private Company parentObject;
+    private Object parent;
     @JsonIgnore
     @JsonProperty(value = "logo")
-    private long logo;
-    @JsonIgnore
-    @JsonProperty(value = "logo")
-    private CompanyLogo logoObject;
+    private Object logo;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
     @JsonIgnore
     @JsonProperty(value = "websites")
-    private List<Long> websites;
-    @JsonIgnore
-    @JsonProperty(value = "websites")
-    private List<CompanyWebsite> websitesObject;
+    private List<Object> websites;
     @JsonIgnore
     @JsonProperty(value = "start_date")
     private long dateStart;
     @JsonIgnore
     @JsonProperty(value = "changed_company_id")
-    private long changedCompanyId;
-    @JsonIgnore
-    @JsonProperty(value = "changed_company_id")
-    private Company changedCompanyIdObject;
+    private Object changedCompanyId;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -148,67 +134,51 @@ public class Company implements Serializable {
     }
 
     public List<Long> getDeveloped() {
-        return developed;
-    }
-
-    public void setDeveloped(List<Long> developed) {
-        this.developed = developed;
+        return new ObjectMapper().convertValue(developed, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getDevelopedObject() {
-        return developedObject;
+        return new ObjectMapper().convertValue(developed, new TypeReference<List<Game>>(){});
     }
 
-    public void setDevelopedObject(List<Game> developedObject) {
-        this.developedObject = developedObject;
+    public void setDeveloped(List<Object> developed) {
+        this.developed = developed;
     }
 
     public List<Long> getPublished() {
-        return published;
-    }
-
-    public void setPublished(List<Long> published) {
-        this.published = published;
+        return new ObjectMapper().convertValue(published, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getPublishedObject() {
-        return publishedObject;
+        return new ObjectMapper().convertValue(published, new TypeReference<List<Game>>(){});
     }
 
-    public void setPublishedObject(List<Game> publishedObject) {
-        this.publishedObject = publishedObject;
+    public void setPublished(List<Object> published) {
+        this.published = published;
     }
 
     public long getParent() {
-        return parent;
-    }
-
-    public void setParent(long parent) {
-        this.parent = parent;
+        return Long.parseLong(String.valueOf(parent));
     }
 
     public Company getParentObject() {
-        return parentObject;
+        return new ObjectMapper().convertValue(parent, Company.class);
     }
 
-    public void setParentObject(Company parentObject) {
-        this.parentObject = parentObject;
+    public void setParent(Object parent) {
+        this.parent = parent;
     }
 
     public long getLogo() {
-        return logo;
-    }
-
-    public void setLogo(long logo) {
-        this.logo = logo;
+        return Long.parseLong(String.valueOf(logo));
     }
 
     public CompanyLogo getLogoObject() {
-        return logoObject;
+        return new ObjectMapper().convertValue(logo, CompanyLogo.class);
     }
 
-    public void setLogoObject(CompanyLogo logoObject) {
-        this.logoObject = logoObject;
+    public void setLogo(Object logo) {
+        this.logo = logo;
     }
 
     public String getUrl() {
@@ -220,19 +190,15 @@ public class Company implements Serializable {
     }
 
     public List<Long> getWebsites() {
-        return websites;
-    }
-
-    public void setWebsites(List<Long> websites) {
-        this.websites = websites;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
     }
 
     public List<CompanyWebsite> getWebsitesObject() {
-        return websitesObject;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<CompanyWebsite>>(){});
     }
 
-    public void setWebsitesObject(List<CompanyWebsite> websitesObject) {
-        this.websitesObject = websitesObject;
+    public void setWebsites(List<Object> websites) {
+        this.websites = websites;
     }
 
     public long getDateStart() {
@@ -244,19 +210,15 @@ public class Company implements Serializable {
     }
 
     public long getChangedCompanyId() {
-        return changedCompanyId;
-    }
-
-    public void setChangedCompanyId(long changedCompanyId) {
-        this.changedCompanyId = changedCompanyId;
+        return Long.parseLong(String.valueOf(changedCompanyId));
     }
 
     public Company getChangedCompanyIdObject() {
-        return changedCompanyIdObject;
+        return new ObjectMapper().convertValue(changedCompanyId, Company.class);
     }
 
-    public void setChangedCompanyIdObject(Company changedCompanyIdObject) {
-        this.changedCompanyIdObject = changedCompanyIdObject;
+    public void setChangedCompanyId(Object changedCompanyId) {
+        this.changedCompanyId = changedCompanyId;
     }
 
     public long getCreatedAt() {
@@ -283,74 +245,6 @@ public class Company implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("developed")
-    public void setDevelopedJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<ExternalGame>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.developed = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.developedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("published")
-    public void setPublishedJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.published = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.publishedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("parent")
-    public void setParentJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.parent = jsonNode.asLong();
-        else
-            this.parentObject = new Gson().fromJson(jsonNode.toString(), Company.class);
-    }
-
-    @JsonSetter("logo")
-    public void setLogoJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.logo = jsonNode.asLong();
-        else
-            this.logoObject = new Gson().fromJson(jsonNode.toString(), CompanyLogo.class);
-    }
-
-    @JsonSetter("websites")
-    public void setWebsitesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<CompanyWebsite>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("changed_company_id")
-    public void setChangedCompanyIdJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Company>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.changedCompanyId = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.changedCompanyIdObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -365,30 +259,24 @@ public class Company implements Serializable {
                 categoryChangeDate == company.categoryChangeDate &&
                 categoryStartDate == company.categoryStartDate &&
                 country == company.country &&
-                parent == company.parent &&
-                logo == company.logo &&
                 dateStart == company.dateStart &&
-                changedCompanyId == company.changedCompanyId &&
                 createdAt == company.createdAt &&
                 updatedAt == company.updatedAt &&
                 Objects.equals(name, company.name) &&
                 Objects.equals(slug, company.slug) &&
                 Objects.equals(description, company.description) &&
                 Objects.equals(developed, company.developed) &&
-                Objects.equals(developedObject, company.developedObject) &&
                 Objects.equals(published, company.published) &&
-                Objects.equals(publishedObject, company.publishedObject) &&
-                Objects.equals(parentObject, company.parentObject) &&
-                Objects.equals(logoObject, company.logoObject) &&
+                Objects.equals(parent, company.parent) &&
+                Objects.equals(logo, company.logo) &&
                 Objects.equals(url, company.url) &&
                 Objects.equals(websites, company.websites) &&
-                Objects.equals(websitesObject, company.websitesObject) &&
-                Objects.equals(changedCompanyIdObject, company.changedCompanyIdObject) &&
+                Objects.equals(changedCompanyId, company.changedCompanyId) &&
                 Objects.equals(checksum, company.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categoryChangeDate, categoryStartDate, country, name, slug, description, developed, developedObject, published, publishedObject, parent, parentObject, logo, logoObject, url, websites, websitesObject, dateStart, changedCompanyId, changedCompanyIdObject, createdAt, updatedAt, checksum);
+        return Objects.hash(id, categoryChangeDate, categoryStartDate, country, name, slug, description, developed, published, parent, logo, url, websites, dateStart, changedCompanyId, createdAt, updatedAt, checksum);
     }
 }

@@ -1,9 +1,11 @@
 package de.blackrose01.model.pulse;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
@@ -11,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Pulse implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -38,25 +41,16 @@ public class Pulse implements Serializable {
     private String image;
     @JsonIgnore
     @JsonProperty(value = "pulse_image")
-    private long pulseImage;
-    @JsonIgnore
-    @JsonProperty(value = "pulse_image")
-    private PulseImage pulseImageObject;
+    private Object pulseImage;
     @JsonIgnore
     @JsonProperty(value = "pulse_source")
-    private long pulseSource;
-    @JsonIgnore
-    @JsonProperty(value = "pulse_source")
-    private PulseSource pulseSourceObject;
+    private Object pulseSource;
     @JsonIgnore
     @JsonProperty(value = "tags")
     private List<Long> tags;
     @JsonIgnore
     @JsonProperty(value = "website")
-    private long website;
-    @JsonIgnore
-    @JsonProperty(value = "website")
-    private PulseUrl websiteObject;
+    private Object website;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -134,35 +128,27 @@ public class Pulse implements Serializable {
     }
 
     public long getPulseImage() {
-        return pulseImage;
+        return Long.parseLong(String.valueOf(pulseImage));
     }
 
-    public void setPulseImage(long pulseImage) {
+    public PulseImage getPulseImageOBject() {
+        return new ObjectMapper().convertValue(pulseImage, PulseImage.class);
+    }
+
+    public void setPulseImage(Object pulseImage) {
         this.pulseImage = pulseImage;
     }
 
-    public PulseImage getPulseImageObject() {
-        return pulseImageObject;
-    }
-
-    public void setPulseImageObject(PulseImage pulseImageObject) {
-        this.pulseImageObject = pulseImageObject;
-    }
-
     public long getPulseSource() {
-        return pulseSource;
-    }
-
-    public void setPulseSource(long pulseSource) {
-        this.pulseSource = pulseSource;
+        return Long.parseLong(String.valueOf(pulseSource));
     }
 
     public PulseSource getPulseSourceObject() {
-        return pulseSourceObject;
+        return new ObjectMapper().convertValue(pulseSource, PulseSource.class);
     }
 
-    public void setPulseSourceObject(PulseSource pulseSourceObject) {
-        this.pulseSourceObject = pulseSourceObject;
+    public void setPulseSource(Object pulseSource) {
+        this.pulseSource = pulseSource;
     }
 
     public List<Long> getTags() {
@@ -174,19 +160,15 @@ public class Pulse implements Serializable {
     }
 
     public long getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(long website) {
-        this.website = website;
+        return Long.parseLong(String.valueOf(website));
     }
 
     public PulseUrl getWebsiteObject() {
-        return websiteObject;
+        return new ObjectMapper().convertValue(website, PulseUrl.class);
     }
 
-    public void setWebsiteObject(PulseUrl websiteObject) {
-        this.websiteObject = websiteObject;
+    public void setWebsite(Object website) {
+        this.website = website;
     }
 
     public long getCreatedAt() {
@@ -213,31 +195,6 @@ public class Pulse implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("pulse_image")
-    public void setPulseImageJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.pulseImage = jsonNode.asLong();
-        else
-            this.pulseImageObject = new Gson().fromJson(jsonNode.toString(), PulseImage.class);
-    }
-
-    @JsonSetter("pulse_source")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.pulseSource = jsonNode.asLong();
-        else
-            this.pulseSourceObject = new Gson().fromJson(jsonNode.toString(), PulseSource.class);
-    }
-
-    @JsonSetter("website")
-    public void setWebsiteJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.website = jsonNode.asLong();
-        else
-            this.websiteObject = new Gson().fromJson(jsonNode.toString(), PulseUrl.class);
-    }
-
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -251,9 +208,6 @@ public class Pulse implements Serializable {
         return id == pulse.id &&
                 category == pulse.category &&
                 isIgnored == pulse.isIgnored &&
-                pulseImage == pulse.pulseImage &&
-                pulseSource == pulse.pulseSource &&
-                website == pulse.website &&
                 createdAt == pulse.createdAt &&
                 updatedAt == pulse.updatedAt &&
                 Objects.equals(uid, pulse.uid) &&
@@ -261,15 +215,15 @@ public class Pulse implements Serializable {
                 Objects.equals(title, pulse.title) &&
                 Objects.equals(summary, pulse.summary) &&
                 Objects.equals(image, pulse.image) &&
-                Objects.equals(pulseImageObject, pulse.pulseImageObject) &&
-                Objects.equals(pulseSourceObject, pulse.pulseSourceObject) &&
+                Objects.equals(pulseImage, pulse.pulseImage) &&
+                Objects.equals(pulseSource, pulse.pulseSource) &&
                 Objects.equals(tags, pulse.tags) &&
-                Objects.equals(websiteObject, pulse.websiteObject) &&
+                Objects.equals(website, pulse.website) &&
                 Objects.equals(checksum, pulse.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, uid, author, title, summary, category, isIgnored, image, pulseImage, pulseImageObject, pulseSource, pulseSourceObject, tags, website, websiteObject, createdAt, updatedAt, checksum);
+        return Objects.hash(id, uid, author, title, summary, category, isIgnored, image, pulseImage, pulseSource, tags, website, createdAt, updatedAt, checksum);
     }
 }

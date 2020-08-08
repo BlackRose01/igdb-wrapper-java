@@ -1,32 +1,27 @@
 package de.blackrose01.model.page;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import de.blackrose01.model.ExternalGame;
 import de.blackrose01.model.Feed;
 import de.blackrose01.model.company.Company;
 import de.blackrose01.model.game.Game;
-import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Page implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "background")
-    private long background;
-    @JsonIgnore
-    @JsonProperty(value = "background")
-    private PageBackground backgroundObject;
+    private Object background;
     @JsonIgnore
     @JsonProperty(value = "country")
     private long country;
@@ -44,22 +39,13 @@ public class Page implements Serializable {
     private String battlenet;
     @JsonIgnore
     @JsonProperty(value = "company")
-    private long company;
-    @JsonIgnore
-    @JsonProperty(value = "company")
-    private Company companyObject;
+    private Object company;
     @JsonIgnore
     @JsonProperty(value = "feed")
-    private long feed;
-    @JsonIgnore
-    @JsonProperty(value = "feed")
-    private Feed feedObject;
+    private Object feed;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "origin")
     private String origin;
@@ -80,10 +66,7 @@ public class Page implements Serializable {
     private long user;
     @JsonIgnore
     @JsonProperty(value = "websites")
-    private List<Long> websites;
-    @JsonIgnore
-    @JsonProperty(value = "websites")
-    private List<PageWebsite> websitesObject;
+    private List<Object> websites;
     @JsonIgnore
     @JsonProperty(value = "category")
     private int category;
@@ -114,19 +97,15 @@ public class Page implements Serializable {
     }
 
     public long getBackground() {
-        return background;
-    }
-
-    public void setBackground(long background) {
-        this.background = background;
+        return Long.parseLong(String.valueOf(background));
     }
 
     public PageBackground getBackgroundObject() {
-        return backgroundObject;
+        return new ObjectMapper().convertValue(background, PageBackground.class);
     }
 
-    public void setBackgroundObject(PageBackground backgroundObject) {
-        this.backgroundObject = backgroundObject;
+    public void setBackground(Object background) {
+        this.background = background;
     }
 
     public long getCountry() {
@@ -170,51 +149,39 @@ public class Page implements Serializable {
     }
 
     public long getCompany() {
-        return company;
-    }
-
-    public void setCompany(long company) {
-        this.company = company;
+        return Long.parseLong(String.valueOf(company));
     }
 
     public Company getCompanyObject() {
-        return companyObject;
+        return new ObjectMapper().convertValue(company, Company.class);
     }
 
-    public void setCompanyObject(Company companyObject) {
-        this.companyObject = companyObject;
+    public void setCompany(Object company) {
+        this.company = company;
     }
 
     public long getFeed() {
-        return feed;
-    }
-
-    public void setFeed(long feed) {
-        this.feed = feed;
+        return Long.parseLong(String.valueOf(feed));
     }
 
     public Feed getFeedObject() {
-        return feedObject;
+        return new ObjectMapper().convertValue(feed, Feed.class);
     }
 
-    public void setFeedObject(Feed feedObject) {
-        this.feedObject = feedObject;
+    public void setFeed(Object feed) {
+        this.feed = feed;
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public String getOrigin() {
@@ -266,19 +233,15 @@ public class Page implements Serializable {
     }
 
     public List<Long> getWebsites() {
-        return websites;
-    }
-
-    public void setWebsites(List<Long> websites) {
-        this.websites = websites;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
     }
 
     public List<PageWebsite> getWebsitesObject() {
-        return websitesObject;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<PageWebsite>>(){});
     }
 
-    public void setWebsitesObject(List<PageWebsite> websitesObject) {
-        this.websitesObject = websitesObject;
+    public void setWebsites(List<Object> websites) {
+        this.websites = websites;
     }
 
     public int getCategory() {
@@ -329,51 +292,6 @@ public class Page implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("background")
-    public void setBackgroundJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.background = jsonNode.asLong();
-        else
-            this.backgroundObject = new Gson().fromJson(jsonNode.toString(), PageBackground.class);
-    }
-
-    @JsonSetter("company")
-    public void setCompanyJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.company = jsonNode.asLong();
-        else
-            this.companyObject = new Gson().fromJson(jsonNode.toString(), Company.class);
-    }
-
-    @JsonSetter("feed")
-    public void setFeedJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.feed = jsonNode.asLong();
-        else
-            this.feedObject = new Gson().fromJson(jsonNode.toString(), Feed.class);
-    }
-
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
-    @JsonSetter("websites")
-    public void setWebsitesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<PageWebsite>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -385,11 +303,7 @@ public class Page implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Page page = (Page) o;
         return id == page.id &&
-                background == page.background &&
                 country == page.country &&
-                company == page.company &&
-                feed == page.feed &&
-                game == page.game &&
                 pageFollowsCount == page.pageFollowsCount &&
                 pageLogo == page.pageLogo &&
                 user == page.user &&
@@ -398,24 +312,23 @@ public class Page implements Serializable {
                 color == page.color &&
                 createdAt == page.createdAt &&
                 updatedAt == page.updatedAt &&
-                Objects.equals(backgroundObject, page.backgroundObject) &&
+                Objects.equals(background, page.background) &&
                 Objects.equals(name, page.name) &&
                 Objects.equals(description, page.description) &&
                 Objects.equals(slug, page.slug) &&
                 Objects.equals(battlenet, page.battlenet) &&
-                Objects.equals(companyObject, page.companyObject) &&
-                Objects.equals(feedObject, page.feedObject) &&
-                Objects.equals(gameObject, page.gameObject) &&
+                Objects.equals(company, page.company) &&
+                Objects.equals(feed, page.feed) &&
+                Objects.equals(game, page.game) &&
                 Objects.equals(origin, page.origin) &&
                 Objects.equals(uplay, page.uplay) &&
                 Objects.equals(url, page.url) &&
                 Objects.equals(websites, page.websites) &&
-                Objects.equals(websitesObject, page.websitesObject) &&
                 Objects.equals(checksum, page.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, background, backgroundObject, country, name, description, slug, battlenet, company, companyObject, feed, feedObject, game, gameObject, origin, uplay, pageFollowsCount, pageLogo, url, user, websites, websitesObject, category, categorySub, color, createdAt, updatedAt, checksum);
+        return Objects.hash(id, background, country, name, description, slug, battlenet, company, feed, game, origin, uplay, pageFollowsCount, pageLogo, url, user, websites, category, categorySub, color, createdAt, updatedAt, checksum);
     }
 }

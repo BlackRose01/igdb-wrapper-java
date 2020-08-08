@@ -1,25 +1,23 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TimeToBeat implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "normally")
     private long normally;
@@ -41,19 +39,15 @@ public class TimeToBeat implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(this.game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(this.game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public long getNormally() {
@@ -80,14 +74,6 @@ public class TimeToBeat implements Serializable {
         this.hastly = hastly;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -99,15 +85,14 @@ public class TimeToBeat implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         TimeToBeat that = (TimeToBeat) o;
         return id == that.id &&
-                game == that.game &&
                 normally == that.normally &&
                 completely == that.completely &&
                 hastly == that.hastly &&
-                Objects.equals(gameObject, that.gameObject);
+                Objects.equals(game, that.game);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, gameObject, normally, completely, hastly);
+        return Objects.hash(id, game, normally, completely, hastly);
     }
 }

@@ -1,15 +1,19 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Website implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -19,10 +23,7 @@ public class Website implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "trusted")
     private boolean trusted;
@@ -52,19 +53,15 @@ public class Website implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(this.game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(this.game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public boolean isTrusted() {
@@ -72,7 +69,7 @@ public class Website implements Serializable {
     }
 
     public void setTrusted(boolean trusted) {
-        trusted = trusted;
+        this.trusted = trusted;
     }
 
     public String getUrl() {
@@ -91,14 +88,6 @@ public class Website implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -111,15 +100,14 @@ public class Website implements Serializable {
         Website website = (Website) o;
         return id == website.id &&
                 category == website.category &&
-                game == website.game &&
                 trusted == website.trusted &&
-                Objects.equals(gameObject, website.gameObject) &&
+                Objects.equals(game, website.game) &&
                 Objects.equals(url, website.url) &&
                 Objects.equals(checksum, website.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, game, gameObject, trusted, url, checksum);
+        return Objects.hash(id, category, game, trusted, url, checksum);
     }
 }

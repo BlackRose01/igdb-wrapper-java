@@ -1,10 +1,14 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 import de.blackrose01.model.game.GameVideo;
 import de.blackrose01.model.pulse.Pulse;
 
@@ -12,6 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Feed implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -21,10 +26,7 @@ public class Feed implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "pulse")
-    private long pulse;
-    @JsonIgnore
-    @JsonProperty(value = "pulse")
-    private Pulse pulseObject;
+    private Object pulse;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -39,13 +41,10 @@ public class Feed implements Serializable {
     private int feedLikesCount;
     @JsonIgnore
     @JsonProperty(value = "feed_video")
-    private long feedVideo;
-    @JsonIgnore
-    @JsonProperty(value = "feed_video")
-    private GameVideo feedVideoObject;
+    private Object feedVideo;
     @JsonIgnore
     @JsonProperty(value = "games")
-    private List<Long> games;
+    private List<Object> games;
     @JsonIgnore
     @JsonProperty(value = "title")
     private String title;
@@ -90,19 +89,15 @@ public class Feed implements Serializable {
     }
 
     public long getPulse() {
-        return pulse;
-    }
-
-    public void setPulse(long pulse) {
-        this.pulse = pulse;
+        return Long.parseLong(String.valueOf(pulse));
     }
 
     public Pulse getPulseObject() {
-        return pulseObject;
+        return new ObjectMapper().convertValue(pulse, Pulse.class);
     }
 
-    public void setPulseObject(Pulse pulseObject) {
-        this.pulseObject = pulseObject;
+    public void setPulse(Object pulse) {
+        this.pulse = pulse;
     }
 
     public String getUrl() {
@@ -138,26 +133,26 @@ public class Feed implements Serializable {
     }
 
     public long getFeedVideo() {
-        return feedVideo;
-    }
-
-    public void setFeedVideo(long feedVideo) {
-        this.feedVideo = feedVideo;
+        return Long.parseLong(String.valueOf(feedVideo));
     }
 
     public GameVideo getFeedVideoObject() {
-        return feedVideoObject;
+        return new ObjectMapper().convertValue(feedVideo, GameVideo.class);
     }
 
-    public void setFeedVideoObject(GameVideo feedVideoObject) {
-        this.feedVideoObject = feedVideoObject;
+    public void setFeedVideo(Object feedVideo) {
+        this.feedVideo = feedVideo;
     }
 
     public List<Long> getGames() {
-        return games;
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>(){});
     }
 
-    public void setGames(List<Long> games) {
+    public List<Game> getGamesObject() {
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>(){});
+    }
+
+    public void setGames(List<Object> games) {
         this.games = games;
     }
 
@@ -225,22 +220,6 @@ public class Feed implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("pulse")
-    public void setPulseJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.pulse = jsonNode.asLong();
-        else
-            this.pulseObject = new Gson().fromJson(jsonNode.toString(), Pulse.class);
-    }
-
-    @JsonSetter("feed_video")
-    public void setFeedVideoJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.feedVideo = jsonNode.asLong();
-        else
-            this.feedVideoObject = new Gson().fromJson(jsonNode.toString(), GameVideo.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -253,18 +232,16 @@ public class Feed implements Serializable {
         Feed feed = (Feed) o;
         return id == feed.id &&
                 category == feed.category &&
-                pulse == feed.pulse &&
                 feedLikesCount == feed.feedLikesCount &&
-                feedVideo == feed.feedVideo &&
                 user == feed.user &&
                 publishedAt == feed.publishedAt &&
                 createdAt == feed.createdAt &&
                 updatedAt == feed.updatedAt &&
-                Objects.equals(pulseObject, feed.pulseObject) &&
+                Objects.equals(pulse, feed.pulse) &&
                 Objects.equals(url, feed.url) &&
                 Objects.equals(meta, feed.meta) &&
                 Objects.equals(content, feed.content) &&
-                Objects.equals(feedVideoObject, feed.feedVideoObject) &&
+                Objects.equals(feedVideo, feed.feedVideo) &&
                 Objects.equals(games, feed.games) &&
                 Objects.equals(title, feed.title) &&
                 Objects.equals(slug, feed.slug) &&
@@ -274,6 +251,6 @@ public class Feed implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, pulse, pulseObject, url, meta, content, feedLikesCount, feedVideo, feedVideoObject, games, title, slug, uid, user, publishedAt, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, pulse, url, meta, content, feedLikesCount, feedVideo, games, title, slug, uid, user, publishedAt, createdAt, updatedAt, checksum);
     }
 }

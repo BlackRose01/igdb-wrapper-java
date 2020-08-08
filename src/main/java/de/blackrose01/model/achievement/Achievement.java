@@ -1,9 +1,11 @@
 package de.blackrose01.model.achievement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.ExternalGame;
@@ -14,6 +16,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Achievement implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -35,10 +38,7 @@ public class Achievement implements Serializable {
     private String idExternal;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -47,16 +47,10 @@ public class Achievement implements Serializable {
     private String slug;
     @JsonIgnore
     @JsonProperty(value = "achievement_icon")
-    private long iconAchievement;
-    @JsonIgnore
-    @JsonProperty(value = "achievement_icon")
-    private AchievementIcon iconAchievementObject;
+    private Object iconAchievement;
     @JsonIgnore
     @JsonProperty(value = "locked_achievement_icon")
-    private long iconAchievementLocked;
-    @JsonIgnore
-    @JsonProperty(value = "locked_achievement_icon")
-    private AchievementIcon iconAchievementLockedObject;
+    private Object iconAchievementLocked;
     @JsonIgnore
     @JsonProperty(value = "owners_percentage")
     private double percentageOwners;
@@ -124,19 +118,15 @@ public class Achievement implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public String getName() {
@@ -156,35 +146,27 @@ public class Achievement implements Serializable {
     }
 
     public long getIconAchievement() {
-        return iconAchievement;
-    }
-
-    public void setIconAchievement(long iconAchievement) {
-        this.iconAchievement = iconAchievement;
+        return Long.parseLong(String.valueOf(iconAchievement));
     }
 
     public AchievementIcon getIconAchievementObject() {
-        return iconAchievementObject;
+        return new ObjectMapper().convertValue(iconAchievement, AchievementIcon.class);
     }
 
-    public void setIconAchievementObject(AchievementIcon iconAchievementObject) {
-        this.iconAchievementObject = iconAchievementObject;
+    public void setIconAchievement(Object iconAchievement) {
+        this.iconAchievement = iconAchievement;
     }
 
     public long getIconAchievementLocked() {
-        return iconAchievementLocked;
-    }
-
-    public void setIconAchievementLocked(long iconAchievementLocked) {
-        this.iconAchievementLocked = iconAchievementLocked;
+        return Long.parseLong(String.valueOf(iconAchievementLocked));
     }
 
     public AchievementIcon getIconAchievementLockedObject() {
-        return iconAchievementLockedObject;
+        return new ObjectMapper().convertValue(iconAchievementLocked, AchievementIcon.class);
     }
 
-    public void setIconAchievementLockedObject(AchievementIcon iconAchievementLockedObject) {
-        this.iconAchievementLockedObject = iconAchievementLockedObject;
+    public void setIconAchievementLocked(Object iconAchievementLocked) {
+        this.iconAchievementLocked = iconAchievementLocked;
     }
 
     public double getPercentageOwners() {
@@ -227,40 +209,6 @@ public class Achievement implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
-    @JsonSetter("achievement_icon")
-    public void setIconAchievementJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.iconAchievement = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.iconAchievementObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("locked_achievement_icon")
-    public void setIconAchievementLockedJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<AchievementIcon>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.iconAchievementLocked = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.iconAchievementLockedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -275,25 +223,22 @@ public class Achievement implements Serializable {
                 category == that.category &&
                 language == that.language &&
                 rank == that.rank &&
-                game == that.game &&
-                iconAchievement == that.iconAchievement &&
-                iconAchievementLocked == that.iconAchievementLocked &&
                 Double.compare(that.percentageOwners, percentageOwners) == 0 &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(idExternal, that.idExternal) &&
-                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(slug, that.slug) &&
-                Objects.equals(iconAchievementObject, that.iconAchievementObject) &&
-                Objects.equals(iconAchievementLockedObject, that.iconAchievementLockedObject) &&
+                Objects.equals(iconAchievement, that.iconAchievement) &&
+                Objects.equals(iconAchievementLocked, that.iconAchievementLocked) &&
                 Objects.equals(tags, that.tags) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, language, rank, description, idExternal, game, gameObject, name, slug, iconAchievement, iconAchievementObject, iconAchievementLocked, iconAchievementLockedObject, percentageOwners, tags, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, language, rank, description, idExternal, game, name, slug, iconAchievement, iconAchievementLocked, percentageOwners, tags, createdAt, updatedAt, checksum);
     }
 }

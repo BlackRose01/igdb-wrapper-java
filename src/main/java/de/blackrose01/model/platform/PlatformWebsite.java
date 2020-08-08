@@ -1,12 +1,14 @@
 package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformWebsite implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -47,7 +49,7 @@ public class PlatformWebsite implements Serializable {
     }
 
     public void setTrusted(boolean trusted) {
-        trusted = trusted;
+        this.trusted = trusted;
     }
 
     public String getUrl() {

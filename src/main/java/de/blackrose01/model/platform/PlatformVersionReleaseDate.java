@@ -1,15 +1,15 @@
 package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformVersionReleaseDate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -19,10 +19,7 @@ public class PlatformVersionReleaseDate implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "platform_version")
-    private long platformVersion;
-    @JsonIgnore
-    @JsonProperty(value = "platform_version")
-    private PlatformVersion platformVersionObject;
+    private Object platformVersion;
     @JsonIgnore
     @JsonProperty(value = "m")
     private int m;
@@ -67,19 +64,15 @@ public class PlatformVersionReleaseDate implements Serializable {
     }
 
     public long getPlatformVersion() {
-        return platformVersion;
-    }
-
-    public void setPlatformVersion(long platformVersion) {
-        this.platformVersion = platformVersion;
+        return Long.parseLong(String.valueOf(platformVersion));
     }
 
     public PlatformVersion getPlatformVersionObject() {
-        return platformVersionObject;
+        return new ObjectMapper().convertValue(platformVersion, PlatformVersion.class);
     }
 
-    public void setPlatformVersionObject(PlatformVersion platformVersionObject) {
-        this.platformVersionObject = platformVersionObject;
+    public void setPlatformVersion(Object platformVersion) {
+        this.platformVersion = platformVersion;
     }
 
     public int getM() {
@@ -146,14 +139,6 @@ public class PlatformVersionReleaseDate implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("platform_version")
-    public void setPlatformVersionJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.platformVersion = jsonNode.asLong();
-        else
-            this.platformVersionObject = new Gson().fromJson(jsonNode.toString(), PlatformVersion.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -166,20 +151,19 @@ public class PlatformVersionReleaseDate implements Serializable {
         PlatformVersionReleaseDate that = (PlatformVersionReleaseDate) o;
         return id == that.id &&
                 category == that.category &&
-                platformVersion == that.platformVersion &&
                 m == that.m &&
                 y == that.y &&
                 region == that.region &&
                 date == that.date &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
-                Objects.equals(platformVersionObject, that.platformVersionObject) &&
+                Objects.equals(platformVersion, that.platformVersion) &&
                 Objects.equals(human, that.human) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, platformVersion, platformVersionObject, m, y, region, human, date, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, platformVersion, m, y, region, human, date, createdAt, updatedAt, checksum);
     }
 }

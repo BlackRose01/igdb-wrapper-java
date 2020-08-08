@@ -1,15 +1,16 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ExternalGame implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -19,10 +20,7 @@ public class ExternalGame implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -64,19 +62,15 @@ public class ExternalGame implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public String getName() {
@@ -135,14 +129,6 @@ public class ExternalGame implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -155,11 +141,10 @@ public class ExternalGame implements Serializable {
         ExternalGame that = (ExternalGame) o;
         return id == that.id &&
                 category == that.category &&
-                game == that.game &&
                 year == that.year &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
-                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(uid, that.uid) &&
                 Objects.equals(url, that.url) &&
@@ -168,6 +153,6 @@ public class ExternalGame implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, game, gameObject, name, uid, url, year, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, game, name, uid, url, year, createdAt, updatedAt, checksum);
     }
 }

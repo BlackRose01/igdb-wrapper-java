@@ -1,19 +1,22 @@
 package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersion implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -38,10 +41,14 @@ public class GameVersion implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
     }
 
-    public void setGame(long game) {
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
+    }
+
+    public void setGame(Object game) {
         this.game = game;
     }
 
@@ -88,9 +95,9 @@ public class GameVersion implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         GameVersion that = (GameVersion) o;
         return id == that.id &&
-                game == that.game &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(checksum, that.checksum);
     }

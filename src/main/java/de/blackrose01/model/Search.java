@@ -1,9 +1,9 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.company.Company;
 import de.blackrose01.model.game.Game;
@@ -13,6 +13,7 @@ import de.blackrose01.model.privates.People;
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Search implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -25,10 +26,7 @@ public class Search implements Serializable {
     private String nameAlternative;
     @JsonIgnore
     @JsonProperty(value = "person")
-    private long person;
-    @JsonIgnore
-    @JsonProperty(value = "person")
-    private People personObject;
+    private Object person;
     @JsonIgnore
     @JsonProperty(value = "description")
     private String description;
@@ -37,37 +35,22 @@ public class Search implements Serializable {
     private double popularity;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "theme")
-    private long theme;
-    @JsonIgnore
-    @JsonProperty(value = "theme")
-    private Theme themeObject;
+    private Object theme;
     @JsonIgnore
     @JsonProperty(value = "test_dummy")
     private long testDummy;
     @JsonIgnore
     @JsonProperty(value = "platform")
-    private long platform;
-    @JsonIgnore
-    @JsonProperty(value = "platform")
-    private Platform platformObject;
+    private Object platform;
     @JsonIgnore
     @JsonProperty(value = "company")
-    private long company;
-    @JsonIgnore
-    @JsonProperty(value = "company")
-    private Company companyObject;
+    private Object company;
     @JsonIgnore
     @JsonProperty(value = "collection")
-    private long collection;
-    @JsonIgnore
-    @JsonProperty(value = "collection")
-    private Collection collectionObject;
+    private Object collection;
     @JsonIgnore
     @JsonProperty(value = "publishedat")
     private long publishedAt;
@@ -102,19 +85,15 @@ public class Search implements Serializable {
     }
 
     public long getPerson() {
-        return person;
-    }
-
-    public void setPerson(long person) {
-        this.person = person;
+        return Long.parseLong(String.valueOf(person));
     }
 
     public People getPersonObject() {
-        return personObject;
+        return new ObjectMapper().convertValue(this.person, People.class);
     }
 
-    public void setPersonObject(People personObject) {
-        this.personObject = personObject;
+    public void setPerson(Object person) {
+        this.person = person;
     }
 
     public String getDescription() {
@@ -134,35 +113,27 @@ public class Search implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(this.game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(this.game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public long getTheme() {
-        return theme;
-    }
-
-    public void setTheme(long theme) {
-        this.theme = theme;
+        return Long.parseLong(String.valueOf(this.theme));
     }
 
     public Theme getThemeObject() {
-        return themeObject;
+        return new ObjectMapper().convertValue(this.theme, Theme.class);
     }
 
-    public void setThemeObject(Theme themeObject) {
-        this.themeObject = themeObject;
+    public void setTheme(Object theme) {
+        this.theme = theme;
     }
 
     public long getTestDummy() {
@@ -174,51 +145,39 @@ public class Search implements Serializable {
     }
 
     public long getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(long platform) {
-        this.platform = platform;
+        return Long.parseLong(String.valueOf(this.platform));
     }
 
     public Platform getPlatformObject() {
-        return platformObject;
+        return new ObjectMapper().convertValue(this.platform, Platform.class);
     }
 
-    public void setPlatformObject(Platform platformObject) {
-        this.platformObject = platformObject;
+    public void setPlatform(Object platform) {
+        this.platform = platform;
     }
 
     public long getCompany() {
-        return company;
-    }
-
-    public void setCompany(long company) {
-        this.company = company;
+        return Long.parseLong(String.valueOf(this.company));
     }
 
     public Company getCompanyObject() {
-        return companyObject;
+        return new ObjectMapper().convertValue(this.company, Company.class);
     }
 
-    public void setCompanyObject(Company companyObject) {
-        this.companyObject = companyObject;
+    public void setCompany(Object company) {
+        this.company = company;
     }
 
     public long getCollection() {
-        return collection;
-    }
-
-    public void setCollection(long collection) {
-        this.collection = collection;
+        return Long.parseLong(String.valueOf(this.collection));
     }
 
     public Collection getCollectionObject() {
-        return collectionObject;
+        return new ObjectMapper().convertValue(this.collection, Collection.class);
     }
 
-    public void setCollectionObject(Collection collectionObject) {
-        this.collectionObject = collectionObject;
+    public void setCollection(Object collection) {
+        this.collection = collection;
     }
 
     public long getPublishedAt() {
@@ -237,46 +196,6 @@ public class Search implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("people")
-    public void setPeopleJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.person = jsonNode.asLong();
-        else
-            this.personObject = new Gson().fromJson(jsonNode.toString(), People.class);
-    }
-
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
-    @JsonSetter("theme")
-    public void setThemeJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.theme = jsonNode.asLong();
-        else
-            this.themeObject = new Gson().fromJson(jsonNode.toString(), Theme.class);
-    }
-
-    @JsonSetter("platform")
-    public void setPlatformJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.platform = jsonNode.asLong();
-        else
-            this.platformObject = new Gson().fromJson(jsonNode.toString(), Platform.class);
-    }
-
-    @JsonSetter("collection")
-    public void setCollectionJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.collection = jsonNode.asLong();
-        else
-            this.collectionObject = new Gson().fromJson(jsonNode.toString(), Collection.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -288,29 +207,23 @@ public class Search implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Search search = (Search) o;
         return id == search.id &&
-                person == search.person &&
                 Double.compare(search.popularity, popularity) == 0 &&
-                game == search.game &&
-                theme == search.theme &&
                 testDummy == search.testDummy &&
-                platform == search.platform &&
-                company == search.company &&
-                collection == search.collection &&
                 publishedAt == search.publishedAt &&
                 Objects.equals(name, search.name) &&
                 Objects.equals(nameAlternative, search.nameAlternative) &&
-                Objects.equals(personObject, search.personObject) &&
+                Objects.equals(person, search.person) &&
                 Objects.equals(description, search.description) &&
-                Objects.equals(gameObject, search.gameObject) &&
-                Objects.equals(themeObject, search.themeObject) &&
-                Objects.equals(platformObject, search.platformObject) &&
-                Objects.equals(companyObject, search.companyObject) &&
-                Objects.equals(collectionObject, search.collectionObject) &&
+                Objects.equals(game, search.game) &&
+                Objects.equals(theme, search.theme) &&
+                Objects.equals(platform, search.platform) &&
+                Objects.equals(company, search.company) &&
+                Objects.equals(collection, search.collection) &&
                 Objects.equals(checksum, search.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, nameAlternative, person, personObject, description, popularity, game, gameObject, theme, themeObject, testDummy, platform, platformObject, company, companyObject, collection, collectionObject, publishedAt, checksum);
+        return Objects.hash(id, name, nameAlternative, person, description, popularity, game, theme, testDummy, platform, company, collection, publishedAt, checksum);
     }
 }

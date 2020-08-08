@@ -1,25 +1,30 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.Feed;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class FeedFollow implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "feed")
-    private long feed;
+    private Object feed;
     @JsonIgnore
     @JsonProperty(value = "user")
     private long user;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -44,10 +49,14 @@ public class FeedFollow implements Serializable {
     }
 
     public long getFeed() {
-        return feed;
+        return Long.parseLong(String.valueOf(feed));
     }
 
-    public void setFeed(long feed) {
+    public Feed getFeedObject() {
+        return new ObjectMapper().convertValue(feed, Feed.class);
+    }
+
+    public void setFeed(Object feed) {
         this.feed = feed;
     }
 
@@ -60,10 +69,14 @@ public class FeedFollow implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
     }
 
-    public void setGame(long game) {
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
+    }
+
+    public void setGame(Object game) {
         this.game = game;
     }
 

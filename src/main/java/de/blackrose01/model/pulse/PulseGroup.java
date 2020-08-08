@@ -1,9 +1,12 @@
 package de.blackrose01.model.pulse;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.ExternalGame;
@@ -14,25 +17,20 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PulseGroup implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
     @JsonIgnore
     @JsonProperty(value = "pulses")
-    private List<Long> pulses;
-    @JsonIgnore
-    @JsonProperty(value = "pulses")
-    private List<Pulse> pulsesObject;
+    private List<Object> pulses;
     @JsonIgnore
     @JsonProperty(value = "tags")
     private List<Long> tags;
@@ -57,19 +55,15 @@ public class PulseGroup implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public String getName() {
@@ -81,19 +75,15 @@ public class PulseGroup implements Serializable {
     }
 
     public List<Long> getPulses() {
-        return pulses;
-    }
-
-    public void setPulses(List<Long> pulses) {
-        this.pulses = pulses;
+        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Long>>(){});
     }
 
     public List<Pulse> getPulsesObject() {
-        return pulsesObject;
+        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Pulse>>(){});
     }
 
-    public void setPulsesObject(List<Pulse> pulsesObject) {
-        this.pulsesObject = pulsesObject;
+    public void setPulses(List<Object> pulses) {
+        this.pulses = pulses;
     }
 
     public List<Long> getTags() {
@@ -128,27 +118,6 @@ public class PulseGroup implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
-    @JsonSetter("pulses")
-    public void setExternalGamesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Pulse>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.pulses = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.pulsesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -160,9 +129,9 @@ public class PulseGroup implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         PulseGroup that = (PulseGroup) o;
         return id == that.id &&
-                game == that.game &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(pulses, that.pulses) &&
                 Objects.equals(tags, that.tags) &&

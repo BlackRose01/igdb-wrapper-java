@@ -1,22 +1,27 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ListEntry implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "list")
-    private long list;
+    private Object list;
     @JsonIgnore
     @JsonProperty(value = "position")
     private int position;
@@ -28,7 +33,7 @@ public class ListEntry implements Serializable {
     private long user;
     @JsonIgnore
     @JsonProperty(value = "platform")
-    private long platform;
+    private Object platform;
     @JsonIgnore
     @JsonProperty(value = "checksum")
     private String checksum;
@@ -44,18 +49,26 @@ public class ListEntry implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
     }
 
-    public void setGame(long game) {
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
+    }
+
+    public void setGame(Object game) {
         this.game = game;
     }
 
     public long getList() {
-        return list;
+        return Long.parseLong(String.valueOf(list));
     }
 
-    public void setList(long list) {
+    public List getListObject() {
+        return new ObjectMapper().convertValue(list, List.class);
+    }
+
+    public void setList(Object list) {
         this.list = list;
     }
 
@@ -84,10 +97,14 @@ public class ListEntry implements Serializable {
     }
 
     public long getPlatform() {
-        return platform;
+        return Long.parseLong(String.valueOf(platform));
     }
 
-    public void setPlatform(long platform) {
+    public Platform getPlatformObject() {
+        return new ObjectMapper().convertValue(platform, Platform.class);
+    }
+
+    public void setPlatform(Object platform) {
         this.platform = platform;
     }
 

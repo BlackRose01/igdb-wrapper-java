@@ -1,25 +1,25 @@
 package de.blackrose01.model.platform;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.company.Company;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class PlatformVersionCompany implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "company")
-    private long company;
-    @JsonIgnore
-    @JsonProperty(value = "company")
-    private Company companyObject;
+    private Object company;
     @JsonIgnore
     @JsonProperty(value = "developer")
     private boolean isDeveloper;
@@ -41,19 +41,15 @@ public class PlatformVersionCompany implements Serializable {
     }
 
     public long getCompany() {
-        return company;
-    }
-
-    public void setCompany(long company) {
-        this.company = company;
+        return Long.parseLong(String.valueOf(company));
     }
 
     public Company getCompanyObject() {
-        return companyObject;
+        return new ObjectMapper().convertValue(company, Company.class);
     }
 
-    public void setCompanyObject(Company companyObject) {
-        this.companyObject = companyObject;
+    public void setCompany(Object company) {
+        this.company = company;
     }
 
     public boolean isDeveloper() {
@@ -80,14 +76,6 @@ public class PlatformVersionCompany implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("company")
-    public void setCompanyJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.company = jsonNode.asLong();
-        else
-            this.companyObject = new Gson().fromJson(jsonNode.toString(), Company.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -99,15 +87,14 @@ public class PlatformVersionCompany implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         PlatformVersionCompany that = (PlatformVersionCompany) o;
         return id == that.id &&
-                company == that.company &&
                 isDeveloper == that.isDeveloper &&
                 isManufacturer == that.isManufacturer &&
-                Objects.equals(companyObject, that.companyObject) &&
+                Objects.equals(company, that.company) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, company, companyObject, isDeveloper, isManufacturer, checksum);
+        return Objects.hash(id, company, isDeveloper, isManufacturer, checksum);
     }
 }

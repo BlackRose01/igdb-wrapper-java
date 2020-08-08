@@ -1,20 +1,26 @@
 package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.company.Company;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameEngine implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "companies")
-    private List<Long> companies;
+    private List<Object> companies;
     @JsonIgnore
     @JsonProperty(value = "logo")
     private long logo;
@@ -23,7 +29,7 @@ public class GameEngine implements Serializable {
     private String name;
     @JsonIgnore
     @JsonProperty(value = "platforms")
-    private List<Long> platforms;
+    private List<Object> platforms;
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
@@ -51,10 +57,14 @@ public class GameEngine implements Serializable {
     }
 
     public List<Long> getCompanies() {
-        return companies;
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>(){});
     }
 
-    public void setCompanies(List<Long> companies) {
+    public List<Company> getCompaniesObject() {
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>(){});
+    }
+
+    public void setCompanies(List<Object> companies) {
         this.companies = companies;
     }
 
@@ -75,10 +85,14 @@ public class GameEngine implements Serializable {
     }
 
     public List<Long> getPlatforms() {
-        return platforms;
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>(){});
     }
 
-    public void setPlatforms(List<Long> platforms) {
+    public List<Platform> getPlatformsObject() {
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>(){});
+    }
+
+    public void setPlatforms(List<Object> platforms) {
         this.platforms = platforms;
     }
 

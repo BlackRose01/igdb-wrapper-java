@@ -1,18 +1,18 @@
 package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.*;
 import de.blackrose01.model.agerating.AgeRating;
 import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -28,46 +28,28 @@ public class Game implements Serializable {
     private String name;
     @JsonIgnore
     @JsonProperty(value = "collection")
-    private long collection;
-    @JsonIgnore
-    @JsonProperty(value = "collection")
-    private Collection collectionObject;
+    private Object collection;
     @JsonIgnore()
     @JsonProperty(value = "cover")
-    private long cover;
-    @JsonIgnore
-    @JsonProperty(value = "cover")
-    private Cover coverObject;
+    private Object cover;
     @JsonIgnore
     @JsonProperty(value = "storyline")
     private String storyline;
     @JsonIgnore
     @JsonProperty(value = "external_games")
-    private List<Long> externalGames;
-    @JsonIgnore
-    @JsonProperty(value = "external_games")
-    private List<ExternalGame> externalGamesObject;
+    private List<Object> externalGames;
     @JsonIgnore
     @JsonProperty(value = "first_release_date")
-    private Long firstReleaseDate;
+    private Object firstReleaseDate;
     @JsonIgnore
     @JsonProperty(value = "game_modes")
-    private List<Long> gameModes;
-    @JsonIgnore
-    @JsonProperty(value = "game_modes")
-    private List<GameMode> gameModesObject;
+    private List<Object> gameModes;
     @JsonIgnore
     @JsonProperty(value = "keywords")
-    private List<Long> keywords;
-    @JsonIgnore
-    @JsonProperty(value = "keywords")
-    private List<Keyword> keywordsObject;
+    private List<Object> keywords;
     @JsonIgnore
     @JsonProperty(value = "platforms")
-    private List<Long> platforms;
-    @JsonIgnore
-    @JsonProperty(value = "platforms")
-    private List<Platform> platformsObject;
+    private List<Object> platforms;
     @JsonIgnore
     @JsonProperty(value = "popularity")
     private double popularity;
@@ -76,16 +58,10 @@ public class Game implements Serializable {
     private int pulseCount;
     @JsonIgnore
     @JsonProperty(value = "release_dates")
-    private List<Long> releaseDates;
-    @JsonIgnore
-    @JsonProperty(value = "release_dates")
-    private List<ReleaseDate> releaseDatesObject;
+    private List<Object> releaseDates;
     @JsonIgnore
     @JsonProperty(value = "similar_games")
-    private List<Long> gamesSimilar;
-    @JsonIgnore
-    @JsonProperty(value = "similar_games")
-    private List<Game> gamesSimilarObject;
+    private List<Object> gamesSimilar;
     @JsonIgnore
     @JsonProperty(value = "slug")
     private String slug;
@@ -97,34 +73,22 @@ public class Game implements Serializable {
     private List<Long> tags;
     @JsonIgnore
     @JsonProperty(value = "themes")
-    private List<Long> themes;
-    @JsonIgnore
-    @JsonProperty(value = "themes")
-    private List<Theme> themesObject;
+    private List<Object> themes;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
     @JsonIgnore
     @JsonProperty(value = "videos")
-    private List<Long> videos;
-    @JsonIgnore
-    @JsonProperty(value = "videos")
-    private List<GameVideo> videosObject;
+    private List<Object> videos;
     @JsonIgnore
     @JsonProperty(value = "websites")
-    private List<Long> websites;
-    @JsonIgnore
-    @JsonProperty(value = "websites")
-    private List<Website> websitesObject;
+    private List<Object> websites;
     @JsonIgnore
     @JsonProperty(value = "parent_game")
     private long gameParent;
     @JsonIgnore
     @JsonProperty(value = "age_ratings")
-    private List<Long> ratingsAge;
-    @JsonIgnore
-    @JsonProperty(value = "age_ratings")
-    private List<AgeRating> ratingsAgeObject;
+    private List<Object> ratingsAge;
     @JsonIgnore
     @JsonProperty(value = "rating")
     private double rating;
@@ -133,55 +97,31 @@ public class Game implements Serializable {
     private int ratingCount;
     @JsonIgnore
     @JsonProperty(value = "screenshots")
-    private List<Long> screenshots;
-    @JsonIgnore
-    @JsonProperty(value = "screenshots")
-    private List<Screenshot> screenshotsObject;
+    private List<Object> screenshots;
     @JsonIgnore
     @JsonProperty(value = "multiplayer_modes")
-    private List<Long> modesMultiplayer;
-    @JsonIgnore
-    @JsonProperty(value = "multiplayer_modes")
-    private List<MultiplayerMode> modesMultiplayerObject;
+    private List<Object> modesMultiplayer;
     @JsonIgnore
     @JsonProperty(value = "involved_companies")
-    private List<Long> companiesInvolved;
-    @JsonIgnore
-    @JsonProperty(value = "involved_companies")
-    private List<InvolvedCompany> companiesInvolvedObject;
+    private List<Object> companiesInvolved;
     @JsonIgnore
     @JsonProperty(value = "genres")
-    private List<Long> genres;
-    @JsonIgnore
-    @JsonProperty(value = "genres")
-    private List<Genre> genresObject;
+    private List<Object> genres;
     @JsonIgnore
     @JsonProperty(value = "game_engines")
-    private List<Long> gameEngines;
-    @JsonIgnore
-    @JsonProperty(value = "game_engines")
-    private List<GameEngine> gameEnginesObject;
+    private List<Object> gameEngines;
     @JsonIgnore
     @JsonProperty(value = "franchises")
-    private List<Long> franchises;
-    @JsonIgnore
-    @JsonProperty(value = "franchises")
-    private List<Franchise> franchisesObject;
+    private List<Object> franchises;
     @JsonIgnore
     @JsonProperty(value = "artworks")
-    private List<Long> artworks;
-    @JsonIgnore
-    @JsonProperty(value = "artworks")
-    private List<Artwork> artworksObject;
+    private List<Object> artworks;
     @JsonIgnore
     @JsonProperty(value = "bundles")
-    private List<Long> bundles;
-    @JsonIgnore
-    @JsonProperty(value = "bundles")
-    private List<Game> bundlesObject;
+    private List<Object> bundles;
     @JsonIgnore
     @JsonProperty(value = "franchise")
-    private long franchise;
+    private Object franchise;
     @JsonIgnore
     @JsonProperty(value = "hypes")
     private int hypes;
@@ -190,31 +130,19 @@ public class Game implements Serializable {
     private int follows;
     @JsonIgnore
     @JsonProperty(value = "time_to_beat")
-    private long timeToBeat;
+    private Object timeToBeat;
     @JsonIgnore
     @JsonProperty(value = "expansions")
-    private List<Long> expansions;
-    @JsonIgnore
-    @JsonProperty(value = "expansions")
-    private List<Game> expansionsObject;
+    private List<Object> expansions;
     @JsonIgnore
     @JsonProperty(value = "standalone_expansions")
-    private List<Long> expansionsStandalone;
-    @JsonIgnore
-    @JsonProperty(value = "standalone_expansions")
-    private List<Game> expansionsStandaloneObject;
+    private List<Object> expansionsStandalone;
     @JsonIgnore
     @JsonProperty(value = "dlcs")
-    private List<Long> dlcs;
-    @JsonIgnore
-    @JsonProperty(value = "dlcs")
-    private List<Game> dlcsObject;
+    private List<Object> dlcs;
     @JsonIgnore
     @JsonProperty(value = "player_perspectives")
-    private List<Long> perspectivesPlayer;
-    @JsonIgnore
-    @JsonProperty(value = "player_perspectives")
-    private List<PlayerPerspective> perspectivesPlayerObject;
+    private List<Object> perspectivesPlayer;
     @JsonIgnore
     @JsonProperty(value = "total_rating")
     private double ratingTotal;
@@ -223,7 +151,7 @@ public class Game implements Serializable {
     private int ratingTotalCount;
     @JsonIgnore
     @JsonProperty(value = "parent_game")
-    private long parentVersion;
+    private Object parentVersion;
     @JsonIgnore
     @JsonProperty(value = "version_title")
     private String titleVersion;
@@ -271,36 +199,28 @@ public class Game implements Serializable {
         this.name = name;
     }
 
-    public long getCollection() {
-        return collection;
-    }
-
-    public void setCollection(long collection) {
-        this.collection = collection;
+    public Long getCollection() {
+        return Long.parseLong(String.valueOf(collection));
     }
 
     public Collection getCollectionObject() {
-        return collectionObject;
+        return new ObjectMapper().convertValue(collection, Collection.class);
     }
 
-    public void setCollectionObject(Collection collectionObject) {
-        this.collectionObject = collectionObject;
+    public void setCollection(Object collection) {
+        this.collection = collection;
     }
 
-    public long getCover() {
-        return cover;
-    }
-
-    public void setCover(long cover) {
-        this.cover = cover;
+    public Long getCover() {
+        return Long.parseLong(String.valueOf(cover));
     }
 
     public Cover getCoverObject() {
-        return coverObject;
+        return new ObjectMapper().convertValue(cover, Cover.class);
     }
 
-    public void setCoverObject(Cover coverObject) {
-        this.coverObject = coverObject;
+    public void setCover(Object cover) {
+        this.cover = cover;
     }
 
     public String getStoryline() {
@@ -312,75 +232,59 @@ public class Game implements Serializable {
     }
 
     public List<Long> getExternalGames() {
-        return externalGames;
-    }
-
-    public void setExternalGames(List<Long> externalGames) {
-        this.externalGames = externalGames;
+        return new ObjectMapper().convertValue(externalGames, new TypeReference<List<Long>>(){});
     }
 
     public List<ExternalGame> getExternalGamesObject() {
-        return externalGamesObject;
+        return new ObjectMapper().convertValue(externalGames, new TypeReference<List<ExternalGame>>(){});
     }
 
-    public void setExternalGamesObject(List<ExternalGame> externalGamesObject) {
-        this.externalGamesObject = externalGamesObject;
+    public void setExternalGames(List<Object> externalGames) {
+        this.externalGames = externalGames;
     }
 
-    public Long getFirstReleaseDate() {
+    public Object getFirstReleaseDate() {
         return firstReleaseDate;
     }
 
-    public void setFirstReleaseDate(Long firstReleaseDate) {
+    public void setFirstReleaseDate(Object firstReleaseDate) {
         this.firstReleaseDate = firstReleaseDate;
     }
 
     public List<Long> getGameModes() {
-        return gameModes;
-    }
-
-    public void setGameModes(List<Long> gameModes) {
-        this.gameModes = gameModes;
+        return new ObjectMapper().convertValue(gameModes, new TypeReference<List<Long>>(){});
     }
 
     public List<GameMode> getGameModesObject() {
-        return gameModesObject;
+        return new ObjectMapper().convertValue(gameModes, new TypeReference<List<GameMode>>(){});
     }
 
-    public void setGameModesObject(List<GameMode> gameModesObject) {
-        this.gameModesObject = gameModesObject;
+    public void setGameModes(List<Object> gameModes) {
+        this.gameModes = gameModes;
     }
 
     public List<Long> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(List<Long> keywords) {
-        this.keywords = keywords;
+        return new ObjectMapper().convertValue(keywords, new TypeReference<List<Long>>(){});
     }
 
     public List<Keyword> getKeywordsObject() {
-        return keywordsObject;
+        return new ObjectMapper().convertValue(keywords, new TypeReference<List<Keyword>>(){});
     }
 
-    public void setKeywordsObject(List<Keyword> keywordsObject) {
-        this.keywordsObject = keywordsObject;
+    public void setKeywords(List<Object> keywords) {
+        this.keywords = keywords;
     }
 
     public List<Long> getPlatforms() {
-        return platforms;
-    }
-
-    public void setPlatforms(List<Long> platforms) {
-        this.platforms = platforms;
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>(){});
     }
 
     public List<Platform> getPlatformsObject() {
-        return platformsObject;
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>(){});
     }
 
-    public void setPlatformsObject(List<Platform> platformsObject) {
-        this.platformsObject = platformsObject;
+    public void setPlatforms(List<Object> platforms) {
+        this.platforms = platforms;
     }
 
     public double getPopularity() {
@@ -400,35 +304,27 @@ public class Game implements Serializable {
     }
 
     public List<Long> getReleaseDates() {
-        return releaseDates;
-    }
-
-    public void setReleaseDates(List<Long> releaseDates) {
-        this.releaseDates = releaseDates;
+        return new ObjectMapper().convertValue(releaseDates, new TypeReference<List<Long>>(){});
     }
 
     public List<ReleaseDate> getReleaseDatesObject() {
-        return releaseDatesObject;
+        return new ObjectMapper().convertValue(releaseDates, new TypeReference<List<ReleaseDate>>(){});
     }
 
-    public void setReleaseDatesObject(List<ReleaseDate> releaseDatesObject) {
-        this.releaseDatesObject = releaseDatesObject;
+    public void setReleaseDates(List<Object> releaseDates) {
+        this.releaseDates = releaseDates;
     }
 
     public List<Long> getGamesSimilar() {
-        return gamesSimilar;
-    }
-
-    public void setGamesSimilar(List<Long> gamesSimilar) {
-        this.gamesSimilar = gamesSimilar;
+        return new ObjectMapper().convertValue(gamesSimilar, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getGamesSimilarObject() {
-        return gamesSimilarObject;
+        return new ObjectMapper().convertValue(gamesSimilar, new TypeReference<List<Game>>(){});
     }
 
-    public void setGamesSimilarObject(List<Game> gamesSimilarObject) {
-        this.gamesSimilarObject = gamesSimilarObject;
+    public void setGamesSimilar(List<Object> gamesSimilar) {
+        this.gamesSimilar = gamesSimilar;
     }
 
     public String getSlug() {
@@ -456,19 +352,15 @@ public class Game implements Serializable {
     }
 
     public List<Long> getThemes() {
-        return themes;
-    }
-
-    public void setThemes(List<Long> themes) {
-        this.themes = themes;
+        return new ObjectMapper().convertValue(themes, new TypeReference<List<Long>>(){});
     }
 
     public List<Theme> getThemesObject() {
-        return themesObject;
+        return new ObjectMapper().convertValue(themes, new TypeReference<List<Theme>>(){});
     }
 
-    public void setThemesObject(List<Theme> themesObject) {
-        this.themesObject = themesObject;
+    public void setThemes(List<Object> themes) {
+        this.themes = themes;
     }
 
     public String getUrl() {
@@ -480,35 +372,27 @@ public class Game implements Serializable {
     }
 
     public List<Long> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Long> videos) {
-        this.videos = videos;
+        return new ObjectMapper().convertValue(videos, new TypeReference<List<Long>>(){});
     }
 
     public List<GameVideo> getVideosObject() {
-        return videosObject;
+        return new ObjectMapper().convertValue(videos, new TypeReference<List<GameVideo>>(){});
     }
 
-    public void setVideosObject(List<GameVideo> videosObject) {
-        this.videosObject = videosObject;
+    public void setVideos(List<Object> videos) {
+        this.videos = videos;
     }
 
     public List<Long> getWebsites() {
-        return websites;
-    }
-
-    public void setWebsites(List<Long> websites) {
-        this.websites = websites;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
     }
 
     public List<Website> getWebsitesObject() {
-        return websitesObject;
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Website>>(){});
     }
 
-    public void setWebsitesObject(List<Website> websitesObject) {
-        this.websitesObject = websitesObject;
+    public void setWebsites(List<Object> websites) {
+        this.websites = websites;
     }
 
     public long getGameParent() {
@@ -520,19 +404,15 @@ public class Game implements Serializable {
     }
 
     public List<Long> getRatingsAge() {
-        return ratingsAge;
-    }
-
-    public void setRatingsAge(List<Long> ratingsAge) {
-        this.ratingsAge = ratingsAge;
+        return new ObjectMapper().convertValue(ratingsAge, new TypeReference<List<Long>>(){});
     }
 
     public List<AgeRating> getRatingsAgeObject() {
-        return ratingsAgeObject;
+        return new ObjectMapper().convertValue(ratingsAge, new TypeReference<List<AgeRating>>(){});
     }
 
-    public void setRatingsAgeObject(List<AgeRating> ratingsAgeObject) {
-        this.ratingsAgeObject = ratingsAgeObject;
+    public void setRatingsAge(List<Object> ratingsAge) {
+        this.ratingsAge = ratingsAge;
     }
 
     public double getRating() {
@@ -552,138 +432,110 @@ public class Game implements Serializable {
     }
 
     public List<Long> getScreenshots() {
-        return screenshots;
-    }
-
-    public void setScreenshots(List<Long> screenshots) {
-        this.screenshots = screenshots;
+        return new ObjectMapper().convertValue(screenshots, new TypeReference<List<Long>>(){});
     }
 
     public List<Screenshot> getScreenshotsObject() {
-        return screenshotsObject;
+        return new ObjectMapper().convertValue(screenshots, new TypeReference<List<Screenshot>>(){});
     }
 
-    public void setScreenshotsObject(List<Screenshot> screenshotsObject) {
-        this.screenshotsObject = screenshotsObject;
+    public void setScreenshots(List<Object> screenshots) {
+        this.screenshots = screenshots;
     }
 
     public List<Long> getModesMultiplayer() {
-        return modesMultiplayer;
-    }
-
-    public void setModesMultiplayer(List<Long> modesMultiplayer) {
-        this.modesMultiplayer = modesMultiplayer;
+        return new ObjectMapper().convertValue(modesMultiplayer, new TypeReference<List<Long>>(){});
     }
 
     public List<MultiplayerMode> getModesMultiplayerObject() {
-        return modesMultiplayerObject;
+        return new ObjectMapper().convertValue(modesMultiplayer, new TypeReference<List<MultiplayerMode>>(){});
     }
 
-    public void setModesMultiplayerObject(List<MultiplayerMode> modesMultiplayerObject) {
-        this.modesMultiplayerObject = modesMultiplayerObject;
+    public void setModesMultiplayer(List<Object> modesMultiplayer) {
+        this.modesMultiplayer = modesMultiplayer;
     }
 
     public List<Long> getCompaniesInvolved() {
-        return companiesInvolved;
-    }
-
-    public void setCompaniesInvolved(List<Long> companiesInvolved) {
-        this.companiesInvolved = companiesInvolved;
+        return new ObjectMapper().convertValue(companiesInvolved, new TypeReference<List<Long>>(){});
     }
 
     public List<InvolvedCompany> getCompaniesInvolvedObject() {
-        return companiesInvolvedObject;
+        return new ObjectMapper().convertValue(companiesInvolved, new TypeReference<List<InvolvedCompany>>(){});
     }
 
-    public void setCompaniesInvolvedObject(List<InvolvedCompany> companiesInvolvedObject) {
-        this.companiesInvolvedObject = companiesInvolvedObject;
+    public void setCompaniesInvolved(List<Object> companiesInvolved) {
+        this.companiesInvolved = companiesInvolved;
     }
 
     public List<Long> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<Long> genres) {
-        this.genres = genres;
+        return new ObjectMapper().convertValue(genres, new TypeReference<List<Long>>(){});
     }
 
     public List<Genre> getGenresObject() {
-        return genresObject;
+        return new ObjectMapper().convertValue(genres, new TypeReference<List<Genre>>(){});
     }
 
-    public void setGenresObject(List<Genre> genresObject) {
-        this.genresObject = genresObject;
+    public void setGenres(List<Object> genres) {
+        this.genres = genres;
     }
 
     public List<Long> getGameEngines() {
-        return gameEngines;
-    }
-
-    public void setGameEngines(List<Long> gameEngines) {
-        this.gameEngines = gameEngines;
+        return new ObjectMapper().convertValue(gameEngines, new TypeReference<List<Long>>(){});
     }
 
     public List<GameEngine> getGameEnginesObject() {
-        return gameEnginesObject;
+        return new ObjectMapper().convertValue(gameEngines, new TypeReference<List<GameEngine>>(){});
     }
 
-    public void setGameEnginesObject(List<GameEngine> gameEnginesObject) {
-        this.gameEnginesObject = gameEnginesObject;
+    public void setGameEngines(List<Object> gameEngines) {
+        this.gameEngines = gameEngines;
     }
 
     public List<Long> getFranchises() {
-        return franchises;
-    }
-
-    public void setFranchises(List<Long> franchises) {
-        this.franchises = franchises;
+        return new ObjectMapper().convertValue(franchises, new TypeReference<List<Long>>(){});
     }
 
     public List<Franchise> getFranchisesObject() {
-        return franchisesObject;
+        return new ObjectMapper().convertValue(franchises, new TypeReference<List<Franchise>>(){});
     }
 
-    public void setFranchisesObject(List<Franchise> franchisesObject) {
-        this.franchisesObject = franchisesObject;
+    public void setFranchises(List<Object> franchises) {
+        this.franchises = franchises;
     }
 
     public List<Long> getArtworks() {
-        return artworks;
-    }
-
-    public void setArtworks(List<Long> artworks) {
-        this.artworks = artworks;
+        return new ObjectMapper().convertValue(artworks, new TypeReference<List<Long>>(){});
     }
 
     public List<Artwork> getArtworksObject() {
-        return artworksObject;
+        return new ObjectMapper().convertValue(artworks, new TypeReference<List<Artwork>>(){});
     }
 
-    public void setArtworksObject(List<Artwork> artworksObject) {
-        this.artworksObject = artworksObject;
+    public void setArtworks(List<Object> artworks) {
+        this.artworks = artworks;
     }
 
     public List<Long> getBundles() {
-        return bundles;
-    }
-
-    public void setBundles(List<Long> bundles) {
-        this.bundles = bundles;
+        return new ObjectMapper().convertValue(bundles, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getBundlesObject() {
-        return bundlesObject;
+        return new ObjectMapper().convertValue(bundles, new TypeReference<List<Game>>(){});
     }
 
-    public void setBundlesObject(List<Game> bundlesObject) {
-        this.bundlesObject = bundlesObject;
+    public void setBundles(List<Object> bundles) {
+        this.bundles = bundles;
     }
 
     public long getFranchise() {
-        return franchise;
+        return Long.parseLong(String.valueOf(franchise));
     }
 
-    public void setFranchise(long franchise) {
+    public Franchise getFranchiseObject() {
+        return new ObjectMapper().convertValue(franchise, Franchise.class);
+    }
+
+    public void setFranchise(Object franchise) {
         this.franchise = franchise;
     }
 
@@ -704,75 +556,63 @@ public class Game implements Serializable {
     }
 
     public long getTimeToBeat() {
-        return timeToBeat;
+        return Long.parseLong(String.valueOf(timeToBeat));
     }
 
-    public void setTimeToBeat(long timeToBeat) {
+    public TimeToBeat getTimeToBeatObject() {
+        return new ObjectMapper().convertValue(franchise, TimeToBeat.class);
+    }
+
+    public void setTimeToBeat(Object timeToBeat) {
         this.timeToBeat = timeToBeat;
     }
 
     public List<Long> getExpansions() {
-        return expansions;
-    }
-
-    public void setExpansions(List<Long> expansions) {
-        this.expansions = expansions;
+        return new ObjectMapper().convertValue(expansions, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getExpansionsObject() {
-        return expansionsObject;
+        return new ObjectMapper().convertValue(expansions, new TypeReference<List<Game>>(){});
     }
 
-    public void setExpansionsObject(List<Game> expansionsObject) {
-        this.expansionsObject = expansionsObject;
+    public void setExpansions(List<Object> expansions) {
+        this.expansions = expansions;
     }
 
     public List<Long> getExpansionsStandalone() {
-        return expansionsStandalone;
-    }
-
-    public void setExpansionsStandalone(List<Long> expansionsStandalone) {
-        this.expansionsStandalone = expansionsStandalone;
+        return new ObjectMapper().convertValue(expansionsStandalone, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getExpansionsStandaloneObject() {
-        return expansionsStandaloneObject;
+        return new ObjectMapper().convertValue(expansionsStandalone, new TypeReference<List<Game>>(){});
     }
 
-    public void setExpansionsStandaloneObject(List<Game> expansionsStandaloneObject) {
-        this.expansionsStandaloneObject = expansionsStandaloneObject;
+    public void setExpansionsStandalone(List<Object> expansionsStandalone) {
+        this.expansionsStandalone = expansionsStandalone;
     }
 
     public List<Long> getDlcs() {
-        return dlcs;
-    }
-
-    public void setDlcs(List<Long> dlcs) {
-        this.dlcs = dlcs;
+        return new ObjectMapper().convertValue(dlcs, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getDlcsObject() {
-        return dlcsObject;
+        return new ObjectMapper().convertValue(dlcs, new TypeReference<List<Game>>(){});
     }
 
-    public void setDlcsObject(List<Game> dlcsObject) {
-        this.dlcsObject = dlcsObject;
+    public void setDlcs(List<Object> dlcs) {
+        this.dlcs = dlcs;
     }
 
     public List<Long> getPerspectivesPlayer() {
-        return perspectivesPlayer;
-    }
-
-    public void setPerspectivesPlayer(List<Long> perspectivesPlayer) {
-        this.perspectivesPlayer = perspectivesPlayer;
+        return new ObjectMapper().convertValue(perspectivesPlayer, new TypeReference<List<Long>>(){});
     }
 
     public List<PlayerPerspective> getPerspectivesPlayerObject() {
-        return perspectivesPlayerObject;
+        return new ObjectMapper().convertValue(perspectivesPlayer, new TypeReference<List<PlayerPerspective>>(){});
     }
 
-    public void setPerspectivesPlayerObject(List<PlayerPerspective> perspectivesPlayerObject) {
-        this.perspectivesPlayerObject = perspectivesPlayerObject;
+    public void setPerspectivesPlayer(List<Object> perspectivesPlayer) {
+        this.perspectivesPlayer = perspectivesPlayer;
     }
 
     public double getRatingTotal() {
@@ -792,10 +632,14 @@ public class Game implements Serializable {
     }
 
     public long getParentVersion() {
-        return parentVersion;
+        return Long.parseLong(String.valueOf(parentVersion));
     }
 
-    public void setParentVersion(long parentVersion) {
+    public Game getParentVersionObject() {
+        return new ObjectMapper().convertValue(parentVersion, Game.class);
+    }
+
+    public void setParentVersion(Object parentVersion) {
         this.parentVersion = parentVersion;
     }
 
@@ -831,308 +675,6 @@ public class Game implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("cover")
-    public void setCoverJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.cover = jsonNode.asLong();
-        else
-            this.coverObject = new Gson().fromJson(jsonNode.toString(), Cover.class);
-    }
-
-    @JsonSetter("collection")
-    public void setCollectionJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.collection = jsonNode.asLong();
-        else
-            this.collectionObject = new Gson().fromJson(jsonNode.toString(), Collection.class);
-    }
-
-    @JsonSetter("external_games")
-    public void setExternalGamesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<ExternalGame>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.externalGames = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.externalGamesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("game_modes")
-    public void setGameModesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<GameMode>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.gameModes = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.gameModesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("keywords")
-    public void setKeywordsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Keyword>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.keywords = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.keywordsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("platforms")
-    public void setPlatformsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Platform>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.platforms = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.platformsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("release_dates")
-    public void setReleaseDatesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<ReleaseDate>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.releaseDates = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.releaseDatesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("similar_games")
-    public void setGamesSimilarJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.gamesSimilar = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.gamesSimilarObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("themes")
-    public void setThemesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Theme>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.themes = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.themesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("videos")
-    public void setVideosJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<GameVideo>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.videos = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.videosObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("websites")
-    public void setWebsitesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Website>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.websites = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.websitesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("age_ratings")
-    public void setAgeRatingsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<AgeRating>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.ratingsAge = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.ratingsAgeObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("screenshots")
-    public void setScreenshotsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Screenshot>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.screenshots = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.screenshotsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("multiplayer_modes")
-    public void setMultiplayerModesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<MultiplayerMode>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.modesMultiplayer = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.modesMultiplayerObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("involved_companies")
-    public void setInvolvedCompaniesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<InvolvedCompany>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.companiesInvolved = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.companiesInvolvedObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("genres")
-    public void setGenresJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Genre>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.genres = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.genresObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("game_engines")
-    public void setGameEnginesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<GameEngine>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.gameEngines = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.gameEnginesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("franchises")
-    public void setFranchisesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Franchise>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.franchises = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.franchisesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("artworks")
-    public void setArtworksJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Artwork>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.artworks = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.artworksObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("bundles")
-    public void setBundlesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.bundles = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.bundlesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("expansions")
-    public void setExpansionsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.expansions = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.expansionsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("standalone_expansions")
-    public void setExpansionsStandaloneJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.expansionsStandalone = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.expansionsStandaloneObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("dlcs")
-    public void setDlcsJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.dlcs = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.dlcsObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("player_perspectives")
-    public void setPerspectivesPlayerJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<PlayerPerspective>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.perspectivesPlayer = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.perspectivesPlayerObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -1146,81 +688,57 @@ public class Game implements Serializable {
         return id == game.id &&
                 category == game.category &&
                 status == game.status &&
-                collection == game.collection &&
-                cover == game.cover &&
                 Double.compare(game.popularity, popularity) == 0 &&
                 pulseCount == game.pulseCount &&
                 gameParent == game.gameParent &&
                 Double.compare(game.rating, rating) == 0 &&
                 ratingCount == game.ratingCount &&
-                franchise == game.franchise &&
                 hypes == game.hypes &&
                 follows == game.follows &&
-                timeToBeat == game.timeToBeat &&
                 Double.compare(game.ratingTotal, ratingTotal) == 0 &&
                 ratingTotalCount == game.ratingTotalCount &&
-                parentVersion == game.parentVersion &&
                 createdAt == game.createdAt &&
                 updatedAt == game.updatedAt &&
                 Objects.equals(name, game.name) &&
-                Objects.equals(collectionObject, game.collectionObject) &&
-                Objects.equals(coverObject, game.coverObject) &&
+                Objects.equals(collection, game.collection) &&
+                Objects.equals(cover, game.cover) &&
                 Objects.equals(storyline, game.storyline) &&
                 Objects.equals(externalGames, game.externalGames) &&
-                Objects.equals(externalGamesObject, game.externalGamesObject) &&
                 Objects.equals(firstReleaseDate, game.firstReleaseDate) &&
                 Objects.equals(gameModes, game.gameModes) &&
-                Objects.equals(gameModesObject, game.gameModesObject) &&
                 Objects.equals(keywords, game.keywords) &&
-                Objects.equals(keywordsObject, game.keywordsObject) &&
                 Objects.equals(platforms, game.platforms) &&
-                Objects.equals(platformsObject, game.platformsObject) &&
                 Objects.equals(releaseDates, game.releaseDates) &&
-                Objects.equals(releaseDatesObject, game.releaseDatesObject) &&
                 Objects.equals(gamesSimilar, game.gamesSimilar) &&
-                Objects.equals(gamesSimilarObject, game.gamesSimilarObject) &&
                 Objects.equals(slug, game.slug) &&
                 Objects.equals(summary, game.summary) &&
                 Objects.equals(tags, game.tags) &&
                 Objects.equals(themes, game.themes) &&
-                Objects.equals(themesObject, game.themesObject) &&
                 Objects.equals(url, game.url) &&
                 Objects.equals(videos, game.videos) &&
-                Objects.equals(videosObject, game.videosObject) &&
                 Objects.equals(websites, game.websites) &&
-                Objects.equals(websitesObject, game.websitesObject) &&
                 Objects.equals(ratingsAge, game.ratingsAge) &&
-                Objects.equals(ratingsAgeObject, game.ratingsAgeObject) &&
                 Objects.equals(screenshots, game.screenshots) &&
-                Objects.equals(screenshotsObject, game.screenshotsObject) &&
                 Objects.equals(modesMultiplayer, game.modesMultiplayer) &&
-                Objects.equals(modesMultiplayerObject, game.modesMultiplayerObject) &&
                 Objects.equals(companiesInvolved, game.companiesInvolved) &&
-                Objects.equals(companiesInvolvedObject, game.companiesInvolvedObject) &&
                 Objects.equals(genres, game.genres) &&
-                Objects.equals(genresObject, game.genresObject) &&
                 Objects.equals(gameEngines, game.gameEngines) &&
-                Objects.equals(gameEnginesObject, game.gameEnginesObject) &&
                 Objects.equals(franchises, game.franchises) &&
-                Objects.equals(franchisesObject, game.franchisesObject) &&
                 Objects.equals(artworks, game.artworks) &&
-                Objects.equals(artworksObject, game.artworksObject) &&
                 Objects.equals(bundles, game.bundles) &&
-                Objects.equals(bundlesObject, game.bundlesObject) &&
+                Objects.equals(franchise, game.franchise) &&
+                Objects.equals(timeToBeat, game.timeToBeat) &&
                 Objects.equals(expansions, game.expansions) &&
-                Objects.equals(expansionsObject, game.expansionsObject) &&
                 Objects.equals(expansionsStandalone, game.expansionsStandalone) &&
-                Objects.equals(expansionsStandaloneObject, game.expansionsStandaloneObject) &&
                 Objects.equals(dlcs, game.dlcs) &&
-                Objects.equals(dlcsObject, game.dlcsObject) &&
                 Objects.equals(perspectivesPlayer, game.perspectivesPlayer) &&
-                Objects.equals(perspectivesPlayerObject, game.perspectivesPlayerObject) &&
+                Objects.equals(parentVersion, game.parentVersion) &&
                 Objects.equals(titleVersion, game.titleVersion) &&
                 Objects.equals(checksum, game.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, status, name, collection, collectionObject, cover, coverObject, storyline, externalGames, externalGamesObject, firstReleaseDate, gameModes, gameModesObject, keywords, keywordsObject, platforms, platformsObject, popularity, pulseCount, releaseDates, releaseDatesObject, gamesSimilar, gamesSimilarObject, slug, summary, tags, themes, themesObject, url, videos, videosObject, websites, websitesObject, gameParent, ratingsAge, ratingsAgeObject, rating, ratingCount, screenshots, screenshotsObject, modesMultiplayer, modesMultiplayerObject, companiesInvolved, companiesInvolvedObject, genres, genresObject, gameEngines, gameEnginesObject, franchises, franchisesObject, artworks, artworksObject, bundles, bundlesObject, franchise, hypes, follows, timeToBeat, expansions, expansionsObject, expansionsStandalone, expansionsStandaloneObject, dlcs, dlcsObject, perspectivesPlayer, perspectivesPlayerObject, ratingTotal, ratingTotalCount, parentVersion, titleVersion, createdAt, updatedAt, checksum);
+        return Objects.hash(id, category, status, name, collection, cover, storyline, externalGames, firstReleaseDate, gameModes, keywords, platforms, popularity, pulseCount, releaseDates, gamesSimilar, slug, summary, tags, themes, url, videos, websites, gameParent, ratingsAge, rating, ratingCount, screenshots, modesMultiplayer, companiesInvolved, genres, gameEngines, franchises, artworks, bundles, franchise, hypes, follows, timeToBeat, expansions, expansionsStandalone, dlcs, perspectivesPlayer, ratingTotal, ratingTotalCount, parentVersion, titleVersion, createdAt, updatedAt, checksum);
     }
 }

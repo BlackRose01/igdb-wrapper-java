@@ -1,13 +1,18 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class People implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -20,7 +25,7 @@ public class People implements Serializable {
     private String slug;
     @JsonIgnore
     @JsonProperty(value = "credited_games")
-    private List<Long> gamesCredited;
+    private List<Object> gamesCredited;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -64,10 +69,14 @@ public class People implements Serializable {
     }
 
     public List<Long> getGamesCredited() {
-        return gamesCredited;
+        return new ObjectMapper().convertValue(gamesCredited, new TypeReference<List<Long>>(){});
     }
 
-    public void setGamesCredited(List<Long> gamesCredited) {
+    public List<Game> getGamesCreditedObject() {
+        return new ObjectMapper().convertValue(gamesCredited, new TypeReference<List<Game>>(){});
+    }
+
+    public void setGamesCredited(List<Object> gamesCredited) {
         this.gamesCredited = gamesCredited;
     }
 

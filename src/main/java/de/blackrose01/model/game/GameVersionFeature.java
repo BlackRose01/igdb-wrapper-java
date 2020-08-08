@@ -1,17 +1,17 @@
 package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersionFeature implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -30,10 +30,7 @@ public class GameVersionFeature implements Serializable {
     private int position;
     @JsonIgnore
     @JsonProperty(value = "values")
-    private List<Long> values;
-    @JsonIgnore
-    @JsonProperty(value = "values")
-    private List<GameVersionFeatureValue> valuesObject;
+    private List<Object> values;
     @JsonIgnore
     @JsonProperty(value = "checksum")
     private String checksum;
@@ -81,19 +78,15 @@ public class GameVersionFeature implements Serializable {
     }
 
     public List<Long> getValues() {
-        return values;
-    }
-
-    public void setValues(List<Long> values) {
-        this.values = values;
+        return new ObjectMapper().convertValue(values, new TypeReference<List<Long>>(){});
     }
 
     public List<GameVersionFeatureValue> getValuesObject() {
-        return valuesObject;
+        return new ObjectMapper().convertValue(values, new TypeReference<List<GameVersionFeatureValue>>(){});
     }
 
-    public void setValuesObject(List<GameVersionFeatureValue> valuesObject) {
-        this.valuesObject = valuesObject;
+    public void setValues(List<Object> values) {
+        this.values = values;
     }
 
     public String getChecksum() {
@@ -102,19 +95,6 @@ public class GameVersionFeature implements Serializable {
 
     public void setChecksum(String checksum) {
         this.checksum = checksum;
-    }
-
-    @JsonSetter("values")
-    public void setValuesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<GameVersionFeatureValue>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.values = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.valuesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
     }
 
     @Override
@@ -133,12 +113,11 @@ public class GameVersionFeature implements Serializable {
                 Objects.equals(title, that.title) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(values, that.values) &&
-                Objects.equals(valuesObject, that.valuesObject) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, title, description, position, values, valuesObject, checksum);
+        return Objects.hash(id, category, title, description, position, values, checksum);
     }
 }

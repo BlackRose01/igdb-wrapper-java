@@ -1,9 +1,12 @@
 package de.blackrose01.model.agerating;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.ExternalGame;
@@ -13,6 +16,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AgeRating implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -22,10 +26,7 @@ public class AgeRating implements Serializable {
     private int category;
     @JsonIgnore
     @JsonProperty(value = "content_descriptions")
-    private List<Long> descriptionsContent;
-    @JsonIgnore
-    @JsonProperty(value = "content_descriptions")
-    private List<AgeRatingContentDescription> descriptionsContentObject;
+    private List<Object> descriptionsContent;
     @JsonIgnore
     @JsonProperty(value = "rating")
     private int rating;
@@ -58,19 +59,15 @@ public class AgeRating implements Serializable {
     }
 
     public List<Long> getDescriptionsContent() {
-        return descriptionsContent;
-    }
-
-    public void setDescriptionsContent(List<Long> descriptionsContent) {
-        this.descriptionsContent = descriptionsContent;
+        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<Long>>(){});
     }
 
     public List<AgeRatingContentDescription> getDescriptionsContentObject() {
-        return descriptionsContentObject;
+        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<AgeRatingContentDescription>>(){});
     }
 
-    public void setDescriptionsContentObject(List<AgeRatingContentDescription> descriptionsContentObject) {
-        this.descriptionsContentObject = descriptionsContentObject;
+    public void setDescriptionsContent(List<Object> descriptionsContent) {
+        this.descriptionsContent = descriptionsContent;
     }
 
     public int getRating() {
@@ -105,19 +102,6 @@ public class AgeRating implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("content_descriptions")
-    public void setExternalGamesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<AgeRatingContentDescription>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.descriptionsContent = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.descriptionsContentObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -132,7 +116,6 @@ public class AgeRating implements Serializable {
                 category == ageRating.category &&
                 rating == ageRating.rating &&
                 Objects.equals(descriptionsContent, ageRating.descriptionsContent) &&
-                Objects.equals(descriptionsContentObject, ageRating.descriptionsContentObject) &&
                 Objects.equals(ratingCoverUrl, ageRating.ratingCoverUrl) &&
                 Objects.equals(synopsis, ageRating.synopsis) &&
                 Objects.equals(checksum, ageRating.checksum);
@@ -140,6 +123,6 @@ public class AgeRating implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, category, descriptionsContent, descriptionsContentObject, rating, ratingCoverUrl, synopsis, checksum);
+        return Objects.hash(id, category, descriptionsContent, rating, ratingCoverUrl, synopsis, checksum);
     }
 }

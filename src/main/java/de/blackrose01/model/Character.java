@@ -1,19 +1,19 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import de.blackrose01.model.game.Game;
 import de.blackrose01.model.privates.People;
 
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Character implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -26,10 +26,7 @@ public class Character implements Serializable {
     private int species;
     @JsonIgnore
     @JsonProperty(value = "games")
-    private List<Long> games;
-    @JsonIgnore
-    @JsonProperty(value = "games")
-    private List<Game> gamesObject;
+    private List<Object> games;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -38,10 +35,7 @@ public class Character implements Serializable {
     private String slug;
     @JsonIgnore
     @JsonProperty(value = "people")
-    private List<Long> people;
-    @JsonIgnore
-    @JsonProperty(value = "people")
-    private List<People> peopleObject;
+    private List<Object> people;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -91,19 +85,15 @@ public class Character implements Serializable {
     }
 
     public List<Long> getGames() {
-        return games;
-    }
-
-    public void setGames(List<Long> games) {
-        this.games = games;
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>(){});
     }
 
     public List<Game> getGamesObject() {
-        return gamesObject;
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>(){});
     }
 
-    public void setGamesObject(List<Game> gamesObject) {
-        this.gamesObject = gamesObject;
+    public void setGames(List<Object> games) {
+        this.games = games;
     }
 
     public String getName() {
@@ -123,19 +113,15 @@ public class Character implements Serializable {
     }
 
     public List<Long> getPeople() {
-        return people;
-    }
-
-    public void setPeople(List<Long> people) {
-        this.people = people;
+        return new ObjectMapper().convertValue(people, new TypeReference<List<Long>>(){});
     }
 
     public List<People> getPeopleObject() {
-        return peopleObject;
+        return new ObjectMapper().convertValue(people, new TypeReference<List<People>>(){});
     }
 
-    public void setPeopleObject(List<People> peopleObject) {
-        this.peopleObject = peopleObject;
+    public void setPeople(List<Object> people) {
+        this.people = people;
     }
 
     public String getUrl() {
@@ -194,32 +180,6 @@ public class Character implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("games")
-    public void setGamesJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<Game>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.games = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.gamesObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
-    @JsonSetter("people")
-    public void setPeopleJson(JsonNode jsonNode) {
-        Type typeListObject = new TypeToken<List<People>>(){}.getType();
-        Type typeListLong = new TypeToken<List<Long>>(){}.getType();
-
-        if (jsonNode.size() == 0)
-            return;
-        else if (jsonNode.isArray() && jsonNode.get(0).isLong())
-            this.people = new Gson().fromJson(jsonNode.toString(), typeListLong);
-        else
-            this.peopleObject = new Gson().fromJson(jsonNode.toString(), typeListObject);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -236,11 +196,9 @@ public class Character implements Serializable {
                 createdAt == character.createdAt &&
                 updatedAt == character.updatedAt &&
                 Objects.equals(games, character.games) &&
-                Objects.equals(gamesObject, character.gamesObject) &&
                 Objects.equals(name, character.name) &&
                 Objects.equals(slug, character.slug) &&
                 Objects.equals(people, character.people) &&
-                Objects.equals(peopleObject, character.peopleObject) &&
                 Objects.equals(url, character.url) &&
                 Objects.equals(description, character.description) &&
                 Objects.equals(nameCountry, character.nameCountry) &&
@@ -250,6 +208,6 @@ public class Character implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, gender, species, games, gamesObject, name, slug, people, peopleObject, url, description, nameCountry, mugShot, createdAt, updatedAt, checksum);
+        return Objects.hash(id, gender, species, games, name, slug, people, url, description, nameCountry, mugShot, createdAt, updatedAt, checksum);
     }
 }

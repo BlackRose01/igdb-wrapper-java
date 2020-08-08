@@ -1,19 +1,23 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Rate implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "private")
     private boolean isPrivate;
@@ -38,10 +42,14 @@ public class Rate implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
     }
 
-    public void setGame(long game) {
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
+    }
+
+    public void setGame(Object game) {
         this.game = game;
     }
 

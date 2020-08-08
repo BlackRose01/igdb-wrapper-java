@@ -1,12 +1,17 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class List implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -37,16 +42,16 @@ public class List implements Serializable {
     private String url;
     @JsonIgnore
     @JsonProperty(value = "list_entries")
-    private java.util.List<Long> listEntries;
+    private java.util.List<Object> listEntries;
     @JsonIgnore
     @JsonProperty(value = "listed_games")
-    private java.util.List<Long> listGames;
+    private java.util.List<Object> listGames;
     @JsonIgnore
     @JsonProperty(value = "list_tags")
     private java.util.List<Long> listTags;
     @JsonIgnore
     @JsonProperty(value = "similar_lists")
-    private java.util.List<Long> similarLists;
+    private java.util.List<Object> similarLists;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -132,18 +137,26 @@ public class List implements Serializable {
     }
 
     public java.util.List<Long> getListEntries() {
-        return listEntries;
+        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<Long>>(){});
     }
 
-    public void setListEntries(java.util.List<Long> listEntries) {
+    public java.util.List<ListEntry> getListEntriesObject() {
+        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<ListEntry>>(){});
+    }
+
+    public void setListEntries(java.util.List<Object> listEntries) {
         this.listEntries = listEntries;
     }
 
     public java.util.List<Long> getListGames() {
-        return listGames;
+        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Long>>(){});
     }
 
-    public void setListGames(java.util.List<Long> listGames) {
+    public java.util.List<Game> getListGamesObject() {
+        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Game>>(){});
+    }
+
+    public void setListGames(java.util.List<Object> listGames) {
         this.listGames = listGames;
     }
 
@@ -156,10 +169,14 @@ public class List implements Serializable {
     }
 
     public java.util.List<Long> getSimilarLists() {
-        return similarLists;
+        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<Long>>(){});
     }
 
-    public void setSimilarLists(java.util.List<Long> similarLists) {
+    public java.util.List<List> getSimilarListsObject() {
+        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<List>>(){});
+    }
+
+    public void setSimilarLists(java.util.List<Object> similarLists) {
         this.similarLists = similarLists;
     }
 

@@ -1,14 +1,17 @@
 package de.blackrose01.model.game;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class GameVersionFeatureValue implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -21,10 +24,7 @@ public class GameVersionFeatureValue implements Serializable {
     private Game gameObject;
     @JsonIgnore
     @JsonProperty(value = "game_feature")
-    private long gameFeature;
-    @JsonIgnore
-    @JsonProperty(value = "game_feature")
-    private GameVersionFeature gameFeatureObject;
+    private Object gameFeature;
     @JsonIgnore
     @JsonProperty(value = "included_feature")
     private int featureInclude;
@@ -37,20 +37,64 @@ public class GameVersionFeatureValue implements Serializable {
 
     public GameVersionFeatureValue() {}
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
+    public long getId() {
+        return id;
     }
 
-    @JsonSetter("game_feature")
-    public void setGameFeatureJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.gameFeature = jsonNode.asLong();
-        else
-            this.gameFeatureObject = new Gson().fromJson(jsonNode.toString(), GameVersionFeature.class);
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getGame() {
+        return game;
+    }
+
+    public void setGame(long game) {
+        this.game = game;
+    }
+
+    public Game getGameObject() {
+        return gameObject;
+    }
+
+    public void setGameObject(Game gameObject) {
+        this.gameObject = gameObject;
+    }
+
+    public long getGameFeature() {
+        return Long.parseLong(String.valueOf(gameFeature));
+    }
+
+    public GameVersionFeature getGameFeatureObject() {
+        return new ObjectMapper().convertValue(gameFeature, GameVersionFeature.class);
+    }
+
+    public void setGameFeature(Object gameFeature) {
+        this.gameFeature = gameFeature;
+    }
+
+    public int getFeatureInclude() {
+        return featureInclude;
+    }
+
+    public void setFeatureInclude(int featureInclude) {
+        this.featureInclude = featureInclude;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getChecksum() {
+        return checksum;
+    }
+
+    public void setChecksum(String checksum) {
+        this.checksum = checksum;
     }
 
     @Override
@@ -65,16 +109,15 @@ public class GameVersionFeatureValue implements Serializable {
         GameVersionFeatureValue that = (GameVersionFeatureValue) o;
         return id == that.id &&
                 game == that.game &&
-                gameFeature == that.gameFeature &&
                 featureInclude == that.featureInclude &&
                 Objects.equals(gameObject, that.gameObject) &&
-                Objects.equals(gameFeatureObject, that.gameFeatureObject) &&
+                Objects.equals(gameFeature, that.gameFeature) &&
                 Objects.equals(note, that.note) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, gameObject, gameFeature, gameFeatureObject, featureInclude, note, checksum);
+        return Objects.hash(id, game, gameObject, gameFeature, featureInclude, note, checksum);
     }
 }

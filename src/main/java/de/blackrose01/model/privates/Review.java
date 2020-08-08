@@ -1,12 +1,17 @@
 package de.blackrose01.model.privates;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import de.blackrose01.model.game.Game;
+import de.blackrose01.model.platform.Platform;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Review implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -31,7 +36,7 @@ public class Review implements Serializable {
     private String pointsNegative;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "likes")
     private int likes;
@@ -49,16 +54,16 @@ public class Review implements Serializable {
     private long user;
     @JsonIgnore
     @JsonProperty(value = "user_rating")
-    private long userRating;
+    private Object userRating;
     @JsonIgnore
     @JsonProperty(value = "views")
     private long views;
     @JsonIgnore
     @JsonProperty(value = "platform")
-    private long platform;
+    private Object platform;
     @JsonIgnore
     @JsonProperty(value = "video")
-    private long video;
+    private Object video;
     @JsonIgnore
     @JsonProperty(value = "created_at")
     private long createdAt;
@@ -128,10 +133,14 @@ public class Review implements Serializable {
     }
 
     public long getGame() {
-        return game;
+        return Long.parseLong(String.valueOf(game));
     }
 
-    public void setGame(long game) {
+    public Game getGameObject() {
+        return new ObjectMapper().convertValue(game, Game.class);
+    }
+
+    public void setGame(Object game) {
         this.game = game;
     }
 
@@ -176,10 +185,14 @@ public class Review implements Serializable {
     }
 
     public long getUserRating() {
-        return userRating;
+        return Long.parseLong(String.valueOf(userRating));
     }
 
-    public void setUserRating(long userRating) {
+    public Rate getUserRatingObject() {
+        return new ObjectMapper().convertValue(userRating, Rate.class);
+    }
+
+    public void setUserRating(Object userRating) {
         this.userRating = userRating;
     }
 
@@ -192,18 +205,26 @@ public class Review implements Serializable {
     }
 
     public long getPlatform() {
-        return platform;
+        return Long.parseLong(String.valueOf(platform));
     }
 
-    public void setPlatform(long platform) {
+    public Platform getPlatformObject() {
+        return new ObjectMapper().convertValue(platform, Platform.class);
+    }
+
+    public void setPlatform(Object platform) {
         this.platform = platform;
     }
 
     public long getVideo() {
-        return video;
+        return Long.parseLong(String.valueOf(video));
     }
 
-    public void setVideo(long video) {
+    public ReviewVideo getVideoObject() {
+        return new ObjectMapper().convertValue(video, ReviewVideo.class);
+    }
+
+    public void setVideo(Object video) {
         this.video = video;
     }
 

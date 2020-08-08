@@ -1,9 +1,11 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.company.Company;
 import de.blackrose01.model.game.Game;
@@ -11,22 +13,17 @@ import de.blackrose01.model.game.Game;
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class InvolvedCompany implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "company")
-    private long company;
-    @JsonIgnore
-    @JsonProperty(value = "company")
-    private Company companyObject;
+    private Object company;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "developer")
     private boolean isDeveloper;
@@ -60,35 +57,27 @@ public class InvolvedCompany implements Serializable {
     }
 
     public long getCompany() {
-        return company;
-    }
-
-    public void setCompany(long company) {
-        this.company = company;
+        return Long.parseLong(String.valueOf(company));
     }
 
     public Company getCompanyObject() {
-        return companyObject;
+        return new ObjectMapper().convertValue(company, Company.class);
     }
 
-    public void setCompanyObject(Company companyObject) {
-        this.companyObject = companyObject;
+    public void setCompany(Object company) {
+        this.company = company;
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public boolean isDeveloper() {
@@ -147,22 +136,6 @@ public class InvolvedCompany implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("company")
-    public void setCompanyJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.company = jsonNode.asLong();
-        else
-            this.companyObject = new Gson().fromJson(jsonNode.toString(), Company.class);
-    }
-
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -174,21 +147,19 @@ public class InvolvedCompany implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         InvolvedCompany that = (InvolvedCompany) o;
         return id == that.id &&
-                company == that.company &&
-                game == that.game &&
                 isDeveloper == that.isDeveloper &&
                 isPorting == that.isPorting &&
                 isPublisher == that.isPublisher &&
                 isSupporting == that.isSupporting &&
                 createdAt == that.createdAt &&
                 updatedAt == that.updatedAt &&
-                Objects.equals(companyObject, that.companyObject) &&
-                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(company, that.company) &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(checksum, that.checksum);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, company, companyObject, game, gameObject, isDeveloper, isPorting, isPublisher, isSupporting, createdAt, updatedAt, checksum);
+        return Objects.hash(id, company, game, isDeveloper, isPorting, isPublisher, isSupporting, createdAt, updatedAt, checksum);
     }
 }

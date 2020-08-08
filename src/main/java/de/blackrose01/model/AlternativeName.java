@@ -1,25 +1,23 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AlternativeName implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
     private long id;
     @JsonIgnore
     @JsonProperty(value = "id")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "id")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "id")
     private String name;
@@ -41,19 +39,15 @@ public class AlternativeName implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public String getName() {
@@ -80,14 +74,6 @@ public class AlternativeName implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -99,8 +85,7 @@ public class AlternativeName implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         AlternativeName that = (AlternativeName) o;
         return id == that.id &&
-                game == that.game &&
-                Objects.equals(gameObject, that.gameObject) &&
+                Objects.equals(game, that.game) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(comment, that.comment) &&
                 Objects.equals(checksum, that.checksum);
@@ -108,6 +93,6 @@ public class AlternativeName implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, game, gameObject, name, comment, checksum);
+        return Objects.hash(id, game, name, comment, checksum);
     }
 }

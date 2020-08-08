@@ -1,15 +1,18 @@
 package de.blackrose01.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import de.blackrose01.model.game.Game;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Artwork implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "id")
@@ -22,10 +25,7 @@ public class Artwork implements Serializable {
     private boolean isAnimated;
     @JsonIgnore
     @JsonProperty(value = "game")
-    private long game;
-    @JsonIgnore
-    @JsonProperty(value = "game")
-    private Game gameObject;
+    private Object game;
     @JsonIgnore
     @JsonProperty(value = "height")
     private int height;
@@ -69,19 +69,15 @@ public class Artwork implements Serializable {
     }
 
     public long getGame() {
-        return game;
-    }
-
-    public void setGame(long game) {
-        this.game = game;
+        return Long.parseLong(String.valueOf(game));
     }
 
     public Game getGameObject() {
-        return gameObject;
+        return new ObjectMapper().convertValue(game, Game.class);
     }
 
-    public void setGameObject(Game gameObject) {
-        this.gameObject = gameObject;
+    public void setGame(Object game) {
+        this.game = game;
     }
 
     public int getHeight() {
@@ -124,14 +120,6 @@ public class Artwork implements Serializable {
         this.checksum = checksum;
     }
 
-    @JsonSetter("game")
-    public void setGameJson(JsonNode jsonNode) {
-        if (jsonNode.isInt() || jsonNode.isLong())
-            this.game = jsonNode.asLong();
-        else
-            this.gameObject = new Gson().fromJson(jsonNode.toString(), Game.class);
-    }
-
     @Override
     public String toString() {
         return new Gson().toJson(this);
@@ -145,10 +133,9 @@ public class Artwork implements Serializable {
         return id == artwork.id &&
                 isAlphaChannel == artwork.isAlphaChannel &&
                 isAnimated == artwork.isAnimated &&
-                game == artwork.game &&
                 height == artwork.height &&
                 width == artwork.width &&
-                Objects.equals(gameObject, artwork.gameObject) &&
+                Objects.equals(game, artwork.game) &&
                 Objects.equals(idImage, artwork.idImage) &&
                 Objects.equals(url, artwork.url) &&
                 Objects.equals(checksum, artwork.checksum);
@@ -156,6 +143,6 @@ public class Artwork implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, isAlphaChannel, isAnimated, game, gameObject, height, width, idImage, url, checksum);
+        return Objects.hash(id, isAlphaChannel, isAnimated, game, height, width, idImage, url, checksum);
     }
 }
