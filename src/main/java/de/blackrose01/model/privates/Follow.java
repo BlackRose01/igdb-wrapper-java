@@ -24,7 +24,8 @@ public class Follow implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Follow() {}
+    public Follow() {
+    }
 
     public long getId() {
         return id;

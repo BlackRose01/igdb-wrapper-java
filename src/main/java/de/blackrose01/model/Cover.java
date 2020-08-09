@@ -38,7 +38,8 @@ public class Cover implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Cover() {}
+    public Cover() {
+    }
 
     public long getId() {
         return id;

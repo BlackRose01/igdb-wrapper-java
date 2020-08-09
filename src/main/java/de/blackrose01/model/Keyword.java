@@ -35,7 +35,8 @@ public class Keyword implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Keyword() {}
+    public Keyword() {
+    }
 
     public long getId() {
         return id;

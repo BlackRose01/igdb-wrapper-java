@@ -30,7 +30,8 @@ public class Rate implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Rate() {}
+    public Rate() {
+    }
 
     public long getId() {
         return id;

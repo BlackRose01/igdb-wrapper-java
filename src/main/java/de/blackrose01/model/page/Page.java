@@ -84,7 +84,8 @@ public class Page implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Page() {}
+    public Page() {
+    }
 
     public long getId() {
         return id;
@@ -231,11 +232,13 @@ public class Page implements Serializable {
     }
 
     public List<Long> getWebsites() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<PageWebsite> getWebsitesObject() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<PageWebsite>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<PageWebsite>>() {
+        });
     }
 
     public void setWebsites(List<Object> websites) {

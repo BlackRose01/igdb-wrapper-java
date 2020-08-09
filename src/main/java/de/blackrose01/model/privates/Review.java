@@ -70,7 +70,8 @@ public class Review implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Review() {}
+    public Review() {
+    }
 
     public long getId() {
         return id;

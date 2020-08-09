@@ -26,7 +26,8 @@ public class PulseUrl implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PulseUrl() {}
+    public PulseUrl() {
+    }
 
     public long getId() {
         return id;

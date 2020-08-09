@@ -66,7 +66,8 @@ public class Company implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Company() {}
+    public Company() {
+    }
 
     public long getId() {
         return id;
@@ -125,11 +126,13 @@ public class Company implements Serializable {
     }
 
     public List<Long> getDeveloped() {
-        return new ObjectMapper().convertValue(developed, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(developed, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Game> getDevelopedObject() {
-        return new ObjectMapper().convertValue(developed, new TypeReference<List<Game>>(){});
+        return new ObjectMapper().convertValue(developed, new TypeReference<List<Game>>() {
+        });
     }
 
     public void setDeveloped(List<Object> developed) {
@@ -137,11 +140,13 @@ public class Company implements Serializable {
     }
 
     public List<Long> getPublished() {
-        return new ObjectMapper().convertValue(published, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(published, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Game> getPublishedObject() {
-        return new ObjectMapper().convertValue(published, new TypeReference<List<Game>>(){});
+        return new ObjectMapper().convertValue(published, new TypeReference<List<Game>>() {
+        });
     }
 
     public void setPublished(List<Object> published) {
@@ -181,11 +186,13 @@ public class Company implements Serializable {
     }
 
     public List<Long> getWebsites() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<CompanyWebsite> getWebsitesObject() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<CompanyWebsite>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<CompanyWebsite>>() {
+        });
     }
 
     public void setWebsites(List<Object> websites) {

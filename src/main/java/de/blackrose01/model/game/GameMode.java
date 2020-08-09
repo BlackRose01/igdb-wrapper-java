@@ -35,7 +35,8 @@ public class GameMode implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameMode() {}
+    public GameMode() {
+    }
 
     public long getId() {
         return id;

@@ -29,7 +29,8 @@ public class PlatformWebsite implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformWebsite() {}
+    public PlatformWebsite() {
+    }
 
     public long getId() {
         return id;

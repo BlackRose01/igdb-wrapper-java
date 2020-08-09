@@ -29,7 +29,8 @@ public class PageWebsite implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PageWebsite() {}
+    public PageWebsite() {
+    }
 
     public long getId() {
         return id;

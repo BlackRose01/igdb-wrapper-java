@@ -26,7 +26,8 @@ public class AgeRatingContentDescription implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public AgeRatingContentDescription() {}
+    public AgeRatingContentDescription() {
+    }
 
     public long getId() {
         return id;

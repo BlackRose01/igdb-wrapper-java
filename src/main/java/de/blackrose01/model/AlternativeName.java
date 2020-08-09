@@ -30,7 +30,8 @@ public class AlternativeName implements Serializable {
     @JsonProperty(value = "id")
     private String checksum;
 
-    public AlternativeName() {}
+    public AlternativeName() {
+    }
 
     public long getId() {
         return id;

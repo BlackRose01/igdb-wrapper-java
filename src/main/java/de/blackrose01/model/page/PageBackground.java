@@ -38,7 +38,8 @@ public class PageBackground implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PageBackground() {}
+    public PageBackground() {
+    }
 
     public long getId() {
         return id;

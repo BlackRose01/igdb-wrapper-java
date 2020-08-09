@@ -42,7 +42,8 @@ public class Artwork implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Artwork() {}
+    public Artwork() {
+    }
 
     public long getId() {
         return id;

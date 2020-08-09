@@ -47,7 +47,8 @@ public class GameEngine implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameEngine() {}
+    public GameEngine() {
+    }
 
     public long getId() {
         return id;
@@ -58,11 +59,13 @@ public class GameEngine implements Serializable {
     }
 
     public List<Long> getCompanies() {
-        return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Company> getCompaniesObject() {
-        return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>(){});
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>() {
+        });
     }
 
     public void setCompanies(List<Object> companies) {
@@ -86,11 +89,13 @@ public class GameEngine implements Serializable {
     }
 
     public List<Long> getPlatforms() {
-        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Platform> getPlatformsObject() {
-        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>(){});
+        return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>() {
+        });
     }
 
     public void setPlatforms(List<Object> platforms) {

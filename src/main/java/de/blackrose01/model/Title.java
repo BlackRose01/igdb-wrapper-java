@@ -41,7 +41,8 @@ public class Title implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Title() {}
+    public Title() {
+    }
 
     public long getId() {
         return id;
@@ -52,11 +53,13 @@ public class Title implements Serializable {
     }
 
     public List<Long> getGames() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Game> getGamesObject() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
+        });
     }
 
     public void setGames(List<Object> games) {

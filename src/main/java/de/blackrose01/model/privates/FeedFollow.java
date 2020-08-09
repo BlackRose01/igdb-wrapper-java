@@ -36,7 +36,8 @@ public class FeedFollow implements Serializable {
     @JsonProperty(value = "checksum")
     private long checksum;
 
-    public FeedFollow() {}
+    public FeedFollow() {
+    }
 
     public long getId() {
         return id;

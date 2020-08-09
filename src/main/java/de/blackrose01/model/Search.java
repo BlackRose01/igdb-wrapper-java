@@ -52,7 +52,8 @@ public class Search implements Serializable {
     @JsonProperty(value = "id")
     private String checksum;
 
-    public Search() {}
+    public Search() {
+    }
 
     public long getId() {
         return id;

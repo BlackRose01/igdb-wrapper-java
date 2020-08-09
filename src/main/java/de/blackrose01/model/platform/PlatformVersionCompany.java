@@ -30,7 +30,8 @@ public class PlatformVersionCompany implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformVersionCompany() {}
+    public PlatformVersionCompany() {
+    }
 
     public long getId() {
         return id;

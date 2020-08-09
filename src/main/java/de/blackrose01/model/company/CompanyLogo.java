@@ -38,7 +38,8 @@ public class CompanyLogo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public CompanyLogo() {}
+    public CompanyLogo() {
+    }
 
     public long getId() {
         return id;

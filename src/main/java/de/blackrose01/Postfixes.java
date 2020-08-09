@@ -34,6 +34,7 @@ public enum Postfixes {
 
     /**
      * return postfix/relational operator
+     *
      * @return
      */
     public String getPostfix() {
@@ -42,6 +43,7 @@ public enum Postfixes {
 
     /**
      * return comparator is requires
+     *
      * @return
      */
     public boolean isRequireComparator() {
@@ -50,6 +52,7 @@ public enum Postfixes {
 
     /**
      * return only numeric values accepted
+     *
      * @return
      */
     public boolean isOnlyNumeric() {

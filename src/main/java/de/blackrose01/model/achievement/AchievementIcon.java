@@ -38,7 +38,8 @@ public class AchievementIcon implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public AchievementIcon() {}
+    public AchievementIcon() {
+    }
 
     public long getId() {
         return id;

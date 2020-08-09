@@ -59,7 +59,8 @@ public class List implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public List() {}
+    public List() {
+    }
 
     public long getId() {
         return id;
@@ -134,11 +135,13 @@ public class List implements Serializable {
     }
 
     public java.util.List<Long> getListEntries() {
-        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<Long>>(){});
+        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<Long>>() {
+        });
     }
 
     public java.util.List<ListEntry> getListEntriesObject() {
-        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<ListEntry>>(){});
+        return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<ListEntry>>() {
+        });
     }
 
     public void setListEntries(java.util.List<Object> listEntries) {
@@ -146,11 +149,13 @@ public class List implements Serializable {
     }
 
     public java.util.List<Long> getListGames() {
-        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Long>>(){});
+        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Long>>() {
+        });
     }
 
     public java.util.List<Game> getListGamesObject() {
-        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Game>>(){});
+        return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Game>>() {
+        });
     }
 
     public void setListGames(java.util.List<Object> listGames) {
@@ -166,11 +171,13 @@ public class List implements Serializable {
     }
 
     public java.util.List<Long> getSimilarLists() {
-        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<Long>>(){});
+        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<Long>>() {
+        });
     }
 
     public java.util.List<List> getSimilarListsObject() {
-        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<List>>(){});
+        return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<List>>() {
+        });
     }
 
     public void setSimilarLists(java.util.List<Object> similarLists) {

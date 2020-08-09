@@ -37,7 +37,8 @@ public class GameVersionFeature implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameVersionFeature() {}
+    public GameVersionFeature() {
+    }
 
     public long getId() {
         return id;
@@ -80,11 +81,13 @@ public class GameVersionFeature implements Serializable {
     }
 
     public List<Long> getValues() {
-        return new ObjectMapper().convertValue(values, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(values, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<GameVersionFeatureValue> getValuesObject() {
-        return new ObjectMapper().convertValue(values, new TypeReference<List<GameVersionFeatureValue>>(){});
+        return new ObjectMapper().convertValue(values, new TypeReference<List<GameVersionFeatureValue>>() {
+        });
     }
 
     public void setValues(List<Object> values) {

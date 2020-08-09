@@ -35,7 +35,8 @@ public class ListEntry implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public ListEntry() {}
+    public ListEntry() {
+    }
 
     public long getId() {
         return id;

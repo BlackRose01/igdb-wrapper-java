@@ -37,7 +37,8 @@ public class AgeRating implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public AgeRating() {}
+    public AgeRating() {
+    }
 
     public long getId() {
         return id;
@@ -56,11 +57,13 @@ public class AgeRating implements Serializable {
     }
 
     public List<Long> getDescriptionsContent() {
-        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<AgeRatingContentDescription> getDescriptionsContentObject() {
-        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<AgeRatingContentDescription>>(){});
+        return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<AgeRatingContentDescription>>() {
+        });
     }
 
     public void setDescriptionsContent(List<Object> descriptionsContent) {

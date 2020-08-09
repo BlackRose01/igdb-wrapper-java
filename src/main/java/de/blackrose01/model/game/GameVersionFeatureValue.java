@@ -31,7 +31,8 @@ public class GameVersionFeatureValue implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameVersionFeatureValue() {}
+    public GameVersionFeatureValue() {
+    }
 
     public long getId() {
         return id;

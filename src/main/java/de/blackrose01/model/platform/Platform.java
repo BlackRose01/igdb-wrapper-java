@@ -53,7 +53,8 @@ public class Platform implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Platform() {}
+    public Platform() {
+    }
 
     public long getId() {
         return id;
@@ -116,11 +117,13 @@ public class Platform implements Serializable {
     }
 
     public List<Long> getVersions() {
-        return new ObjectMapper().convertValue(versions, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(versions, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<PlatformVersion> getVersionsObject() {
-        return new ObjectMapper().convertValue(versions, new TypeReference<List<PlatformVersion>>(){});
+        return new ObjectMapper().convertValue(versions, new TypeReference<List<PlatformVersion>>() {
+        });
     }
 
     public void setVersions(List<Object> versions) {
@@ -128,11 +131,13 @@ public class Platform implements Serializable {
     }
 
     public List<Long> getWebsites() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<PlatformWebsite> getWebsitesObject() {
-        return new ObjectMapper().convertValue(websites, new TypeReference<List<PlatformWebsite>>(){});
+        return new ObjectMapper().convertValue(websites, new TypeReference<List<PlatformWebsite>>() {
+        });
     }
 
     public void setWebsites(List<Object> websites) {

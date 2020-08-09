@@ -23,7 +23,8 @@ public class ReviewVideo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public ReviewVideo() {}
+    public ReviewVideo() {
+    }
 
     public long getId() {
         return id;

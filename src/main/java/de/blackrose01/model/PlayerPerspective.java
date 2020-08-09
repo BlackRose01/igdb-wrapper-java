@@ -35,7 +35,8 @@ public class PlayerPerspective implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlayerPerspective() {}
+    public PlayerPerspective() {
+    }
 
     public long getId() {
         return id;

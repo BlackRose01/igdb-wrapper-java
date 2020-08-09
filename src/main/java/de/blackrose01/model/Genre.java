@@ -35,7 +35,8 @@ public class Genre implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Genre() {}
+    public Genre() {
+    }
 
     public long getId() {
         return id;

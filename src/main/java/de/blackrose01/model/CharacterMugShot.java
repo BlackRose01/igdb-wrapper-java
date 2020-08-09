@@ -38,7 +38,8 @@ public class CharacterMugShot implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public CharacterMugShot() {}
+    public CharacterMugShot() {
+    }
 
     public long getId() {
         return id;

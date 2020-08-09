@@ -74,7 +74,8 @@ public class PlatformVersion implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformVersion() {}
+    public PlatformVersion() {
+    }
 
     public long getId() {
         return id;
@@ -85,11 +86,13 @@ public class PlatformVersion implements Serializable {
     }
 
     public List<Long> getCompanies() {
-        return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Company> getCompaniesObject() {
-        return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>(){});
+        return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>() {
+        });
     }
 
     public void setCompanies(List<Object> companies) {
@@ -189,11 +192,13 @@ public class PlatformVersion implements Serializable {
     }
 
     public List<Long> getPlatformVersionReleaseDates() {
-        return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<PlatformVersionReleaseDate> getPlatformVersionReleaseDatesObject() {
-        return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<PlatformVersionReleaseDate>>(){});
+        return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<PlatformVersionReleaseDate>>() {
+        });
     }
 
     public void setPlatformVersionReleaseDates(List<Object> platformVersionReleaseDates) {

@@ -19,7 +19,8 @@ public class ApiStatus implements Serializable {
     @JsonProperty(value = "usage_reports")
     private UsageReports usageReports;
 
-    public ApiStatus() {}
+    public ApiStatus() {
+    }
 
     public boolean isAuthorized() {
         return authorized;
@@ -58,7 +59,8 @@ public class ApiStatus implements Serializable {
         @JsonProperty(value = "usage_report")
         private UsageReport usageReport;
 
-        public UsageReports() {}
+        public UsageReports() {
+        }
 
         public UsageReport getUsageReport() {
             return usageReport;
@@ -98,7 +100,8 @@ public class ApiStatus implements Serializable {
         @JsonProperty(value = "current_value")
         private String valueCurrent;
 
-        public UsageReport() {}
+        public UsageReport() {
+        }
 
         public String getMetric() {
             return metric;

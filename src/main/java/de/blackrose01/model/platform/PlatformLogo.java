@@ -38,7 +38,8 @@ public class PlatformLogo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformLogo() {}
+    public PlatformLogo() {
+    }
 
     public long getId() {
         return id;

@@ -33,7 +33,8 @@ public class Website implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Website() {}
+    public Website() {
+    }
 
     public long getId() {
         return id;

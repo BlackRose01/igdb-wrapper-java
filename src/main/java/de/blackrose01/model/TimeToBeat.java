@@ -30,7 +30,8 @@ public class TimeToBeat implements Serializable {
     @JsonProperty(value = "hastly")
     private long hastly;
 
-    public TimeToBeat() {}
+    public TimeToBeat() {
+    }
 
     public long getId() {
         return id;

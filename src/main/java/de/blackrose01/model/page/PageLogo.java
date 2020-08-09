@@ -38,7 +38,8 @@ public class PageLogo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PageLogo() {}
+    public PageLogo() {
+    }
 
     public long getId() {
         return id;

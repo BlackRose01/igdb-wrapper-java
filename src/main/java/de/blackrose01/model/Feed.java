@@ -68,7 +68,8 @@ public class Feed implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Feed() {}
+    public Feed() {
+    }
 
     public long getId() {
         return id;
@@ -143,11 +144,13 @@ public class Feed implements Serializable {
     }
 
     public List<Long> getGames() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Game> getGamesObject() {
-        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>(){});
+        return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
+        });
     }
 
     public void setGames(List<Object> games) {

@@ -51,7 +51,8 @@ public class ReleaseDate implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public ReleaseDate() {}
+    public ReleaseDate() {
+    }
 
     public long getId() {
         return id;

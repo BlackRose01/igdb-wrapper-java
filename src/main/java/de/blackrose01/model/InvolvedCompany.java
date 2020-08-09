@@ -42,7 +42,8 @@ public class InvolvedCompany implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public InvolvedCompany() {}
+    public InvolvedCompany() {
+    }
 
     public long getId() {
         return id;

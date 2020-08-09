@@ -35,7 +35,8 @@ public class Theme implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Theme() {}
+    public Theme() {
+    }
 
     public long getId() {
         return id;

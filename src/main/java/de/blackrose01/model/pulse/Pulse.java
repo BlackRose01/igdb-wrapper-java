@@ -58,7 +58,8 @@ public class Pulse implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Pulse() {}
+    public Pulse() {
+    }
 
     public long getId() {
         return id;

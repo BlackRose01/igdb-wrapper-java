@@ -47,7 +47,8 @@ public class PlatformVersionReleaseDate implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PlatformVersionReleaseDate() {}
+    public PlatformVersionReleaseDate() {
+    }
 
     public long getId() {
         return id;

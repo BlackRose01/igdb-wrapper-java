@@ -20,10 +20,12 @@ public class Parameters {
     private String search = "";
     private String exclude = "";
 
-    public Parameters() {}
+    public Parameters() {
+    }
 
     /**
      * Add single ID as filter
+     *
      * @param id
      * @return
      */
@@ -34,6 +36,7 @@ public class Parameters {
 
     /**
      * Add a bunch of IDs as filter
+     *
      * @param id
      * @return
      */
@@ -49,6 +52,7 @@ public class Parameters {
 
     /**
      * Add a bunch of IDs as filter
+     *
      * @param id
      * @return
      */
@@ -58,6 +62,7 @@ public class Parameters {
 
     /**
      * Select the field to show in object
+     *
      * @param fields
      * @return
      */
@@ -68,6 +73,7 @@ public class Parameters {
 
     /**
      * Select the fields to show in objects
+     *
      * @param fields
      * @return
      */
@@ -78,6 +84,7 @@ public class Parameters {
 
     /**
      * Select the fields to show in objects
+     *
      * @param fields
      * @return
      */
@@ -86,7 +93,6 @@ public class Parameters {
     }
 
     /**
-     *
      * @param offset
      * @return
      */
@@ -104,6 +110,7 @@ public class Parameters {
     /**
      * Maximal size of objects in response
      * max value: 500, min value: 1
+     *
      * @param limit
      * @return
      */
@@ -120,6 +127,7 @@ public class Parameters {
 
     /**
      * sort response list by given field
+     *
      * @param field
      * @param descending
      * @return
@@ -136,6 +144,7 @@ public class Parameters {
     /**
      * search for given string in name field; sort by similarity
      * only for endpoints Character, Collection, Game, Platform, People Theme
+     *
      * @param endpoint
      * @param search
      * @return
@@ -156,6 +165,7 @@ public class Parameters {
 
     /**
      * exclude a field in response objects
+     *
      * @param field
      * @return
      */
@@ -166,6 +176,7 @@ public class Parameters {
 
     /**
      * set comparising filters
+     *
      * @param field
      * @param comparator
      * @param n
@@ -174,7 +185,7 @@ public class Parameters {
     public Parameters addFilter(String field, Postfixes comparator, Number n) {
         if (
                 (comparator.isRequireComparator() && comparator.isOnlyNumeric()) ||
-                (comparator.isRequireComparator() && comparator == Postfixes.Equal_Case_Sensitive)
+                        (comparator.isRequireComparator() && comparator == Postfixes.Equal_Case_Sensitive)
         )
             this.filters.add(field + comparator.getPostfix() + String.valueOf(n));
 
@@ -183,6 +194,7 @@ public class Parameters {
 
     /**
      * set comparising filters
+     *
      * @param field
      * @param comparator
      * @param s
@@ -191,8 +203,8 @@ public class Parameters {
     public Parameters addFilter(String field, Postfixes comparator, String s) {
         if (
                 !comparator.isOnlyNumeric() &&
-                s != null &&
-                comparator.isRequireComparator()
+                        s != null &&
+                        comparator.isRequireComparator()
         )
             this.filters.add(field + comparator.getPostfix() + s);
 
@@ -201,6 +213,7 @@ public class Parameters {
 
     /**
      * set comparising filters (only null checks)
+     *
      * @param field
      * @param comparator
      * @return
@@ -208,12 +221,13 @@ public class Parameters {
     public Parameters addFilterNull(String field, Postfixes comparator) {
         if (comparator == Postfixes.Is_Null || comparator == Postfixes.Not_Null)
             this.filters.add(field + comparator.getPostfix());
-        
+
         return this;
     }
 
     /**
      * set comparising filters
+     *
      * @param values
      * @param comparator
      * @return
@@ -231,6 +245,7 @@ public class Parameters {
 
     /**
      * set comparising filters
+     *
      * @param values
      * @param comparator
      * @return
@@ -241,6 +256,7 @@ public class Parameters {
 
     /**
      * delete all parameters
+     *
      * @return
      */
     public Parameters resetFilterAll() {
@@ -258,6 +274,7 @@ public class Parameters {
 
     /**
      * delete parameters for ID
+     *
      * @return
      */
     public Parameters resetFilterIds() {
@@ -267,6 +284,7 @@ public class Parameters {
 
     /**
      * delete filter parameters
+     *
      * @return
      */
     public Parameters resetFilterFilters() {
@@ -276,6 +294,7 @@ public class Parameters {
 
     /**
      * delete parameters for fields
+     *
      * @return
      */
     public Parameters resetFilterFields() {
@@ -285,6 +304,7 @@ public class Parameters {
 
     /**
      * delete parameters for ordering
+     *
      * @return
      */
     public Parameters resetFilterOrder() {
@@ -294,6 +314,7 @@ public class Parameters {
 
     /**
      * delete parameters for offset
+     *
      * @return
      */
     public Parameters resetFilterOffset() {
@@ -303,6 +324,7 @@ public class Parameters {
 
     /**
      * delete parameters for limit
+     *
      * @return
      */
     public Parameters resetFilterLimit() {
@@ -312,6 +334,7 @@ public class Parameters {
 
     /**
      * delete parameters for searching
+     *
      * @return
      */
     public Parameters resetFilterSearch() {
@@ -321,6 +344,7 @@ public class Parameters {
 
     /**
      * delete parameters for exluding fields
+     *
      * @return
      */
     public Parameters resetFilterExclude() {
@@ -330,6 +354,7 @@ public class Parameters {
 
     /**
      * build query string for request
+     *
      * @return
      */
     public String buildQuery() {

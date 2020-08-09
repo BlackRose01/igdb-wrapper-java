@@ -62,7 +62,8 @@ public class Achievement implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Achievement() {}
+    public Achievement() {
+    }
 
     public long getId() {
         return id;

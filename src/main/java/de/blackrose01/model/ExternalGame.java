@@ -45,7 +45,8 @@ public class ExternalGame implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public ExternalGame() {}
+    public ExternalGame() {
+    }
 
     public long getId() {
         return id;

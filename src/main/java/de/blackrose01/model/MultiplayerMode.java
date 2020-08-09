@@ -57,7 +57,8 @@ public class MultiplayerMode implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public MultiplayerMode() {}
+    public MultiplayerMode() {
+    }
 
     public long getId() {
         return id;

@@ -26,7 +26,8 @@ public class ProductFamily implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public ProductFamily() {}
+    public ProductFamily() {
+    }
 
     public long getId() {
         return id;

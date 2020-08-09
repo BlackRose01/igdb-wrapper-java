@@ -29,7 +29,8 @@ public class GameVideo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameVideo() {}
+    public GameVideo() {
+    }
 
     public long getId() {
         return id;

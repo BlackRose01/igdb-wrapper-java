@@ -42,7 +42,8 @@ public class Screenshot implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public Screenshot() {}
+    public Screenshot() {
+    }
 
     public long getId() {
         return id;

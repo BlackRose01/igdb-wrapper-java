@@ -33,6 +33,7 @@ public class IgdbWrapper {
 
     /**
      * general method to send requests
+     *
      * @param endpoint
      * @param parameters
      * @param httpMethod
@@ -47,7 +48,7 @@ public class IgdbWrapper {
 
         headers.add("user-key", this.apiKey);
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
+        headers.setAccept(Arrays.asList(new MediaType[]{MediaType.APPLICATION_JSON}));
 
         entity = new HttpEntity(parameters.buildQuery(), headers);
 
@@ -56,6 +57,7 @@ public class IgdbWrapper {
 
     /**
      * general method to send requests
+     *
      * @param endpoint
      * @param parameters
      * @param c
@@ -68,6 +70,7 @@ public class IgdbWrapper {
 
     /**
      * general method to send requests
+     *
      * @param endpoint
      * @param httpMethod
      * @param c
@@ -80,6 +83,7 @@ public class IgdbWrapper {
 
     /**
      * general method to send requests
+     *
      * @param endpoint
      * @param c
      * @param <T>

@@ -30,7 +30,8 @@ public class PulseSource implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PulseSource() {}
+    public PulseSource() {
+    }
 
     public long getId() {
         return id;

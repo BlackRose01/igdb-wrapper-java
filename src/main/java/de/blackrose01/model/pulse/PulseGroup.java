@@ -40,7 +40,8 @@ public class PulseGroup implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public PulseGroup() {}
+    public PulseGroup() {
+    }
 
     public long getId() {
         return id;
@@ -71,11 +72,13 @@ public class PulseGroup implements Serializable {
     }
 
     public List<Long> getPulses() {
-        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Long>>(){});
+        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Long>>() {
+        });
     }
 
     public List<Pulse> getPulsesObject() {
-        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Pulse>>(){});
+        return new ObjectMapper().convertValue(pulses, new TypeReference<List<Pulse>>() {
+        });
     }
 
     public void setPulses(List<Object> pulses) {

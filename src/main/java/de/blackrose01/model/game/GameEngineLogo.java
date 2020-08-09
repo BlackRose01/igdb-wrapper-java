@@ -38,7 +38,8 @@ public class GameEngineLogo implements Serializable {
     @JsonProperty(value = "checksum")
     private String checksum;
 
-    public GameEngineLogo() {}
+    public GameEngineLogo() {
+    }
 
     public long getId() {
         return id;
