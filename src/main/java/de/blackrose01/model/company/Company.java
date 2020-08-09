@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Video game companies. Both publishers & developers
+ * Video game companies. Both publishers and developers
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Company implements Serializable {
