@@ -37,8 +37,8 @@ jobs:
           draft: false
           prerelease: false
       - name: Upload Release Asset
-        # uses: actions/upload-artifact@v2
-        run: mvn -B package --file pom.xml
+        uses: actions/upload-artifact@v2
+        # run: mvn -B package --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
