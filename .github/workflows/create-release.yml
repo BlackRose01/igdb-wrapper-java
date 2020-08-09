@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: Publish to Nexus and create release on GitHub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
