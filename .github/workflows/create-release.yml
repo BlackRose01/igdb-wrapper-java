@@ -38,10 +38,10 @@ jobs:
           prerelease: false
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
-        # run: mvn -B package --file pom.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: igdb-wrapper-java-${{ github.ref }}
-          path: ${{ github.workspace }}/target
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          name: igdb-wrapper-java-${{ steps.create_release.outputs.tag_name }}
+          path: target/igdb-wrapper-java.*.jar
           if-no-files-found: warn
