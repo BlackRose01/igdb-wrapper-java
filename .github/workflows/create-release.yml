@@ -43,5 +43,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           name: igdb-wrapper-java-${{ steps.create_release.outputs.tag_name }}
-          path: ${{ github.workspace }}/target
+          path: target/igdb-wrapper-java.*.jar
           if-no-files-found: warn
