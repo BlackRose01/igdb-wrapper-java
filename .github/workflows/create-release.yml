@@ -31,7 +31,7 @@ jobs:
       #    MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
       #    MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
       - name: Release Maven package
-        uses: samuelmeuli/action-maven-publish@v1
+        uses: samuelmeuli/action-maven-publish@v1.4.0
         with:
           gpg_private_key: ${{ secrets.PGP_KEY_PRIVATE }}
           gpg_passphrase: ${{ secrets.PGP_KEY_PASSPHRASE }}
