@@ -25,7 +25,7 @@ public enum EndpointPrivate implements Endpoint {
     /**
      * return URI of endpoint
      *
-     * @return
+     * @return Endpoint URI
      */
     public String getUri() {
         return preUrl + uri;

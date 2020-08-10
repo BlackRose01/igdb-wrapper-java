@@ -27,7 +27,7 @@ public class Parameters {
      * Add single ID as filter
      *
      * @param id
-     * @return
+     * @return Parameters object
      */
     public Parameters addId(long id) {
         this.ids = "id = (" + String.valueOf(id) + ")";
@@ -38,7 +38,7 @@ public class Parameters {
      * Add a bunch of IDs as filter
      *
      * @param id
-     * @return
+     * @return Parameters object
      */
     public Parameters addId(long[] id) {
         String[] ids = new String[id.length];
@@ -54,7 +54,7 @@ public class Parameters {
      * Add a bunch of IDs as filter
      *
      * @param id
-     * @return
+     * @return Parameters object
      */
     public Parameters addId(List<Long> id) {
         return this.addId(long[].class.cast(id.toArray()));
@@ -64,7 +64,7 @@ public class Parameters {
      * Select the field to show in object
      *
      * @param fields
-     * @return
+     * @return Parameters object
      */
     public Parameters addFields(String fields) {
         this.fields = "fields " + fields.replace(" ", ",").toLowerCase();
@@ -75,7 +75,7 @@ public class Parameters {
      * Select the fields to show in objects
      *
      * @param fields
-     * @return
+     * @return Parameters object
      */
     public Parameters addFields(String[] fields) {
         this.fields = "fields " + String.join(",", fields).toLowerCase();
@@ -86,7 +86,7 @@ public class Parameters {
      * Select the fields to show in objects
      *
      * @param fields
-     * @return
+     * @return Parameters object
      */
     public Parameters addFields(List<String> fields) {
         return addFields(fields.toArray(new String[fields.size()]));
@@ -94,7 +94,7 @@ public class Parameters {
 
     /**
      * @param offset
-     * @return
+     * @return Parameters object
      */
     public Parameters addOffset(int offset) {
         if (offset < 1)
@@ -112,7 +112,7 @@ public class Parameters {
      * max value: 500, min value: 1
      *
      * @param limit
-     * @return
+     * @return Parameters object
      */
     public Parameters addLimit(int limit) {
         if (limit < 1)
@@ -130,7 +130,7 @@ public class Parameters {
      *
      * @param field
      * @param descending
-     * @return
+     * @return Parameters object
      */
     public Parameters addOrder(String field, boolean descending) {
         if (descending)
@@ -147,7 +147,7 @@ public class Parameters {
      *
      * @param endpoint
      * @param search
-     * @return
+     * @return Parameters object
      */
     public Parameters addSearch(Endpoint endpoint, String search) {
         if (
@@ -167,7 +167,7 @@ public class Parameters {
      * exclude a field in response objects
      *
      * @param field
-     * @return
+     * @return Parameters object
      */
     public Parameters addExclude(String field) {
         this.exclude = "exclude = " + field;
@@ -180,7 +180,7 @@ public class Parameters {
      * @param field
      * @param comparator
      * @param n
-     * @return
+     * @return Parameters object
      */
     public Parameters addFilter(String field, Postfixes comparator, Number n) {
         if (
@@ -198,7 +198,7 @@ public class Parameters {
      * @param field
      * @param comparator
      * @param s
-     * @return
+     * @return Parameters object
      */
     public Parameters addFilter(String field, Postfixes comparator, String s) {
         if (
@@ -216,7 +216,7 @@ public class Parameters {
      *
      * @param field
      * @param comparator
-     * @return
+     * @return Parameters object
      */
     public Parameters addFilterNull(String field, Postfixes comparator) {
         if (comparator == Postfixes.Is_Null || comparator == Postfixes.Not_Null)
@@ -230,7 +230,7 @@ public class Parameters {
      *
      * @param values
      * @param comparator
-     * @return
+     * @return Parameters object
      */
     public Parameters addFilter(String[] values, Postfixes comparator) {
         if (
@@ -248,7 +248,7 @@ public class Parameters {
      *
      * @param values
      * @param comparator
-     * @return
+     * @return Parameters object
      */
     public Parameters addFilter(List<String> values, Postfixes comparator) {
         return this.addFilter(values.toArray(new String[values.size()]), comparator);
@@ -257,7 +257,7 @@ public class Parameters {
     /**
      * delete all parameters
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterAll() {
         this.filters = new ArrayList<String>();
@@ -275,7 +275,7 @@ public class Parameters {
     /**
      * delete parameters for ID
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterIds() {
         this.ids = "";
@@ -285,7 +285,7 @@ public class Parameters {
     /**
      * delete filter parameters
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterFilters() {
         this.filters = new ArrayList<>();
@@ -295,7 +295,7 @@ public class Parameters {
     /**
      * delete parameters for fields
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterFields() {
         this.fields = "fields *";
@@ -305,7 +305,7 @@ public class Parameters {
     /**
      * delete parameters for ordering
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterOrder() {
         this.order = "";
@@ -315,7 +315,7 @@ public class Parameters {
     /**
      * delete parameters for offset
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterOffset() {
         this.offset = "";
@@ -325,7 +325,7 @@ public class Parameters {
     /**
      * delete parameters for limit
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterLimit() {
         this.limit = "";
@@ -335,7 +335,7 @@ public class Parameters {
     /**
      * delete parameters for searching
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterSearch() {
         this.search = "";
@@ -345,7 +345,7 @@ public class Parameters {
     /**
      * delete parameters for exluding fields
      *
-     * @return
+     * @return Parameters object
      */
     public Parameters resetFilterExclude() {
         this.exclude = "";
@@ -355,7 +355,7 @@ public class Parameters {
     /**
      * build query string for request
      *
-     * @return
+     * @return parameterized query string
      */
     public String buildQuery() {
         String query = fields + ";";

@@ -69,7 +69,7 @@ public enum EndpointPublic implements Endpoint {
     /**
      * returns URI of endpoint
      *
-     * @return
+     * @return uri
      */
     public String getUri() {
         return uri;

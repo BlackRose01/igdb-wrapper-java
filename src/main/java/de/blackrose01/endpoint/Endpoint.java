@@ -7,14 +7,14 @@ public interface Endpoint {
     /**
      * should return URI of endpoint
      *
-     * @return
+     * @return endpoint URI
      */
     String getUri();
 
     /**
      * should return stringified object
      *
-     * @return
+     * @return stringified endpoint object
      */
     String toString();
 }

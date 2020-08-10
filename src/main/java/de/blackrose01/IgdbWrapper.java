@@ -38,8 +38,7 @@ public class IgdbWrapper {
      * @param parameters
      * @param httpMethod
      * @param c
-     * @param <T>
-     * @return
+     * @return api response
      */
     public <T> T sendRequest(Endpoint endpoint, Parameters parameters, HttpMethod httpMethod, Class<T> c) {
         RestTemplate restTemplate = new RestTemplate();
@@ -62,7 +61,7 @@ public class IgdbWrapper {
      * @param parameters
      * @param c
      * @param <T>
-     * @return
+     * @return api response
      */
     public <T> T sendRequest(Endpoint endpoint, Parameters parameters, Class<T> c) {
         return this.sendRequest(endpoint, parameters, HttpMethod.GET, c);
@@ -75,7 +74,7 @@ public class IgdbWrapper {
      * @param httpMethod
      * @param c
      * @param <T>
-     * @return
+     * @return api response
      */
     public <T> T sendRequest(Endpoint endpoint, HttpMethod httpMethod, Class<T> c) {
         return this.sendRequest(endpoint, new Parameters(), httpMethod, c);
@@ -87,7 +86,7 @@ public class IgdbWrapper {
      * @param endpoint
      * @param c
      * @param <T>
-     * @return
+     * @return api response
      */
     public <T> T sendRequest(Endpoint endpoint, Class<T> c) {
         return this.sendRequest(endpoint, new Parameters(), HttpMethod.GET, c);
