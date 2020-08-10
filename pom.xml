@@ -159,10 +159,8 @@
                             <goal>sign</goal>
                         </goals>
                         <configuration>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <keyname>${gpg.keyname}</keyname>
-                            <!--suppress UnresolvedMavenProperty -->
-                            <passphraseServerId>${gpg.keyname}</passphraseServerId>
+                            <keyname>${gpg.passphrase}</keyname>
+                            <passphraseServerId>${gpg.passphrase}</passphraseServerId>
                         </configuration>
                     </execution>
                 </executions>
