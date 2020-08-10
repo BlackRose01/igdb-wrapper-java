@@ -33,8 +33,8 @@ jobs:
       - name: Release Maven package
         uses: samuelmeuli/action-maven-publish@v1
         with:
-          gpg_private_key: ${{ secrets.PGP_KEY_ID }}
-          gpg_passphrase: ${{ secrets.PGP_KEY_PRIVATE }}
+          gpg_private_key: ${{ secrets.PGP_KEY_PRIVATE }}
+          gpg_passphrase: ${{ secrets.PGP_KEY_PASSPHRASE }}
           nexus_username: ${{ secrets.OSSRH_USERNAME }}
           nexus_password: ${{ secrets.OSSRH_TOKEN }}
       - name: Publish to GitHub Packages
