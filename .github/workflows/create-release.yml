@@ -20,11 +20,18 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+      - name: Create settings.xml
+        uses: whelk-io/maven-settings-xml-action@v10
+        with:
+          servers: '[{ "id": "ossrh", "${{ secrets.OSSRH_USERNAME }}": "some.user", "password": "${{ secrets.OSSRH_TOKEN }}" }, {"id": "pgp.passphrases", "passphrase": "", "privateKey": ""}]'
+          profiles: '[{"activation": {"activeByDefault": true}, "properties": {"gpg.keyname": "gpg.passphrase"}}]'
       - name: Publish to Nexus Repository Manager
         run: mvn -B deploy
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_TOKEN }}
+      - name: Publish to GitHub Packages
+        run: mvn deploy -Dregistry=https://maven.pkg.github.com/BlackRose01 -Dtoken=${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -43,5 +50,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           name: igdb-wrapper-java-${{ steps.create_release.outputs.tag_name }}
-          path: target/igdb-wrapper-java.*.jar
+          path: target/igdb-wrapper-java*.jar
           if-no-files-found: warn
