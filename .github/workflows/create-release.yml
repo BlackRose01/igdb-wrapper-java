@@ -20,11 +20,6 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-      #- name: Create settings.xml
-      #  uses: whelk-io/maven-settings-xml-action@v10
-      #  with:
-      #    servers: '[{ "id": "ossrh", "username": "${{ secrets.OSSRH_USERNAME }}", "password": "${{ secrets.OSSRH_TOKEN }}" }, {"id": "pgp.passphrases", "passphrase": "${{ secrets.PGP_KEY_PASSPHRASE }}", "privateKey": "${{ secrets.PGP_KEY_PRIVATE }}"}]'
-      #    profiles: '[{"activation": {"activeByDefault": true}, "properties": {"gpg.executable": true, "gpg.keyname": "gpg.passphrase"}}]'
       #- name: Publish to Nexus Repository Manager
       #  run: mvn -B deploy
       #  env:
@@ -33,11 +28,10 @@ jobs:
       - name: Release Maven package
         uses: samuelmeuli/action-maven-publish@v1.4.0
         with:
-          gpg_private_key: ${{ PGP_KEY_PRIVATE }}
-          gpg_passphrase: ${{ PGP_KEY_PASSPHRASE }}
+          gpg_private_key: ${{ secrets.PGP_KEY_PRIVATE }}
+          gpg_passphrase: ${{ secrets.PGP_KEY_PASSPHRASE }}
           nexus_username: ${{ secrets.OSSRH_USERNAME }}
           nexus_password: ${{ secrets.OSSRH_TOKEN }}
-          maven_profiles: deploy, verify
           #maven_args: -X
       #- name: Publish to GitHub Packages
       #  run: mvn deploy -Dregistry=https://maven.pkg.github.com/BlackRose01 -Dtoken=${{ secrets.GITHUB_TOKEN }}
