@@ -118,7 +118,9 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
+                                    <!--suppress UnresolvedMavenProperty -->
                                     <keyname>${gpg.passphrase}</keyname>
+                                    <!--suppress UnresolvedMavenProperty -->
                                     <passphraseServerId>${gpg.passphrase}</passphraseServerId>
                                     <!-- Prevent `gpg` from using pinentry programs -->
                                     <gpgArguments>
