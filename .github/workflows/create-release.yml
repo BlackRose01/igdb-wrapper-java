@@ -20,11 +20,11 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
-      #- name: Create settings.xml
-      #  uses: whelk-io/maven-settings-xml-action@v10
-      #  with:
-      #    servers: '[{ "id": "ossrh", "username": "${{ secrets.OSSRH_USERNAME }}", "password": "${{ secrets.OSSRH_TOKEN }}" }, {"id": "pgp.passphrases", "passphrase": "${{ secrets.PGP_KEY_PASSPHRASE }}", "privateKey": "${{ secrets.PGP_KEY_PRIVATE }}"}]'
-      #    profiles: '[{"activation": {"activeByDefault": true}, "properties": {"gpg.executable": true, "gpg.keyname": "gpg.passphrase"}}]'
+      - name: Create settings.xml
+        uses: whelk-io/maven-settings-xml-action@v10
+        with:
+          servers: '[{ "id": "ossrh", "username": "${{ secrets.OSSRH_USERNAME }}", "password": "${{ secrets.OSSRH_TOKEN }}" }, {"id": "pgp.passphrases", "passphrase": "${{ secrets.PGP_KEY_PASSPHRASE }}", "privateKey": "${{ secrets.PGP_KEY_PRIVATE }}"}]'
+          profiles: '[{"activation": {"activeByDefault": true}, "properties": {"gpg.executable": true, "gpg.keyname": "gpg.passphrase"}}]'
       #- name: Publish to Nexus Repository Manager
       #  run: mvn -B deploy
       #  env:
