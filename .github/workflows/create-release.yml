@@ -37,6 +37,7 @@ jobs:
           gpg_passphrase: ${{ secrets.PGP_KEY_PASSPHRASE }}
           nexus_username: ${{ secrets.OSSRH_USERNAME }}
           nexus_password: ${{ secrets.OSSRH_TOKEN }}
+          maven_args: -X
       #- name: Publish to GitHub Packages
       #  run: mvn deploy -Dregistry=https://maven.pkg.github.com/BlackRose01 -Dtoken=${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
