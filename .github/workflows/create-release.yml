@@ -40,13 +40,11 @@ jobs:
       #    prerelease: false
       - name: Create package
         run: mvn clean package
-      - name: List Directory
-        run: ls target
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           name: igdb-wrapper-java.jar
-          path: target/?.jar
+          path: target/igdb-wrapper-java-?.jar
           if-no-files-found: warn
