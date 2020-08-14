@@ -39,13 +39,12 @@ jobs:
           draft: false
           prerelease: false
       - name: List Directory
-        run: ls
+        run: echo ${{ github.workspace }}
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-        #  upload_url: ${{ steps.create_release.outputs.upload_url }}
-          name: igdb-wrapper-java-${{ steps.create_release.outputs.tag_name }}
+          name: igdb-wrapper-java.jar
           path: target/?.jar
           if-no-files-found: warn
