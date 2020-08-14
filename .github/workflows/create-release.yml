@@ -38,6 +38,8 @@ jobs:
           body: ${{ github.event.commits[0].message }}
           draft: false
           prerelease: false
+      - name: List Directory
+        run: ls
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
         env:
