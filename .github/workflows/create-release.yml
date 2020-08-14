@@ -54,6 +54,7 @@ jobs:
       - name: Get path from artifacts
         run: |
           ARTIFACT_PATH=$(ls target/*.jar | head -n 1)
+          echo $ARTIFACT_PATH
           ARTIFACT_NAME=$(basename -- $ARTIFACT_PATHNAME)
           echo ::set-env name=ARTIFACT_PATH::${ARTIFACT_PATH}
           echo ::set-env name=ARTIFACT_NAME::${ARTIFACT_NAME}
