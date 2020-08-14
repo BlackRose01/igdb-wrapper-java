@@ -41,7 +41,7 @@ jobs:
       - name: Create package
         run: mvn clean package
       - name: List Directory
-        run: ls
+        run: ls target
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
         env:
