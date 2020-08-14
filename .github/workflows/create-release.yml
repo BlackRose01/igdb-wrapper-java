@@ -52,9 +52,9 @@ jobs:
           draft: false
           prerelease: false
       - name: Get Artifacts
-        run: |
-          echo ::set-env name=ARTIFACT_PATH::$(ls target/*.jar | head -n 1)
-          echo ::set-env name=ARTIFACT_NAME::$(basename $ARTIFACT_PATH)
+          run: |
+            echo ::set-env name=ARTIFACT_PATH::$(ls target/*.jar | head -n 1)
+            echo ::set-env name=ARTIFACT_NAME::$(basename $ARTIFACT_PATH)
       - name: Upload Release Asset
           id: upload-release-asset
           uses: actions/upload-release-asset@v1
