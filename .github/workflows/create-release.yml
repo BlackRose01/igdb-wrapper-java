@@ -38,6 +38,8 @@ jobs:
           body: ${{ github.event.commits[0].message }}
           draft: false
           prerelease: false
+      - name: Create package
+        run: mvn clean package
       - name: List Directory
         run: echo ${{ github.workspace }}
       - name: Upload Release Asset
