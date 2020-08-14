@@ -40,21 +40,28 @@ jobs:
           server-id: ossrh
       - name: Create package
         run: mvn clean package
-      #- name: Create Release
-      #  id: create_release
-      #  uses: actions/create-release@v1
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  with:
-      #    tag_name: ${{ github.ref }}
-      #    release_name: Release ${{ github.ref }}
-      #    body: ${{ github.event.commits[0].message }}
-      #    draft: false
-      #    prerelease: false
-      - name: Upload Release Asset
-        uses: actions/upload-artifact@v2
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: '${{ github.workspace }}/target/?.jar'
-          if-no-files-found: error
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ github.event.commits[0].message }}
+          draft: false
+          prerelease: false
+      - name: Get Artifacts
+        run: |
+          echo ::set-env name=ARTIFACT_PATH::$(ls target/*.jar | head -n 1)
+          echo ::set-env name=ARTIFACT_NAME::$(basename $ARTIFACT_PATH)
+      - name: Upload Release Asset
+          id: upload-release-asset
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+            asset_path: ${{ env.ARTIFACT_PATH }}
+            asset_name: ${{ env.ARTIFACT_NAME }}
+            asset_content_type: application/java-archive
