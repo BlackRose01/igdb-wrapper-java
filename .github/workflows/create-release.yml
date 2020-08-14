@@ -56,5 +56,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          path: '${{ github.workspace }}target/igdb-wrapper-java?.jar'
+          path: '${{ github.workspace }}/target/igdb-wrapper-java?.jar'
           if-no-files-found: error
