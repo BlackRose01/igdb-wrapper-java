@@ -27,21 +27,21 @@ jobs:
       #    gpg_passphrase: ${{ secrets.PGP_KEY_PASSPHRASE }}
       #    nexus_username: ${{ secrets.OSSRH_USERNAME }}
       #    nexus_password: ${{ secrets.OSSRH_TOKEN }}
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ github.event.commits[0].message }}
-          draft: false
-          prerelease: false
+      #- name: Create Release
+      #  id: create_release
+      #  uses: actions/create-release@v1
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  with:
+      #    tag_name: ${{ github.ref }}
+      #    release_name: Release ${{ github.ref }}
+      #    body: ${{ github.event.commits[0].message }}
+      #    draft: false
+      #    prerelease: false
       - name: Create package
         run: mvn clean package
       - name: List Directory
-        run: echo ${{ github.workspace }}
+        run: ls
       - name: Upload Release Asset
         uses: actions/upload-artifact@v2
         env:
