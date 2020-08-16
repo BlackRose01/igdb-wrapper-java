@@ -54,9 +54,8 @@ public class Page implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "page_follows_count")
     private int pageFollowsCount;
-    @JsonIgnore
     @JsonProperty(value = "page_logo")
-    private long pageLogo;
+    private Object pageLogo;
     @JsonIgnore
     @JsonProperty(value = "url")
     private String url;
@@ -207,8 +206,14 @@ public class Page implements Serializable {
         this.pageFollowsCount = pageFollowsCount;
     }
 
+    @JsonIgnore
     public long getPageLogo() {
-        return pageLogo;
+        return Long.parseLong(String.valueOf(pageLogo));
+    }
+
+    @JsonIgnore
+    public PageLogo getPageLogoObject() {
+        return new ObjectMapper().convertValue(pageLogo, PageLogo.class);
     }
 
     public void setPageLogo(long pageLogo) {
