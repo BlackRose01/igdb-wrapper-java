@@ -129,10 +129,12 @@ public class Review implements Serializable {
         this.pointsNegative = pointsNegative;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }
@@ -181,10 +183,12 @@ public class Review implements Serializable {
         this.user = user;
     }
 
+    @JsonIgnore
     public long getUserRating() {
         return Long.parseLong(String.valueOf(userRating));
     }
 
+    @JsonIgnore
     public Rate getUserRatingObject() {
         return new ObjectMapper().convertValue(userRating, Rate.class);
     }
@@ -201,10 +205,12 @@ public class Review implements Serializable {
         this.views = views;
     }
 
+    @JsonIgnore
     public long getPlatform() {
         return Long.parseLong(String.valueOf(platform));
     }
 
+    @JsonIgnore
     public Platform getPlatformObject() {
         return new ObjectMapper().convertValue(platform, Platform.class);
     }
@@ -213,10 +219,12 @@ public class Review implements Serializable {
         this.platform = platform;
     }
 
+    @JsonIgnore
     public long getVideo() {
         return Long.parseLong(String.valueOf(video));
     }
 
+    @JsonIgnore
     public ReviewVideo getVideoObject() {
         return new ObjectMapper().convertValue(video, ReviewVideo.class);
     }

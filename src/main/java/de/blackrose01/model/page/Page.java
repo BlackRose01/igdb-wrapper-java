@@ -94,10 +94,12 @@ public class Page implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getBackground() {
         return Long.parseLong(String.valueOf(background));
     }
 
+    @JsonIgnore
     public PageBackground getBackgroundObject() {
         return new ObjectMapper().convertValue(background, PageBackground.class);
     }
@@ -146,10 +148,12 @@ public class Page implements Serializable {
         this.battlenet = battlenet;
     }
 
+    @JsonIgnore
     public long getCompany() {
         return Long.parseLong(String.valueOf(company));
     }
 
+    @JsonIgnore
     public Company getCompanyObject() {
         return new ObjectMapper().convertValue(company, Company.class);
     }
@@ -158,10 +162,12 @@ public class Page implements Serializable {
         this.company = company;
     }
 
+    @JsonIgnore
     public long getFeed() {
         return Long.parseLong(String.valueOf(feed));
     }
 
+    @JsonIgnore
     public Feed getFeedObject() {
         return new ObjectMapper().convertValue(feed, Feed.class);
     }
@@ -170,10 +176,12 @@ public class Page implements Serializable {
         this.feed = feed;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }
@@ -236,11 +244,13 @@ public class Page implements Serializable {
         this.user = user;
     }
 
+    @JsonIgnore
     public List<Long> getWebsites() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<PageWebsite> getWebsitesObject() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<PageWebsite>>() {
         });

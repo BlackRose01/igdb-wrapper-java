@@ -176,10 +176,12 @@ public class Game implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public Long getCollection() {
         return Long.parseLong(String.valueOf(collection));
     }
 
+    @JsonIgnore
     public Collection getCollectionObject() {
         return new ObjectMapper().convertValue(collection, Collection.class);
     }
@@ -188,10 +190,12 @@ public class Game implements Serializable {
         this.collection = collection;
     }
 
+    @JsonIgnore
     public Long getCover() {
         return Long.parseLong(String.valueOf(cover));
     }
 
+    @JsonIgnore
     public Cover getCoverObject() {
         return new ObjectMapper().convertValue(cover, Cover.class);
     }
@@ -208,11 +212,13 @@ public class Game implements Serializable {
         this.storyline = storyline;
     }
 
+    @JsonIgnore
     public List<Long> getExternalGames() {
         return new ObjectMapper().convertValue(externalGames, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<ExternalGame> getExternalGamesObject() {
         return new ObjectMapper().convertValue(externalGames, new TypeReference<List<ExternalGame>>() {
         });
@@ -230,11 +236,13 @@ public class Game implements Serializable {
         this.firstReleaseDate = firstReleaseDate;
     }
 
+    @JsonIgnore
     public List<Long> getGameModes() {
         return new ObjectMapper().convertValue(gameModes, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<GameMode> getGameModesObject() {
         return new ObjectMapper().convertValue(gameModes, new TypeReference<List<GameMode>>() {
         });
@@ -244,11 +252,13 @@ public class Game implements Serializable {
         this.gameModes = gameModes;
     }
 
+    @JsonIgnore
     public List<Long> getKeywords() {
         return new ObjectMapper().convertValue(keywords, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Keyword> getKeywordsObject() {
         return new ObjectMapper().convertValue(keywords, new TypeReference<List<Keyword>>() {
         });
@@ -258,11 +268,13 @@ public class Game implements Serializable {
         this.keywords = keywords;
     }
 
+    @JsonIgnore
     public List<Long> getPlatforms() {
         return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Platform> getPlatformsObject() {
         return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>() {
         });
@@ -288,11 +300,13 @@ public class Game implements Serializable {
         this.pulseCount = pulseCount;
     }
 
+    @JsonIgnore
     public List<Long> getReleaseDates() {
         return new ObjectMapper().convertValue(releaseDates, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<ReleaseDate> getReleaseDatesObject() {
         return new ObjectMapper().convertValue(releaseDates, new TypeReference<List<ReleaseDate>>() {
         });
@@ -302,11 +316,13 @@ public class Game implements Serializable {
         this.releaseDates = releaseDates;
     }
 
+    @JsonIgnore
     public List<Long> getGamesSimilar() {
         return new ObjectMapper().convertValue(gamesSimilar, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getGamesSimilarObject() {
         return new ObjectMapper().convertValue(gamesSimilar, new TypeReference<List<Game>>() {
         });
@@ -340,11 +356,13 @@ public class Game implements Serializable {
         this.tags = tags;
     }
 
+    @JsonIgnore
     public List<Long> getThemes() {
         return new ObjectMapper().convertValue(themes, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Theme> getThemesObject() {
         return new ObjectMapper().convertValue(themes, new TypeReference<List<Theme>>() {
         });
@@ -362,11 +380,13 @@ public class Game implements Serializable {
         this.url = url;
     }
 
+    @JsonIgnore
     public List<Long> getVideos() {
         return new ObjectMapper().convertValue(videos, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<GameVideo> getVideosObject() {
         return new ObjectMapper().convertValue(videos, new TypeReference<List<GameVideo>>() {
         });
@@ -376,11 +396,13 @@ public class Game implements Serializable {
         this.videos = videos;
     }
 
+    @JsonIgnore
     public List<Long> getWebsites() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Website> getWebsitesObject() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<Website>>() {
         });
@@ -404,11 +426,13 @@ public class Game implements Serializable {
         this.gameParent = gameParent;
     }
 
+    @JsonIgnore
     public List<Long> getRatingsAge() {
         return new ObjectMapper().convertValue(ratingsAge, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<AgeRating> getRatingsAgeObject() {
         return new ObjectMapper().convertValue(ratingsAge, new TypeReference<List<AgeRating>>() {
         });
@@ -434,11 +458,13 @@ public class Game implements Serializable {
         this.ratingCount = ratingCount;
     }
 
+    @JsonIgnore
     public List<Long> getScreenshots() {
         return new ObjectMapper().convertValue(screenshots, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Screenshot> getScreenshotsObject() {
         return new ObjectMapper().convertValue(screenshots, new TypeReference<List<Screenshot>>() {
         });
@@ -448,11 +474,13 @@ public class Game implements Serializable {
         this.screenshots = screenshots;
     }
 
+    @JsonIgnore
     public List<Long> getModesMultiplayer() {
         return new ObjectMapper().convertValue(modesMultiplayer, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<MultiplayerMode> getModesMultiplayerObject() {
         return new ObjectMapper().convertValue(modesMultiplayer, new TypeReference<List<MultiplayerMode>>() {
         });
@@ -462,11 +490,13 @@ public class Game implements Serializable {
         this.modesMultiplayer = modesMultiplayer;
     }
 
+    @JsonIgnore
     public List<Long> getCompaniesInvolved() {
         return new ObjectMapper().convertValue(companiesInvolved, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<InvolvedCompany> getCompaniesInvolvedObject() {
         return new ObjectMapper().convertValue(companiesInvolved, new TypeReference<List<InvolvedCompany>>() {
         });
@@ -476,11 +506,13 @@ public class Game implements Serializable {
         this.companiesInvolved = companiesInvolved;
     }
 
+    @JsonIgnore
     public List<Long> getGenres() {
         return new ObjectMapper().convertValue(genres, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Genre> getGenresObject() {
         return new ObjectMapper().convertValue(genres, new TypeReference<List<Genre>>() {
         });
@@ -490,11 +522,13 @@ public class Game implements Serializable {
         this.genres = genres;
     }
 
+    @JsonIgnore
     public List<Long> getGameEngines() {
         return new ObjectMapper().convertValue(gameEngines, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<GameEngine> getGameEnginesObject() {
         return new ObjectMapper().convertValue(gameEngines, new TypeReference<List<GameEngine>>() {
         });
@@ -504,11 +538,13 @@ public class Game implements Serializable {
         this.gameEngines = gameEngines;
     }
 
+    @JsonIgnore
     public List<Long> getFranchises() {
         return new ObjectMapper().convertValue(franchises, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Franchise> getFranchisesObject() {
         return new ObjectMapper().convertValue(franchises, new TypeReference<List<Franchise>>() {
         });
@@ -518,11 +554,13 @@ public class Game implements Serializable {
         this.franchises = franchises;
     }
 
+    @JsonIgnore
     public List<Long> getArtworks() {
         return new ObjectMapper().convertValue(artworks, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Artwork> getArtworksObject() {
         return new ObjectMapper().convertValue(artworks, new TypeReference<List<Artwork>>() {
         });
@@ -532,11 +570,13 @@ public class Game implements Serializable {
         this.artworks = artworks;
     }
 
+    @JsonIgnore
     public List<Long> getBundles() {
         return new ObjectMapper().convertValue(bundles, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getBundlesObject() {
         return new ObjectMapper().convertValue(bundles, new TypeReference<List<Game>>() {
         });
@@ -546,10 +586,12 @@ public class Game implements Serializable {
         this.bundles = bundles;
     }
 
+    @JsonIgnore
     public long getFranchise() {
         return Long.parseLong(String.valueOf(franchise));
     }
 
+    @JsonIgnore
     public Franchise getFranchiseObject() {
         return new ObjectMapper().convertValue(franchise, Franchise.class);
     }
@@ -574,10 +616,12 @@ public class Game implements Serializable {
         this.follows = follows;
     }
 
+    @JsonIgnore
     public long getTimeToBeat() {
         return Long.parseLong(String.valueOf(timeToBeat));
     }
 
+    @JsonIgnore
     public TimeToBeat getTimeToBeatObject() {
         return new ObjectMapper().convertValue(franchise, TimeToBeat.class);
     }
@@ -586,11 +630,13 @@ public class Game implements Serializable {
         this.timeToBeat = timeToBeat;
     }
 
+    @JsonIgnore
     public List<Long> getExpansions() {
         return new ObjectMapper().convertValue(expansions, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getExpansionsObject() {
         return new ObjectMapper().convertValue(expansions, new TypeReference<List<Game>>() {
         });
@@ -600,11 +646,13 @@ public class Game implements Serializable {
         this.expansions = expansions;
     }
 
+    @JsonIgnore
     public List<Long> getExpansionsStandalone() {
         return new ObjectMapper().convertValue(expansionsStandalone, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getExpansionsStandaloneObject() {
         return new ObjectMapper().convertValue(expansionsStandalone, new TypeReference<List<Game>>() {
         });
@@ -614,11 +662,13 @@ public class Game implements Serializable {
         this.expansionsStandalone = expansionsStandalone;
     }
 
+    @JsonIgnore
     public List<Long> getDlcs() {
         return new ObjectMapper().convertValue(dlcs, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getDlcsObject() {
         return new ObjectMapper().convertValue(dlcs, new TypeReference<List<Game>>() {
         });
@@ -628,11 +678,13 @@ public class Game implements Serializable {
         this.dlcs = dlcs;
     }
 
+    @JsonIgnore
     public List<Long> getPerspectivesPlayer() {
         return new ObjectMapper().convertValue(perspectivesPlayer, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<PlayerPerspective> getPerspectivesPlayerObject() {
         return new ObjectMapper().convertValue(perspectivesPlayer, new TypeReference<List<PlayerPerspective>>() {
         });
@@ -658,10 +710,12 @@ public class Game implements Serializable {
         this.ratingTotalCount = ratingTotalCount;
     }
 
+    @JsonIgnore
     public long getParentVersion() {
         return Long.parseLong(String.valueOf(parentVersion));
     }
 
+    @JsonIgnore
     public Game getParentVersionObject() {
         return new ObjectMapper().convertValue(parentVersion, Game.class);
     }

@@ -134,11 +134,13 @@ public class List implements Serializable {
         this.url = url;
     }
 
+    @JsonIgnore
     public java.util.List<Long> getListEntries() {
         return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public java.util.List<ListEntry> getListEntriesObject() {
         return new ObjectMapper().convertValue(listEntries, new TypeReference<java.util.List<ListEntry>>() {
         });
@@ -148,11 +150,13 @@ public class List implements Serializable {
         this.listEntries = listEntries;
     }
 
+    @JsonIgnore
     public java.util.List<Long> getListGames() {
         return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public java.util.List<Game> getListGamesObject() {
         return new ObjectMapper().convertValue(listGames, new TypeReference<java.util.List<Game>>() {
         });
@@ -170,11 +174,13 @@ public class List implements Serializable {
         this.listTags = listTags;
     }
 
+    @JsonIgnore
     public java.util.List<Long> getSimilarLists() {
         return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public java.util.List<List> getSimilarListsObject() {
         return new ObjectMapper().convertValue(similarLists, new TypeReference<java.util.List<List>>() {
         });

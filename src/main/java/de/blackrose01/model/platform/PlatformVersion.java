@@ -85,11 +85,13 @@ public class PlatformVersion implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public List<Long> getCompanies() {
         return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Company> getCompaniesObject() {
         return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>() {
         });
@@ -179,10 +181,12 @@ public class PlatformVersion implements Serializable {
         this.output = output;
     }
 
+    @JsonIgnore
     public long getPlatformLogo() {
         return Long.parseLong(String.valueOf(platformLogo));
     }
 
+    @JsonIgnore
     public PlatformLogo getPlatformLogoObject() {
         return new ObjectMapper().convertValue(platformLogo, PlatformLogo.class);
     }
@@ -191,11 +195,13 @@ public class PlatformVersion implements Serializable {
         this.platformLogo = platformLogo;
     }
 
+    @JsonIgnore
     public List<Long> getPlatformVersionReleaseDates() {
         return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<PlatformVersionReleaseDate> getPlatformVersionReleaseDatesObject() {
         return new ObjectMapper().convertValue(platformVersionReleaseDates, new TypeReference<List<PlatformVersionReleaseDate>>() {
         });
@@ -205,10 +211,12 @@ public class PlatformVersion implements Serializable {
         this.platformVersionReleaseDates = platformVersionReleaseDates;
     }
 
+    @JsonIgnore
     public long getManufacturerMain() {
         return Long.parseLong(String.valueOf(manufacturerMain));
     }
 
+    @JsonIgnore
     public PlatformVersionCompany getManufacturerMainObject() {
         return new ObjectMapper().convertValue(manufacturerMain, PlatformVersionCompany.class);
     }

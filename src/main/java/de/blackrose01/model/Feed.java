@@ -87,10 +87,12 @@ public class Feed implements Serializable {
         this.category = category;
     }
 
+    @JsonIgnore
     public long getPulse() {
         return Long.parseLong(String.valueOf(pulse));
     }
 
+    @JsonIgnore
     public Pulse getPulseObject() {
         return new ObjectMapper().convertValue(pulse, Pulse.class);
     }
@@ -131,10 +133,12 @@ public class Feed implements Serializable {
         this.feedLikesCount = feedLikesCount;
     }
 
+    @JsonIgnore
     public long getFeedVideo() {
         return Long.parseLong(String.valueOf(feedVideo));
     }
 
+    @JsonIgnore
     public GameVideo getFeedVideoObject() {
         return new ObjectMapper().convertValue(feedVideo, GameVideo.class);
     }
@@ -143,11 +147,13 @@ public class Feed implements Serializable {
         this.feedVideo = feedVideo;
     }
 
+    @JsonIgnore
     public List<Long> getGames() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getGamesObject() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
         });

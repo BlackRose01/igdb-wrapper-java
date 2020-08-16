@@ -49,10 +49,12 @@ public class PulseSource implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public long getPage() {
         return Long.parseLong(String.valueOf(page));
     }
 
+    @JsonIgnore
     public Page getPageObject() {
         return new ObjectMapper().convertValue(page, Page.class);
     }
@@ -61,10 +63,12 @@ public class PulseSource implements Serializable {
         this.page = page;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }

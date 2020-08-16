@@ -104,10 +104,12 @@ public class Platform implements Serializable {
         this.slug = slug;
     }
 
+    @JsonIgnore
     public long getPlatformLogo() {
         return Long.parseLong(String.valueOf(platformLogo));
     }
 
+    @JsonIgnore
     public PlatformLogo getPlatformLogoObject() {
         return new ObjectMapper().convertValue(platformLogo, PlatformLogo.class);
     }
@@ -116,11 +118,13 @@ public class Platform implements Serializable {
         this.platformLogo = platformLogo;
     }
 
+    @JsonIgnore
     public List<Long> getVersions() {
         return new ObjectMapper().convertValue(versions, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<PlatformVersion> getVersionsObject() {
         return new ObjectMapper().convertValue(versions, new TypeReference<List<PlatformVersion>>() {
         });
@@ -130,11 +134,13 @@ public class Platform implements Serializable {
         this.versions = versions;
     }
 
+    @JsonIgnore
     public List<Long> getWebsites() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<PlatformWebsite> getWebsitesObject() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<PlatformWebsite>>() {
         });
@@ -144,10 +150,12 @@ public class Platform implements Serializable {
         this.websites = websites;
     }
 
+    @JsonIgnore
     public long getProductFamily() {
         return Long.parseLong(String.valueOf(productFamily));
     }
 
+    @JsonIgnore
     public ProductFamily getProductFamilyObject() {
         return new ObjectMapper().convertValue(productFamily, ProductFamily.class);
     }

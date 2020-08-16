@@ -56,11 +56,13 @@ public class AgeRating implements Serializable {
         this.category = category;
     }
 
+    @JsonIgnore
     public List<Long> getDescriptionsContent() {
         return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<AgeRatingContentDescription> getDescriptionsContentObject() {
         return new ObjectMapper().convertValue(descriptionsContent, new TypeReference<List<AgeRatingContentDescription>>() {
         });

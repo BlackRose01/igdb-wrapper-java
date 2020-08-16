@@ -125,11 +125,13 @@ public class Company implements Serializable {
         this.description = description;
     }
 
+    @JsonIgnore
     public List<Long> getDeveloped() {
         return new ObjectMapper().convertValue(developed, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getDevelopedObject() {
         return new ObjectMapper().convertValue(developed, new TypeReference<List<Game>>() {
         });
@@ -139,11 +141,13 @@ public class Company implements Serializable {
         this.developed = developed;
     }
 
+    @JsonIgnore
     public List<Long> getPublished() {
         return new ObjectMapper().convertValue(published, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getPublishedObject() {
         return new ObjectMapper().convertValue(published, new TypeReference<List<Game>>() {
         });
@@ -153,10 +157,12 @@ public class Company implements Serializable {
         this.published = published;
     }
 
+    @JsonIgnore
     public long getParent() {
         return Long.parseLong(String.valueOf(parent));
     }
 
+    @JsonIgnore
     public Company getParentObject() {
         return new ObjectMapper().convertValue(parent, Company.class);
     }
@@ -165,10 +171,12 @@ public class Company implements Serializable {
         this.parent = parent;
     }
 
+    @JsonIgnore
     public long getLogo() {
         return Long.parseLong(String.valueOf(logo));
     }
 
+    @JsonIgnore
     public CompanyLogo getLogoObject() {
         return new ObjectMapper().convertValue(logo, CompanyLogo.class);
     }
@@ -185,11 +193,13 @@ public class Company implements Serializable {
         this.url = url;
     }
 
+    @JsonIgnore
     public List<Long> getWebsites() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<CompanyWebsite> getWebsitesObject() {
         return new ObjectMapper().convertValue(websites, new TypeReference<List<CompanyWebsite>>() {
         });
@@ -207,10 +217,12 @@ public class Company implements Serializable {
         this.dateStart = dateStart;
     }
 
+    @JsonIgnore
     public long getChangedCompanyId() {
         return Long.parseLong(String.valueOf(changedCompanyId));
     }
 
+    @JsonIgnore
     public Company getChangedCompanyIdObject() {
         return new ObjectMapper().convertValue(changedCompanyId, Company.class);
     }

@@ -66,10 +66,12 @@ public class PlatformVersionReleaseDate implements Serializable {
         this.category = category;
     }
 
+    @JsonIgnore
     public long getPlatformVersion() {
         return Long.parseLong(String.valueOf(platformVersion));
     }
 
+    @JsonIgnore
     public PlatformVersion getPlatformVersionObject() {
         return new ObjectMapper().convertValue(platformVersion, PlatformVersion.class);
     }

@@ -70,10 +70,12 @@ public class ReleaseDate implements Serializable {
         this.category = category;
     }
 
+    @JsonIgnore
     public long getPlatform() {
         return Long.parseLong(String.valueOf(platform));
     }
 
+    @JsonIgnore
     public Platform getPlatformObject() {
         return new ObjectMapper().convertValue(platform, Platform.class);
     }
@@ -114,10 +116,12 @@ public class ReleaseDate implements Serializable {
         this.human = human;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(this.game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(this.game, Game.class);
     }

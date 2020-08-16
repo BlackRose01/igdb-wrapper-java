@@ -80,11 +80,13 @@ public class GameVersionFeature implements Serializable {
         this.position = position;
     }
 
+    @JsonIgnore
     public List<Long> getValues() {
         return new ObjectMapper().convertValue(values, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<GameVersionFeatureValue> getValuesObject() {
         return new ObjectMapper().convertValue(values, new TypeReference<List<GameVersionFeatureValue>>() {
         });

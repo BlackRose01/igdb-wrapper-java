@@ -52,10 +52,12 @@ public class Website implements Serializable {
         this.category = category;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(this.game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(this.game, Game.class);
     }

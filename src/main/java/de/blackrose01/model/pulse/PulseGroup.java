@@ -51,10 +51,12 @@ public class PulseGroup implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }
@@ -71,11 +73,13 @@ public class PulseGroup implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public List<Long> getPulses() {
         return new ObjectMapper().convertValue(pulses, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Pulse> getPulsesObject() {
         return new ObjectMapper().convertValue(pulses, new TypeReference<List<Pulse>>() {
         });

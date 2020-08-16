@@ -125,11 +125,13 @@ public class Pulse implements Serializable {
         this.image = image;
     }
 
+    @JsonIgnore
     public long getPulseImage() {
         return Long.parseLong(String.valueOf(pulseImage));
     }
 
-    public PulseImage getPulseImageOBject() {
+    @JsonIgnore
+    public PulseImage getPulseImageObject() {
         return new ObjectMapper().convertValue(pulseImage, PulseImage.class);
     }
 
@@ -137,10 +139,12 @@ public class Pulse implements Serializable {
         this.pulseImage = pulseImage;
     }
 
+    @JsonIgnore
     public long getPulseSource() {
         return Long.parseLong(String.valueOf(pulseSource));
     }
 
+    @JsonIgnore
     public PulseSource getPulseSourceObject() {
         return new ObjectMapper().convertValue(pulseSource, PulseSource.class);
     }
@@ -157,10 +161,12 @@ public class Pulse implements Serializable {
         this.tags = tags;
     }
 
+    @JsonIgnore
     public long getWebsite() {
         return Long.parseLong(String.valueOf(website));
     }
 
+    @JsonIgnore
     public PulseUrl getWebsiteObject() {
         return new ObjectMapper().convertValue(website, PulseUrl.class);
     }

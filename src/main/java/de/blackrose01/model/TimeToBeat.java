@@ -41,10 +41,12 @@ public class TimeToBeat implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(this.game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(this.game, Game.class);
     }

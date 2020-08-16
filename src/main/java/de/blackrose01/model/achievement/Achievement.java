@@ -141,10 +141,12 @@ public class Achievement implements Serializable {
         this.slug = slug;
     }
 
+    @JsonIgnore
     public long getIconAchievement() {
         return Long.parseLong(String.valueOf(iconAchievement));
     }
 
+    @JsonIgnore
     public AchievementIcon getIconAchievementObject() {
         return new ObjectMapper().convertValue(iconAchievement, AchievementIcon.class);
     }
@@ -153,10 +155,12 @@ public class Achievement implements Serializable {
         this.iconAchievement = iconAchievement;
     }
 
+    @JsonIgnore
     public long getIconAchievementLocked() {
         return Long.parseLong(String.valueOf(iconAchievementLocked));
     }
 
+    @JsonIgnore
     public AchievementIcon getIconAchievementLockedObject() {
         return new ObjectMapper().convertValue(iconAchievementLocked, AchievementIcon.class);
     }

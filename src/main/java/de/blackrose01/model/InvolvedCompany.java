@@ -53,10 +53,12 @@ public class InvolvedCompany implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getCompany() {
         return Long.parseLong(String.valueOf(company));
     }
 
+    @JsonIgnore
     public Company getCompanyObject() {
         return new ObjectMapper().convertValue(company, Company.class);
     }
@@ -65,10 +67,12 @@ public class InvolvedCompany implements Serializable {
         this.company = company;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }

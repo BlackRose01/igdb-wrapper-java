@@ -41,10 +41,12 @@ public class PlatformVersionCompany implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getCompany() {
         return Long.parseLong(String.valueOf(company));
     }
 
+    @JsonIgnore
     public Company getCompanyObject() {
         return new ObjectMapper().convertValue(company, Company.class);
     }

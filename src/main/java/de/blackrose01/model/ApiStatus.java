@@ -1,5 +1,6 @@
 package de.blackrose01.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
@@ -30,6 +31,7 @@ public class ApiStatus implements Serializable {
         return plan;
     }
 
+    @JsonIgnore
     public UsageReports getUsageReports() {
         return usageReports;
     }
@@ -62,6 +64,7 @@ public class ApiStatus implements Serializable {
         public UsageReports() {
         }
 
+        @JsonIgnore
         public UsageReport getUsageReport() {
             return usageReport;
         }

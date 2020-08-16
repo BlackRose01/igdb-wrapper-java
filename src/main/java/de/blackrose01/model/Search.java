@@ -79,10 +79,12 @@ public class Search implements Serializable {
         this.nameAlternative = nameAlternative;
     }
 
+    @JsonIgnore
     public long getPerson() {
         return Long.parseLong(String.valueOf(person));
     }
 
+    @JsonIgnore
     public People getPersonObject() {
         return new ObjectMapper().convertValue(this.person, People.class);
     }
@@ -107,10 +109,12 @@ public class Search implements Serializable {
         this.popularity = popularity;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(this.game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(this.game, Game.class);
     }
@@ -119,10 +123,12 @@ public class Search implements Serializable {
         this.game = game;
     }
 
+    @JsonIgnore
     public long getTheme() {
         return Long.parseLong(String.valueOf(this.theme));
     }
 
+    @JsonIgnore
     public Theme getThemeObject() {
         return new ObjectMapper().convertValue(this.theme, Theme.class);
     }
@@ -139,10 +145,12 @@ public class Search implements Serializable {
         this.testDummy = testDummy;
     }
 
+    @JsonIgnore
     public long getPlatform() {
         return Long.parseLong(String.valueOf(this.platform));
     }
 
+    @JsonIgnore
     public Platform getPlatformObject() {
         return new ObjectMapper().convertValue(this.platform, Platform.class);
     }
@@ -151,10 +159,12 @@ public class Search implements Serializable {
         this.platform = platform;
     }
 
+    @JsonIgnore
     public long getCompany() {
         return Long.parseLong(String.valueOf(this.company));
     }
 
+    @JsonIgnore
     public Company getCompanyObject() {
         return new ObjectMapper().convertValue(this.company, Company.class);
     }
@@ -163,10 +173,12 @@ public class Search implements Serializable {
         this.company = company;
     }
 
+    @JsonIgnore
     public long getCollection() {
         return Long.parseLong(String.valueOf(this.collection));
     }
 
+    @JsonIgnore
     public Collection getCollectionObject() {
         return new ObjectMapper().convertValue(this.collection, Collection.class);
     }

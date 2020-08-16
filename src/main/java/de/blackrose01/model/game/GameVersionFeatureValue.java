@@ -42,10 +42,12 @@ public class GameVersionFeatureValue implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }

@@ -86,11 +86,13 @@ public class Character implements Serializable {
         this.species = species;
     }
 
+    @JsonIgnore
     public List<Long> getGames() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getGamesObject() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
         });
@@ -116,11 +118,13 @@ public class Character implements Serializable {
         this.slug = slug;
     }
 
+    @JsonIgnore
     public List<Long> getPeople() {
         return new ObjectMapper().convertValue(people, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<People> getPeopleObject() {
         return new ObjectMapper().convertValue(people, new TypeReference<List<People>>() {
         });

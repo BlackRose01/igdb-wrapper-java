@@ -46,10 +46,12 @@ public class ListEntry implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }
@@ -58,10 +60,12 @@ public class ListEntry implements Serializable {
         this.game = game;
     }
 
+    @JsonIgnore
     public long getList() {
         return Long.parseLong(String.valueOf(list));
     }
 
+    @JsonIgnore
     public List getListObject() {
         return new ObjectMapper().convertValue(list, List.class);
     }
@@ -94,10 +98,12 @@ public class ListEntry implements Serializable {
         this.user = user;
     }
 
+    @JsonIgnore
     public long getPlatform() {
         return Long.parseLong(String.valueOf(platform));
     }
 
+    @JsonIgnore
     public Platform getPlatformObject() {
         return new ObjectMapper().convertValue(platform, Platform.class);
     }

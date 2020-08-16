@@ -52,11 +52,13 @@ public class Collection implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public List<Long> getGames() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getGamesObject() {
         return new ObjectMapper().convertValue(games, new TypeReference<List<Game>>() {
         });

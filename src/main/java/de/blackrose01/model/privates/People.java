@@ -68,11 +68,13 @@ public class People implements Serializable {
         this.slug = slug;
     }
 
+    @JsonIgnore
     public List<Long> getGamesCredited() {
         return new ObjectMapper().convertValue(gamesCredited, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Game> getGamesCreditedObject() {
         return new ObjectMapper().convertValue(gamesCredited, new TypeReference<List<Game>>() {
         });

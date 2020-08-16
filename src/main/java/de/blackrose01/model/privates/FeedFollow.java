@@ -47,10 +47,12 @@ public class FeedFollow implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public long getFeed() {
         return Long.parseLong(String.valueOf(feed));
     }
 
+    @JsonIgnore
     public Feed getFeedObject() {
         return new ObjectMapper().convertValue(feed, Feed.class);
     }
@@ -67,10 +69,12 @@ public class FeedFollow implements Serializable {
         this.user = user;
     }
 
+    @JsonIgnore
     public long getGame() {
         return Long.parseLong(String.valueOf(game));
     }
 
+    @JsonIgnore
     public Game getGameObject() {
         return new ObjectMapper().convertValue(game, Game.class);
     }

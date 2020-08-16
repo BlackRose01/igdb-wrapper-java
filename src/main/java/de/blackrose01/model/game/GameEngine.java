@@ -57,11 +57,13 @@ public class GameEngine implements Serializable {
         this.id = id;
     }
 
+    @JsonIgnore
     public List<Long> getCompanies() {
         return new ObjectMapper().convertValue(companies, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Company> getCompaniesObject() {
         return new ObjectMapper().convertValue(companies, new TypeReference<List<Company>>() {
         });
@@ -71,10 +73,12 @@ public class GameEngine implements Serializable {
         this.companies = companies;
     }
 
+    @JsonIgnore
     public long getLogo() {
         return Long.parseLong(String.valueOf(logo));
     }
 
+    @JsonIgnore
     public GameEngineLogo getLogoObject() {
         return new ObjectMapper().convertValue(logo, GameEngineLogo.class);
     }
@@ -91,11 +95,13 @@ public class GameEngine implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public List<Long> getPlatforms() {
         return new ObjectMapper().convertValue(platforms, new TypeReference<List<Long>>() {
         });
     }
 
+    @JsonIgnore
     public List<Platform> getPlatformsObject() {
         return new ObjectMapper().convertValue(platforms, new TypeReference<List<Platform>>() {
         });
