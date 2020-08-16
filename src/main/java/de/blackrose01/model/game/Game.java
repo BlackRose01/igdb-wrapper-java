@@ -76,9 +76,8 @@ public class Game implements Serializable {
     private List<Object> videos;
     @JsonProperty(value = "websites")
     private List<Object> websites;
-    @JsonIgnore
     @JsonProperty(value = "parent_game")
-    private long gameParent;
+    private Object gameParent;
     @JsonProperty(value = "age_ratings")
     private List<Object> ratingsAge;
     @JsonIgnore
@@ -127,7 +126,7 @@ public class Game implements Serializable {
     @JsonIgnore
     @JsonProperty(value = "total_rating_count")
     private int ratingTotalCount;
-    @JsonProperty(value = "parent_game")
+    @JsonProperty(value = "version_parent")
     private Object parentVersion;
     @JsonIgnore
     @JsonProperty(value = "version_title")
@@ -391,8 +390,14 @@ public class Game implements Serializable {
         this.websites = websites;
     }
 
+    @JsonIgnore
     public long getGameParent() {
-        return gameParent;
+        return Long.parseLong(String.valueOf(gameParent));
+    }
+
+    @JsonIgnore
+    public Game getGameParentObject() {
+        return new ObjectMapper().convertValue(gameParent, Game.class);
     }
 
     public void setGameParent(long gameParent) {
