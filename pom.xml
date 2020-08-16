@@ -6,7 +6,7 @@
 
     <groupId>com.github.blackrose01</groupId>
     <artifactId>igdb-wrapper-java</artifactId>
-    <version>v1.0</version>
+    <version>v1.1</version>
     <url>https://github.com/BlackRose01/igdb-wrapper-java</url>
 
     <name>igdb-wrapper-java</name>
