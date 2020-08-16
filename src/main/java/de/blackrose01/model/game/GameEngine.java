@@ -23,9 +23,8 @@ public class GameEngine implements Serializable {
     private long id;
     @JsonProperty(value = "companies")
     private List<Object> companies;
-    @JsonIgnore
     @JsonProperty(value = "logo")
-    private long logo;
+    private Object logo;
     @JsonIgnore
     @JsonProperty(value = "name")
     private String name;
@@ -73,7 +72,11 @@ public class GameEngine implements Serializable {
     }
 
     public long getLogo() {
-        return logo;
+        return Long.parseLong(String.valueOf(logo));
+    }
+
+    public GameEngineLogo getLogoObject() {
+        return new ObjectMapper().convertValue(logo, GameEngineLogo.class);
     }
 
     public void setLogo(long logo) {
