@@ -158,7 +158,7 @@ public class Parameters {
                         endpoint == EndpointPrivate.People ||
                         endpoint == EndpointPublic.Theme
         )
-            this.search = "search = " + search.replace(" ", "%20");
+            this.search = "search \"" + search.replace(" ", "-").toLowerCase() + "\"";
 
         return this;
     }
@@ -170,7 +170,7 @@ public class Parameters {
      * @return Parameters object
      */
     public Parameters addExclude(String field) {
-        this.exclude = "exclude = " + field;
+        this.exclude = "exclude " + field;
         return this;
     }
 
